@@ -1,0 +1,756 @@
+{
+  "Resumen": [
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Origen de despacho: Santiago (Región Metropolitana) · Productos: joyería pequeña (anillos, aros, cadenas)"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Dato",
+      "__EMPTY": "Detalle"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Transportista",
+      "__EMPTY": "Blue Express (empresa del grupo Copec)"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Origen",
+      "__EMPTY": "Santiago, Región Metropolitana"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Cobertura",
+      "__EMPTY": "Nacional — red propia + más de 3.200 Puntos Blue Express, incluyendo estaciones de servicio Copec 24/7"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Tipo de producto",
+      "__EMPTY": "Joyería pequeña y liviana (anillos, aros, cadenas, pulseras) — clasifica en la talla más baja del transportista"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Tarifa de entrada publicada",
+      "__EMPTY": "Desde $2.600 IVA incluido (envío tamaño más pequeño, vía plataforma de envíos blue.cl)"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Punto clave de la cotización",
+      "__EMPTY": "Blue Express NO publica un tarifario único fijo por comuna para clientes PYME: el precio final se calcula en el checkout de la plataforma (app.bluex.cl / ecommerce.blue.cl) según talla, peso volumétrico y destino"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "Cómo usar este archivo"
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "1) Hoja 'Cobertura y Plazos' → confirma que Blue Express llega a las 16/16 regiones de Chile y cuánto demora cada zona desde Santiago."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "2) Hoja 'Modalidad de Entrega' → cómo dejar el envío más barato: retiro en Punto/Locker vs. despacho a domicilio, y 3 palancas de ahorro."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "3) Hoja 'Puntos de Retiro' → muestra de direcciones reales de Puntos Blue Express en 9 ciudades clave (una por zona), con link al buscador oficial para el resto."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "4) Hoja 'Tarifas por Zona' → tabla editable de precios de envío por zona de destino, agrupada por talla de paquete (S = joyería)."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "5) Hoja 'Calculadora de Margen' → ingresa el costo real de envío que te cotice Blue Express y define cuánto cobrarle al cliente final (envío gratis, tarifa plana o variable)."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "6) Hoja 'Metodología y Fuentes' → de dónde salió cada dato y qué falta verificar directamente en tu cuenta Blue Express."
+    },
+    {
+      "Plan de Logística de Envíos — Blue Express (Copec)": "⚠️ Antes de fijar tarifas definitivas: crea tu cuenta en ecommerce.blue.cl (o app.bluex.cl) y cotiza un paquete real de talla S hacia 5–6 comunas representativas (una por zona). Los montos de la hoja 'Tarifas por Zona' son de referencia/mercado, no el tarifario oficial vigente de tu cuenta."
+    }
+  ],
+  "Cobertura y Plazos": [
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona",
+      "__EMPTY": "Regiones incluidas",
+      "__EMPTY_1": "Comunas / ciudades principales",
+      "__EMPTY_2": "Plazo de entrega desde Santiago (hábil)",
+      "__EMPTY_3": "Puntos Blue Express / Copec",
+      "__EMPTY_4": "Nivel de cobertura"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 1 · Metropolitana",
+      "__EMPTY": "Región Metropolitana",
+      "__EMPTY_1": "Santiago y todas sus comunas",
+      "__EMPTY_2": "24 horas (siguiente día hábil)",
+      "__EMPTY_3": "Máxima densidad de Puntos y estaciones Copec",
+      "__EMPTY_4": "Excelente"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 2 · Centro (Copiapó–Puerto Montt)",
+      "__EMPTY": "Atacama, Coquimbo, Valparaíso, O'Higgins, Maule, Ñuble, Biobío, La Araucanía, Los Ríos, Los Lagos (hasta Pto. Montt)",
+      "__EMPTY_1": "Copiapó, La Serena/Coquimbo, Valparaíso/Viña del Mar, Rancagua, Talca, Chillán, Concepción, Temuco, Valdivia, Puerto Montt",
+      "__EMPTY_2": "48 horas (2° día hábil, antes de las 20:00)",
+      "__EMPTY_3": "Cobertura amplia de Puntos y Copec en ciudades principales",
+      "__EMPTY_4": "Muy buena"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 3 · Norte Grande (Antofagasta/Calama/Iquique)",
+      "__EMPTY": "Antofagasta, Tarapacá",
+      "__EMPTY_1": "Antofagasta, Calama, Iquique",
+      "__EMPTY_2": "3 días hábiles",
+      "__EMPTY_3": "Buena cobertura de Puntos en capitales regionales",
+      "__EMPTY_4": "Buena"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 4 · Arica y Parinacota",
+      "__EMPTY": "Arica y Parinacota",
+      "__EMPTY_1": "Arica",
+      "__EMPTY_2": "4 días hábiles",
+      "__EMPTY_3": "Cobertura en la ciudad de Arica",
+      "__EMPTY_4": "Buena"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 5 · Aysén",
+      "__EMPTY": "Aysén",
+      "__EMPTY_1": "Coyhaique y localidades cercanas",
+      "__EMPTY_2": "7 días hábiles",
+      "__EMPTY_3": "Cobertura reducida (menor densidad de Puntos)",
+      "__EMPTY_4": "Limitada — confirmar comuna exacta"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Zona 6 · Magallanes",
+      "__EMPTY": "Magallanes y la Antártica Chilena",
+      "__EMPTY_1": "Punta Arenas y localidades cercanas",
+      "__EMPTY_2": "9 días hábiles",
+      "__EMPTY_3": "Cobertura reducida (menor densidad de Puntos)",
+      "__EMPTY_4": "Limitada — confirmar comuna exacta"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Notas:"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "• Blue Express declara cobertura del 99,9% del territorio nacional, con más de 3.200 Puntos de entrega/retiro (incluye estaciones de servicio Copec, atención 24/7)."
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "• Los plazos son la 'promesa de entrega' del servicio Express estándar publicada por Blue Express; pueden extenderse por clima, aduana interna o alta demanda (fechas comerciales)."
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "• Verifica cobertura puerta a puerta y de retiro en locker/Punto para tu comuna exacta en: https://www.blue.cl/lockers-puntos/encuentra-tu-punto"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "• En localidades muy extremas o rurales de Aysén/Magallanes/islas puede requerirse coordinación especial o entrega a Punto más cercano en vez de domicilio."
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Las 16 regiones de Chile — ¿todas tienen cobertura Blue Express?"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "N°",
+      "__EMPTY": "Región",
+      "__EMPTY_1": "Zona (según tabla de arriba)",
+      "__EMPTY_2": "¿Cobertura confirmada?"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 1,
+      "__EMPTY": "Arica y Parinacota",
+      "__EMPTY_1": "Zona 4",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 2,
+      "__EMPTY": "Tarapacá",
+      "__EMPTY_1": "Zona 3",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 3,
+      "__EMPTY": "Antofagasta",
+      "__EMPTY_1": "Zona 3",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 4,
+      "__EMPTY": "Atacama",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 5,
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 6,
+      "__EMPTY": "Valparaíso",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 7,
+      "__EMPTY": "Metropolitana de Santiago",
+      "__EMPTY_1": "Zona 1 (origen)",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 8,
+      "__EMPTY": "O'Higgins",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 9,
+      "__EMPTY": "Maule",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 10,
+      "__EMPTY": "Ñuble",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 11,
+      "__EMPTY": "Biobío",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 12,
+      "__EMPTY": "La Araucanía",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 13,
+      "__EMPTY": "Los Ríos",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 14,
+      "__EMPTY": "Los Lagos",
+      "__EMPTY_1": "Zona 2",
+      "__EMPTY_2": "Sí"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 15,
+      "__EMPTY": "Aysén",
+      "__EMPTY_1": "Zona 5",
+      "__EMPTY_2": "Sí — verificar comuna exacta"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": 16,
+      "__EMPTY": "Magallanes y Antártica Chilena",
+      "__EMPTY_1": "Zona 6",
+      "__EMPTY_2": "Sí — verificar comuna exacta"
+    },
+    {
+      "Cobertura nacional y plazos de entrega desde Santiago": "Conclusión: Blue Express cubre las 16/16 regiones de Chile desde Santiago. En Aysén y Magallanes (islas y localidades muy aisladas dentro de esas regiones) conviene confirmar la comuna puntual, ya que ahí la densidad de Puntos es menor y algunas entregas pueden requerir coordinación especial o entrega solo en Punto (no a domicilio)."
+    }
+  ],
+  "Modalidad de Entrega": [
+    {
+      "Cómo dejar el envío más económico para el cliente": "Blue Express ofrece dos modalidades de entrega — elegir la correcta es la principal palanca de ahorro."
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "Modalidad",
+      "__EMPTY": "Cómo funciona",
+      "__EMPTY_1": "Costo relativo",
+      "__EMPTY_2": "Plazo de retiro/entrega",
+      "__EMPTY_3": "Recomendación"
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "Entrega en Punto / Locker (fuera de casa)",
+      "__EMPTY": "El cliente retira su pedido en un Punto Blue Express (tienda asociada, minimarket, gimnasio) o en un locker inteligente, incluyendo estaciones de servicio Copec 24/7. Blue Express lo declara explícitamente como la opción de 'precios más convenientes para vendedores y clientes'.",
+      "__EMPTY_1": "MÁS ECONÓMICA (opción recomendada por defecto)",
+      "__EMPTY_2": "Disponible para retiro hasta 5 días hábiles",
+      "__EMPTY_3": "Ofrécela como opción predeterminada / con descuento en el checkout, dado que para joyería pequeña no hay urgencia de recibirla en la puerta de la casa."
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "Despacho a domicilio",
+      "__EMPTY": "Entrega directa en la dirección indicada por el cliente. El sistema calcula el envío según dirección y talla/peso del paquete.",
+      "__EMPTY_1": "MÁS CARA (mayor costo operativo de última milla puerta a puerta)",
+      "__EMPTY_2": "Según zona (24h RM / 48h centro-sur / 3-9 días zonas extremas)",
+      "__EMPTY_3": "Ofrécela como opción premium/opcional con cargo adicional, o resérvala para clientes que la soliciten expresamente."
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "3 palancas concretas para bajar el costo de envío en tu tienda"
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "1) Modalidad: prioriza 'retiro en Punto/Locker' como opción por defecto y más barata — para anillos, aros y cadenas no hay razón operativa para exigir entrega a domicilio."
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "2) Talla/embalaje: usa siempre el sobre o caja más chico posible (talla S). Blue Express cobra por el mayor entre peso físico y peso volumétrico (largo × ancho × alto ÷ 4.000), así que un embalaje sobredimensionado te puede subir de talla y de precio aunque el producto pese gramos."
+    },
+    {
+      "Cómo dejar el envío más económico para el cliente": "3) Volumen: a medida que crezcan tus envíos mensuales, Blue Express ofrece precios especiales por volumen (más de 500 envíos/mes) y planes de e-commerce integrados desde $3.100 IVA incluido — vale la pena renegociar tarifa cada cierto tiempo."
+    }
+  ],
+  "Puntos de Retiro": [
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Blue Express tiene más de 3.200 puntos en Chile; no existe un listado estático único (viven en un mapa que se actualiza a diario). Abajo hay una MUESTRA real de direcciones por comuna (una comuna representativa por zona) para que veas el tipo de cobertura y uses el mapa oficial para el resto."
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Región",
+      "__EMPTY": "Comuna",
+      "__EMPTY_1": "Nombre del punto",
+      "__EMPTY_2": "Dirección",
+      "__EMPTY_3": "Horario (resumen)"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Arica y Parinacota",
+      "__EMPTY": "Arica",
+      "__EMPTY_1": "Punto Blue Express Jk",
+      "__EMPTY_2": "Pasaje 3 Norte 115, Villa Altos Del Mar, Arica",
+      "__EMPTY_3": "Lun-vie 10:00-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Arica y Parinacota",
+      "__EMPTY": "Arica",
+      "__EMPTY_1": "Punto Blue Express Donde Junior",
+      "__EMPTY_2": "18 De Septiembre 575, Arica",
+      "__EMPTY_3": "Lun-vie y sáb 07:30-15:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Arica y Parinacota",
+      "__EMPTY": "Arica",
+      "__EMPTY_1": "Punto Blue Express Almacén Jovanny",
+      "__EMPTY_2": "Pasaje 7 3368, Población Flor Del Inca, Arica",
+      "__EMPTY_3": "Todos los días 08:30-22:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Arica y Parinacota",
+      "__EMPTY": "Arica",
+      "__EMPTY_1": "Punto Blue Express Librería Aramont",
+      "__EMPTY_2": "Carlos Tello 1584, Arica",
+      "__EMPTY_3": "Lun-dom (horario extendido)"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Coquimbo",
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Punto Blue Express Day Mat",
+      "__EMPTY_2": "Ricardo Rivera 2546, Coquimbo",
+      "__EMPTY_3": "Todos los días 09:00-22:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Coquimbo",
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Punto Blue Express Sublime Estampado",
+      "__EMPTY_2": "Los Tulipanes 171, Coquimbo",
+      "__EMPTY_3": "Todos los días 09:00-19:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Coquimbo",
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Punto Blue Express La Nueva Esquina",
+      "__EMPTY_2": "Los Pimientos 500, Coquimbo",
+      "__EMPTY_3": "Todos los días 09:30-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Coquimbo",
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Punto Blue Express Almacén Sabary",
+      "__EMPTY_2": "Calle Nueva Cinco 1479, Coquimbo",
+      "__EMPTY_3": "Lun-vie 10:00-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Coquimbo",
+      "__EMPTY": "Coquimbo",
+      "__EMPTY_1": "Punto Blue Express La Cantera Market",
+      "__EMPTY_2": "Obpo. D. Rodrigo González 3320, Coquimbo",
+      "__EMPTY_3": "Lun-dom 10:00-21:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Valparaíso",
+      "__EMPTY": "Valparaíso",
+      "__EMPTY_1": "Punto Blue Express Don Facu",
+      "__EMPTY_2": "Cardenal Samoré 3135, Placilla, Valparaíso",
+      "__EMPTY_3": "Lun-sáb 10:00-21:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Valparaíso",
+      "__EMPTY": "Valparaíso",
+      "__EMPTY_1": "Punto Blue Express Santa Teresa",
+      "__EMPTY_2": "Playa Ancha 797, Valparaíso",
+      "__EMPTY_3": "Lun-sáb 09:30-19:00 (con pausa)"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Valparaíso",
+      "__EMPTY": "Valparaíso",
+      "__EMPTY_1": "Punto Blue Express El Sureño",
+      "__EMPTY_2": "Serrano 325, Valparaíso",
+      "__EMPTY_3": "Lun-dom 09:00-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Valparaíso",
+      "__EMPTY": "Valparaíso",
+      "__EMPTY_1": "Punto Blue Express Tumi",
+      "__EMPTY_2": "Placeres 543, Valparaíso",
+      "__EMPTY_3": "Lun-vie 10:00-16:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Botánica Seeds",
+      "__EMPTY_2": "Huérfanos 903, Local 953, Santiago",
+      "__EMPTY_3": "Lun-vie 09:00-18:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Bazar Tami & Juan",
+      "__EMPTY_2": "Franklin 1010, Local 9, Santiago",
+      "__EMPTY_3": "Lun-vie 10:00-17:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Mi Ángel",
+      "__EMPTY_2": "Claudio Gay 2859, Santiago",
+      "__EMPTY_3": "Lun-dom 08:00-23:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express La Otra Esquina",
+      "__EMPTY_2": "Huérfanos 2401, Santiago",
+      "__EMPTY_3": "Lun-sáb 09:30-20:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Tío Ale",
+      "__EMPTY_2": "José Miguel Carrera 208, Local 5, Santiago",
+      "__EMPTY_3": "Lun-vie 10:00-17:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Cyber Don Francis",
+      "__EMPTY_2": "Tarapacá 722, Santiago",
+      "__EMPTY_3": "Lun-vie 12:00-19:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Metropolitana de Santiago",
+      "__EMPTY": "Santiago",
+      "__EMPTY_1": "Punto Blue Express Donde la Vivi",
+      "__EMPTY_2": "Yungay 2369, Santiago",
+      "__EMPTY_3": "Lun-dom 09:00-21:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Biobío",
+      "__EMPTY": "Concepción",
+      "__EMPTY_1": "Punto Blue Express Don Vitoco",
+      "__EMPTY_2": "Freire 27, Concepción",
+      "__EMPTY_3": "Lun-sáb 09:00-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Biobío",
+      "__EMPTY": "Concepción",
+      "__EMPTY_1": "Punto Blue Express Burbujas Market",
+      "__EMPTY_2": "Freire 1053, Concepción",
+      "__EMPTY_3": "Lun-vie 09:00-17:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Biobío",
+      "__EMPTY": "Concepción",
+      "__EMPTY_1": "Punto Blue Express Detergentes God",
+      "__EMPTY_2": "Juan Martínez de Rozas 699, Local 1, Concepción",
+      "__EMPTY_3": "Lun-sáb 09:00-18:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Biobío",
+      "__EMPTY": "Concepción",
+      "__EMPTY_1": "Punto Blue Express Carli Cosas Concepción",
+      "__EMPTY_2": "Freire 522, Galería Caracol, Local 181, Concepción",
+      "__EMPTY_3": "Lun-sáb 11:00-19:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "La Araucanía",
+      "__EMPTY": "Temuco",
+      "__EMPTY_1": "Punto Blue Express Librería Progreso",
+      "__EMPTY_2": "Claro Solar 573, Temuco",
+      "__EMPTY_3": "Lun-vie 10:00-19:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "La Araucanía",
+      "__EMPTY": "Temuco",
+      "__EMPTY_1": "Punto Blue Express Minimarket San Ignacio",
+      "__EMPTY_2": "Altamira 2301, Temuco",
+      "__EMPTY_3": "Lun-dom 09:00-16:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "La Araucanía",
+      "__EMPTY": "Temuco",
+      "__EMPTY_1": "Punto Blue Express Provisiones Del Maipo",
+      "__EMPTY_2": "Avda. Portal Del Maipo 137, Local 1, Temuco",
+      "__EMPTY_3": "Lun-dom (horario variable)"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "La Araucanía",
+      "__EMPTY": "Temuco",
+      "__EMPTY_1": "Punto Blue Express San Nicolás",
+      "__EMPTY_2": "Arauco 1384, Temuco",
+      "__EMPTY_3": "Lun-sáb 09:30-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Los Lagos",
+      "__EMPTY": "Puerto Montt",
+      "__EMPTY_1": "Punto Blue Express Gmr",
+      "__EMPTY_2": "Miraflores 1402, Puerto Montt",
+      "__EMPTY_3": "Lun-vie 09:00-18:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Los Lagos",
+      "__EMPTY": "Puerto Montt",
+      "__EMPTY_1": "Punto Blue Express Propiedades Cordillera",
+      "__EMPTY_2": "Serrano 137, Puerto Montt",
+      "__EMPTY_3": "Lun-vie 09:30-17:30 (cerrado miércoles)"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Los Lagos",
+      "__EMPTY": "Puerto Montt",
+      "__EMPTY_1": "Punto Blue Express Grettel",
+      "__EMPTY_2": "Chilca 1013, Puerto Montt",
+      "__EMPTY_3": "Lun-vie 10:00-19:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Los Lagos",
+      "__EMPTY": "Puerto Montt",
+      "__EMPTY_1": "Punto Blue Express Sat Nam",
+      "__EMPTY_2": "Cuarta Terraza 5001, Local 10, Puerto Montt",
+      "__EMPTY_3": "Lun-sáb 10:00-19:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Aysén",
+      "__EMPTY": "Aysén",
+      "__EMPTY_1": "Punto Blue Express Tienda Rayén Antonia",
+      "__EMPTY_2": "Sargento Aldea 1333, Aysén",
+      "__EMPTY_3": "Lun-dom 10:30-19:30"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Magallanes y Antártica Chilena",
+      "__EMPTY": "Punta Arenas",
+      "__EMPTY_1": "Punto Blue Express Los Cariñositos",
+      "__EMPTY_2": "Martínez De Aldunate 1425, Punta Arenas",
+      "__EMPTY_3": "Lun-sáb 09:00-13:00 / 15:00-20:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Magallanes y Antártica Chilena",
+      "__EMPTY": "Punta Arenas",
+      "__EMPTY_1": "Punto Blue Express Amelie Creaciones",
+      "__EMPTY_2": "Los Salesianos 817, Punta Arenas",
+      "__EMPTY_3": "Lun-sáb 10:00-13:00 / 15:00-21:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Magallanes y Antártica Chilena",
+      "__EMPTY": "Punta Arenas",
+      "__EMPTY_1": "Punto Blue Express Almacén Donde Kika",
+      "__EMPTY_2": "José Martínez De Aldunate 3235, Punta Arenas",
+      "__EMPTY_3": "Lun-dom 08:30-22:00"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "Notas importantes:"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "• Esta tabla es una MUESTRA de 36 puntos reales (de más de 3.200 a nivel nacional), cubriendo 9 comunas representativas — una por cada zona logística."
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "• Fuente: directorio de terceros (logisticachilena.cl), que replica datos de contacto de Blue Express. Es información NO oficial y puede desactualizarse (los puntos cambian con frecuencia: abren, cierran o cambian de horario)."
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "• Para direcciones completas y en tiempo real de TODO el país (los 3.200+ puntos, incluidas estaciones Copec y lockers), usa el buscador oficial: https://www.blue.cl/lockers-puntos/encuentra-tu-punto o https://mapa-pickup.blue.cl/"
+    },
+    {
+      "Puntos Blue Express de retiro — muestra por ciudad/comuna": "• Recomendación operativa: en tu checkout, integra ese buscador oficial (o la API/plugin de Blue Express para tu plataforma de e-commerce) en vez de mantener una lista fija — así el cliente siempre ve el punto más cercano y vigente a su domicilio."
+    }
+  ],
+  "Tarifas por Zona": [
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Precios en CLP, IVA incluido. Talla S = paquete más pequeño/liviano de Blue Express. Se asume modalidad ENTREGA EN PUNTO/LOCKER (la más económica — ver hoja 'Modalidad de Entrega')."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Zona de destino",
+      "__EMPTY": "Comunas de referencia",
+      "__EMPTY_1": "Plazo entrega",
+      "__EMPTY_2": "Tarifa mínima oficial publicada",
+      "__EMPTY_3": "Tarifa referencial de mercado (benchmark)",
+      "__EMPTY_4": "Tarifa que cotizaste tú (COMPLETAR)",
+      "__EMPTY_5": "Margen que agregarás (%)",
+      "__EMPTY_6": "Precio a cobrar al cliente"
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Santiago / RM",
+      "__EMPTY": "Todas las comunas de la Región Metropolitana",
+      "__EMPTY_1": "24 h",
+      "__EMPTY_2": 2600,
+      "__EMPTY_3": 3100,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 4340
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Norte Chico (Atacama, Coquimbo)",
+      "__EMPTY": "Copiapó, La Serena, Coquimbo",
+      "__EMPTY_1": "48 h",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 5800,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 8119.999999999999
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Centro (Valparaíso a Biobío)",
+      "__EMPTY": "Valparaíso, Viña del Mar, Rancagua, Talca, Chillán, Concepción",
+      "__EMPTY_1": "48 h",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 7000,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 9800
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Sur (Araucanía, Los Ríos, Los Lagos)",
+      "__EMPTY": "Temuco, Valdivia, Osorno, Puerto Montt",
+      "__EMPTY_1": "48 h",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 7200,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 10080
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Norte Grande (Antofagasta, Tarapacá)",
+      "__EMPTY": "Antofagasta, Calama, Iquique",
+      "__EMPTY_1": "3 días",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 6800,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 9520
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Arica y Parinacota",
+      "__EMPTY": "Arica",
+      "__EMPTY_1": "4 días",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 6800,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 9520
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Aysén",
+      "__EMPTY": "Coyhaique",
+      "__EMPTY_1": "7 días",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 15100,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 21140
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Magallanes",
+      "__EMPTY": "Punta Arenas",
+      "__EMPTY_1": "9 días",
+      "__EMPTY_2": "Cotizar en plataforma",
+      "__EMPTY_3": 15100,
+      "__EMPTY_5": 0.4,
+      "__EMPTY_6": 21140
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Leyenda de columnas editables (amarillo):"
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "• Columna 'Tarifa que cotizaste tú' (G): pega aquí el costo real que te muestre Blue Express al cotizar un envío de joyería (talla S) en app.bluex.cl / ecommerce.blue.cl."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "• Columna 'Margen que agregarás' (H): % que sumas sobre el costo de envío para cubrir empaque, mermas o para definir el precio de flete que le cobras al comprador."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "• Columna 'Precio a cobrar al cliente' (I): se calcula sola = (tarifa cotizada si existe, si no la referencial) × (1 + margen). Cambia la fórmula si prefieres otra lógica (ej. envío gratis sobre cierto monto de compra)."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Fuente 'Tarifa mínima oficial publicada' (RM): blue.cl — 'Envía con precios fijos desde $2.600 IVA incluido' (envío tamaño más pequeño vía plataforma de envíos, punto a punto)."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Fuente 'Tarifa referencial de mercado': valores publicados por comercios que despachan con Blue Express (ej. talla/peso liviano ~1–1,5 kg); ORIGEN de esos ejemplos no siempre es Santiago, úsalos solo como orden de magnitud, no como tarifario oficial."
+    },
+    {
+      "Tarifas de envío — Talla S (joyería: anillos, aros, cadenas)": "Blue Express no publica un tarifario único fijo por comuna para todos sus clientes PYME: el valor final depende de talla/peso volumétrico, destino exacto y el tipo de contrato (plataforma sin contrato vía Búho/PYME vs. contrato empresa)."
+    }
+  ],
+  "Calculadora de Margen": [
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Supuestos generales"
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Umbral de envío gratis (CLP)",
+      "__EMPTY": 30000
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Costo promedio de envío talla S (CLP)",
+      "__EMPTY": 6500
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Margen objetivo sobre costo de envío (%)",
+      "__EMPTY": 0.3
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Costo de empaque/protección por unidad (CLP)",
+      "__EMPTY": 400
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Simulador por pedido"
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Monto de compra del cliente (CLP)",
+      "__EMPTY": 15000
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "¿Envío gratis? (según umbral)",
+      "__EMPTY": "NO"
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Costo de envío a cobrar al cliente (CLP)",
+      "__EMPTY": 8450
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Costo real de envío + empaque (CLP)",
+      "__EMPTY": 6900
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Resultado neto de logística (CLP)",
+      "__EMPTY": 1550
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Cambia el 'Monto de compra del cliente' (celda amarilla) para simular distintos carritos."
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "Cambia los supuestos generales (umbral de envío gratis, costo de envío, margen y empaque) para probar distintas políticas comerciales."
+    },
+    {
+      "Calculadora rápida — ¿cuánto cobro por envío?": "'Resultado neto de logística' negativo significa que estás subsidiando el envío en ese pedido (frecuente cuando ofreces envío gratis bajo el umbral en compras pequeñas)."
+    }
+  ],
+  "Metodología y Fuentes": [
+    {
+      "Metodología, supuestos y fuentes": "Dato",
+      "__EMPTY": "Fuente",
+      "__EMPTY_1": "Confiabilidad / qué falta verificar"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Cobertura nacional +3.200 Puntos, incl. Copec 24/7, 99,9% de cobertura",
+      "__EMPTY": "blue.cl (sitio oficial) y ficha de la app Blue Express en Shopify App Store",
+      "__EMPTY_1": "Alta — dato publicado por el propio Blue Express"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Tarifa mínima publicada 'desde $2.600 IVA incluido'",
+      "__EMPTY": "blue.cl, sección de envíos vía plataforma (punto a punto, talla más pequeña)",
+      "__EMPTY_1": "Alta para RM/envío básico — puede no incluir despacho a domicilio en regiones extremas"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Plazos de entrega por zona (24h RM, 48h Copiapó–Pto. Montt, 3–9 días extremos)",
+      "__EMPTY": "Términos y condiciones de blue.cl, replicados por comercios que despachan con Blue Express",
+      "__EMPTY_1": "Alta — son los plazos 'promesa' publicados por el transportista; pueden variar por clima/demanda"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Tarifas referenciales de mercado por zona (columna 'benchmark')",
+      "__EMPTY": "Ejemplos de comercios reales que despachan con Blue Express (peso ~1–1,5 kg)",
+      "__EMPTY_1": "Media — sirven como orden de magnitud, no como tarifario oficial; el origen de esos ejemplos no siempre es Santiago"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Tarifario PYME oficial completo por talla y comuna",
+      "__EMPTY": "PDF 'tarifario-pyme' publicado en blue.cl",
+      "__EMPTY_1": "No se pudo extraer (documento en formato imagen). Descárgalo directamente desde blue.cl/s/tarifario-pyme e ingresa los valores en la hoja 'Tarifas por Zona'"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Recomendación final"
+    },
+    {
+      "Metodología, supuestos y fuentes": "Para fijar tarifas definitivas: (1) crea una cuenta gratuita en ecommerce.blue.cl o app.bluex.cl, (2) simula un envío real de un anillo/cadena (dimensiones y peso reales de tu embalaje) hacia 1 comuna por cada zona de la hoja 'Tarifas por Zona', (3) reemplaza los valores de la columna 'Tarifa que cotizaste tú' con esos montos, (4) ajusta el % de margen según tu estrategia (envío gratis sobre cierto monto, tarifa plana única, o costo real traspasado al cliente)."
+    }
+  ]
+}

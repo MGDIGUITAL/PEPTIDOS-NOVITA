@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--off-white);
+  color: var(--obsidian);
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ═══ TYPOGRAPHY ═══════════════════════════ */
+.font-display { font-family: 'Cormorant Garamond', serif; }
+.font-title   { font-family: 'Cinzel', serif; }
+
+/* Gold accent text */
+.text-gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Dark gradient text for hero */
+.text-obsidian-gradient {
+  background: linear-gradient(160deg, var(--obsidian) 0%, var(--ink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══ DIVIDERS ═══════════════════════════════ */
+.amora-divider {
+  display: flex; align-items: center; gap: 10px;
+  color: var(--gold); font-family: 'Cinzel', serif;
+  font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
+}
+.amora-divider span.line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(184,151,90,0.45));
+}
+.amora-divider span.line.rev {
+  background: linear-gradient(90deg, rgba(184,151,90,0.45), transparent);
+}
+
+/* ═══ BUTTONS ════════════════════════════════ */
+.btn-primary {
+  display: inline-flex; align-items: center;
+  background: var(--obsidian); color: var(--off-white);
+  font-family: 'Cinzel', serif; font-size: 0.72rem;
+  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 16px 44px;
+  border: 1px solid var(--obsidian);
+  cursor: pointer; text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  box-shadow: 0 6px 24px rgba(16,16,16,0.22);
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center;
+  background: transparent;
+  color: var(--off-white);
+  font-family: 'Cinzel', serif; font-size: 0.72rem;
+  font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 16px 44px;
+  border: 1px solid rgba(253,252,248,0.7);
+  cursor: pointer; text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  background: rgba(253,252,248,0.12);
+  border-color: var(--off-white);
+}
+
+.btn-outline-gold {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: transparent; color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 10px 24px; border: 1px solid rgba(184,151,90,0.5);
+  cursor: pointer; text-decoration: none; transition: all 0.25s;
+}
+.btn-outline-gold:hover { background: rgba(184,151,90,0.1); border-color: var(--gold); }
+
+/* ═══ CARDS ══════════════════════════════════ */
+.product-card {
+  background: var(--ivory);
+  border: 1px solid var(--nude);
+  transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+  cursor: pointer; overflow: hidden;
+}
+.product-card:hover {
+  border-color: var(--nude-dark);
+  box-shadow: 0 20px 60px rgba(16,16,16,0.12);
+  transform: translateY(-6px);
+}
+
+.collection-cell {
+  background: var(--ivory);
+  border-right: 1px solid var(--nude);
+  border-bottom: 1px solid var(--nude);
+  transition: background 0.3s;
+  cursor: pointer;
+}
+.collection-cell:hover { background: var(--nude); }
+
+/* ═══ PROMO BAR ══════════════════════════════ */
+.promo-bar {
+  background: var(--obsidian);
+  background-size: 200% 100%;
+}
+
+/* ═══ ANIMATIONS ═════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeInUp 1s ease forwards; }
+
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.float { animation: float 6s ease-in-out infinite; }
+
+/* ═══ SCROLLBAR ══════════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--nude-dark); border-radius: 3px; }
+::selection { background: rgba(184,151,90,0.2); }
