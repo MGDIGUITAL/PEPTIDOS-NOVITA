@@ -223,10 +223,15 @@ export default function CheckoutPage() {
         <section className="checkout-left">
           <h2 style={{ ...sectionTitleStyle, marginTop: 0 }}>1. Información de Contacto</h2>
           {isLoggedIn && (
-            <div style={{ padding: '12px 16px', background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.25)', borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ color: '#60A5FA', fontSize: '0.9rem', fontWeight: 'bold' }}>✓</span>
-              <span style={{ fontSize: '0.8rem', color: '#DBEAFE', fontFamily: 'Inter, sans-serif' }}>
-                Sesión activa como <strong>{clientEmail}</strong>. Tus datos personales han sido cargados automáticamente.
+            <div style={{ padding: '16px 20px', background: S.surface, border: `1px solid ${S.border}`, borderLeft: `3px solid ${S.ivory}`, borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 14 }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(230, 226, 211, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={S.ivory} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+              <span style={{ fontSize: '0.8rem', color: S.white, fontFamily: 'Inter, sans-serif', lineHeight: 1.5 }}>
+                Sesión activa como <strong style={{ color: S.ivory, fontWeight: 600 }}>{clientEmail}</strong>. Tus datos han sido cargados de forma segura.
               </span>
             </div>
           )}

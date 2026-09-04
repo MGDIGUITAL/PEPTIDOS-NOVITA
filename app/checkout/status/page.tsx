@@ -110,9 +110,14 @@ function ErrorScreen({ router }: { router: any }) {
           Si el cobro fue descontado de tu cuenta, escríbenos directamente a<br/>
           <a href="mailto:Cnovoadrust@gmail.com" style={{ color: S.ivory, textDecoration: 'underline', fontWeight: 600 }}>Cnovoadrust@gmail.com</a>
         </p>
-        <button onClick={() => router.push('/')} style={{ padding: '14px 36px', background: S.white, color: S.black, border: 'none', borderRadius: 6, fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 800, cursor: 'pointer' }}>
-          Volver al Catálogo
-        </button>
+        <div style={{ display: 'flex', gap: 14, justifyContent: 'center', marginTop: 32, flexWrap: 'wrap' }}>
+          <button onClick={() => router.push('/checkout')} style={{ padding: '14px 32px', background: S.white, color: S.black, border: 'none', borderRadius: 6, fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 800, cursor: 'pointer', transition: 'all 0.2s' }}>
+            Intentar Nuevamente
+          </button>
+          <button onClick={() => router.push('/')} style={{ padding: '14px 32px', background: 'transparent', color: S.white, border: `1px solid ${S.border}`, borderRadius: 6, fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}>
+            Volver al Catálogo
+          </button>
+        </div>
       </div>
     </div>
   );
