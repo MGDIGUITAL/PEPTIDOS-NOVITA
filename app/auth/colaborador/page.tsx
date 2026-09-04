@@ -6,7 +6,12 @@ import { supabase } from '@/lib/supabase/client';
 
 // Respeta la paleta del sitio: ivory/nude/obsidian/gold
 const S = {
+  black:    '#000000',
+  surface:  '#0A0A0A',
+  card:     '#121212',
+  border:   '#222222',
   offWhite: '#FDFCF8',
+  white:    '#FFFFFF',
   ivory:    '#F3F0E9',
   nude:     '#E3DBCC',
   nudeDk:   '#C8BBA8',

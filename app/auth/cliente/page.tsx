@@ -16,6 +16,9 @@ const S = {
   white:    '#FFFFFF',
   muted:    '#888888',
   error:    '#ef4444',
+  obs:      '#111111',
+  gold:     '#C4BFA9',
+  nudeDk:   '#A39E8B',
 };
 
 const inp: React.CSSProperties = {

@@ -692,7 +692,7 @@ function TestimonialsSection() {
             Experiencias & Reseñas de Clientes
           </h2>
           <p style={{ color: S.muted, fontSize: '0.98rem', maxWidth: 640, margin: '0 auto', lineHeight: 1.7, fontFamily: 'Inter, sans-serif' }}>
-            Conoce los testimonios de profesionales e investigadores en Chile. Pureza analítica verificada >99%, empaque totalmente discreto y despacho prioritario.
+            Conoce los testimonios de profesionales e investigadores en Chile. Pureza analítica verificada &gt;99%, empaque totalmente discreto y despacho prioritario.
           </p>
 
           {/* Badges de Confianza */}
