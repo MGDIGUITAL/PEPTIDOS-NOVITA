@@ -177,7 +177,7 @@ export default function MarcoRegulatorioPage() {
               7. Contacto
             </h2>
             <p style={{ color: '#CCCCCC', fontSize: '0.95rem' }}>
-              Para consultas formales sobre el marco regulatorio: <a href="mailto:contacto@novaperformance.cl" style={{ color: '#E6E2D3', textDecoration: 'underline' }}>contacto@novaperformance.cl</a>
+              Para consultas formales sobre el marco regulatorio: <a href="mailto:Cnovoadrust@gmail.com" style={{ color: '#E6E2D3', textDecoration: 'underline' }}>Cnovoadrust@gmail.com</a>
             </p>
           </section>
 
