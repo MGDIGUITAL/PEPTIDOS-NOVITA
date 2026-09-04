@@ -4,34 +4,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 
-// Respeta la paleta del sitio: ivory/nude/obsidian/gold
 const S = {
   black:    '#000000',
   surface:  '#0A0A0A',
   card:     '#121212',
   border:   '#222222',
-  offWhite: '#FDFCF8',
+  ivory:    '#E6E2D3',
   white:    '#FFFFFF',
-  ivory:    '#F3F0E9',
-  nude:     '#E3DBCC',
-  nudeDk:   '#C8BBA8',
-  obs:      '#101010',
-  muted:    '#7A7468',
-  gold:     '#B8975A',
-  error:    '#c0392b',
+  muted:    '#888888',
+  error:    '#ef4444',
 };
 
-const inp: React.CSSProperties = {
-  width: '100%', padding: '12px 16px', fontSize: '0.88rem',
-  background: 'rgba(253,252,248,0.85)', border: `1px solid #C8BBA8`,
-  borderRadius: 6, color: '#101010', outline: 'none',
+const inpStyle: React.CSSProperties = {
+  width: '100%', padding: '14px 16px', fontSize: '0.9rem',
+  background: '#141414', border: `1px solid ${S.border}`,
+  borderRadius: 8, color: S.white, outline: 'none',
   fontFamily: 'Inter, sans-serif', boxSizing: 'border-box',
+  transition: 'all 0.2s',
 };
 
-const lbl: React.CSSProperties = {
-  display: 'block', fontSize: '0.66rem', color: S.muted,
-  letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 6,
-  fontFamily: 'Cinzel, serif',
+const lblStyle: React.CSSProperties = {
+  display: 'block', fontSize: '0.72rem', color: S.ivory,
+  letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6,
+  fontFamily: 'Outfit, sans-serif', fontWeight: 700,
 };
 
 export default function ColaboradorAuthPage() {
@@ -48,7 +43,7 @@ export default function ColaboradorAuthPage() {
 
     if (authErr || !data.user) {
       setLoading(false);
-      setError('Credenciales incorrectas.');
+      setError('Credenciales de colaborador incorrectas.');
       return;
     }
 
@@ -66,21 +61,20 @@ export default function ColaboradorAuthPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', background: S.black }}>
 
-      {/* Fondo con imagen del sitio */}
+      {/* Fondo */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-        <Image src="/fondo-login.png" alt="Fondo" fill priority style={{ objectFit: 'cover', objectPosition: 'center' }} />
-        {/* Overlay oscuro elegante para panel interno */}
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(16,16,16,0.60)' }} />
+        <Image src="/fondo-login.png" alt="Fondo NOVA" fill priority style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.3 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.95) 100%)' }} />
       </div>
 
-      {/* Nav mínimo con estética del sitio */}
-      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      {/* Nav mínimo */}
+      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/">
-          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} />
+          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
-        <Link href="/" style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.72rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
+        <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
           ← Volver a la tienda
         </Link>
       </nav>
@@ -88,61 +82,61 @@ export default function ColaboradorAuthPage() {
       {/* Card centrada */}
       <div style={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 1rem' }}>
         <div style={{
-          width: '100%', maxWidth: 400,
+          width: '100%', maxWidth: 420,
           background: S.surface, backdropFilter: 'blur(24px)',
           border: `1px solid ${S.border}`,
           borderRadius: 12, padding: '44px 40px',
-          boxShadow: '0 24px 80px rgba(0,0,0,0.8)',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.95)',
         }}>
 
-          {/* Header con divider estilo sitio */}
-          <div style={{ textAlign: 'center', marginBottom: 36 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 18 }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: 32 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
               <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,transparent,${S.ivory})` }} />
-              <span style={{ fontFamily: 'Outfit,sans-serif', color: S.ivory, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700 }}>Área Interna</span>
+              <span style={{ fontFamily: 'Outfit, sans-serif', color: S.ivory, fontSize: '0.65rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 800 }}>Área Interna</span>
               <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,${S.ivory},transparent)` }} />
             </div>
-            <h1 className="font-display" style={{ fontSize: '1.5rem', fontWeight: 800, color: S.white, letterSpacing: '0.02em', marginBottom: 8, textTransform: 'uppercase' }}>
+            <h1 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.6rem', fontWeight: 800, color: S.white, letterSpacing: '0.04em', marginBottom: 6, textTransform: 'uppercase' }}>
               Acceso Colaborador
             </h1>
-            <p style={{ color: S.muted, fontSize: '0.78rem', fontFamily: 'Inter, sans-serif' }}>
-              Área exclusiva para el equipo NOVA Performance®
+            <p style={{ color: S.muted, fontSize: '0.82rem', fontFamily: 'Inter, sans-serif' }}>
+              Panel de administración NOVA Performance®
             </p>
           </div>
 
           {error && (
-            <div style={{ background: 'rgba(192,57,43,0.12)', border: '1px solid rgba(192,57,43,0.35)', borderRadius: 8, padding: '10px 14px', marginBottom: 24, color: '#f87171', fontSize: '0.8rem', fontFamily: 'Inter, sans-serif' }}>
+            <div style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: 8, padding: '12px 16px', marginBottom: 24, color: S.error, fontSize: '0.82rem', fontFamily: 'Inter, sans-serif' }}>
               {error}
             </div>
           )}
 
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <div>
-              <label style={{ ...lbl, color: S.ivory }}>Correo electrónico</label>
+              <label style={lblStyle}>Correo electrónico</label>
               <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="colaborador@novaperformance.cl" style={inp} />
+                placeholder="colaborador@novaperformance.cl" style={inpStyle} />
             </div>
             <div>
-              <label style={{ ...lbl, color: S.ivory }}>Contraseña</label>
+              <label style={lblStyle}>Contraseña</label>
               <input type="password" required value={pass} onChange={e => setPass(e.target.value)}
-                placeholder="••••••••" style={inp} />
+                placeholder="••••••••" style={inpStyle} />
             </div>
             <button type="submit" disabled={loading} style={{
-              marginTop: 4, padding: '14px',
+              marginTop: 6, padding: '16px',
               background: loading ? S.muted : S.white,
-              color: S.black, border: 'none', borderRadius: 4,
-              fontFamily: 'Outfit, sans-serif', fontSize: '0.72rem', letterSpacing: '0.16em',
+              color: S.black, border: 'none', borderRadius: 8,
+              fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', letterSpacing: '0.14em',
               textTransform: 'uppercase', cursor: loading ? 'wait' : 'pointer', fontWeight: 800,
               transition: 'all 0.2s',
             }}>
-              {loading ? 'Verificando…' : 'Acceder al sistema'}
+              {loading ? 'Verificando…' : 'Acceder al Sistema'}
             </button>
           </form>
 
-          {/* Separador estilo sitio */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '28px 0 0' }}>
+          {/* Separador */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '32px 0 0' }}>
             <span style={{ flex: 1, height: 1, background: S.border }} />
-            <span style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.6rem', color: S.ivory, letterSpacing: '0.14em', fontWeight: 700 }}>NOVA PERFORMANCE®</span>
+            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.62rem', color: S.ivory, letterSpacing: '0.18em', fontWeight: 800 }}>NOVA PERFORMANCE®</span>
             <span style={{ flex: 1, height: 1, background: S.border }} />
           </div>
         </div>
