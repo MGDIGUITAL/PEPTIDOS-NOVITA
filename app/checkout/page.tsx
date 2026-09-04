@@ -91,9 +91,7 @@ export default function CheckoutPage() {
         subtotal: cartTotal,
         shipping_cost: shippingCost,
         total: finalTotal,
-        status: 'Pendiente',
-        applied_coupon: null,
-        discount_amount: 0
+        status: 'Pendiente'
       };
 
       const itemsPayload = cart.map(item => ({

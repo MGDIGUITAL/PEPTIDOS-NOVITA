@@ -5,10 +5,27 @@ export async function POST(request: Request) {
   try {
     const { orderPayload, itemsPayload } = await request.json();
 
+    const cleanOrderPayload = {
+      client_name: orderPayload.client_name,
+      client_rut: orderPayload.client_rut,
+      client_email: orderPayload.client_email,
+      client_phone: orderPayload.client_phone,
+      delivery_method: orderPayload.delivery_method || 'domicilio',
+      shipping_region: orderPayload.shipping_region,
+      shipping_comuna: orderPayload.shipping_comuna,
+      shipping_address: orderPayload.shipping_address,
+      pickup_point_name: orderPayload.pickup_point_name || null,
+      pickup_point_address: orderPayload.pickup_point_address || null,
+      subtotal: orderPayload.subtotal,
+      shipping_cost: orderPayload.shipping_cost,
+      total: orderPayload.total,
+      status: orderPayload.status || 'Pendiente'
+    };
+
     // Insertar orden usando la service_role key (bypassa RLS)
     const { data: order, error: orderError } = await supabaseAdmin
       .from('orders')
-      .insert(orderPayload)
+      .insert(cleanOrderPayload)
       .select()
       .single();
 
@@ -28,34 +45,6 @@ export async function POST(request: Request) {
 
     if (itemsError) {
       return NextResponse.json({ error: itemsError.message }, { status: 500 });
-    }
-
-    // Track coupon usage if present
-    if (orderPayload.applied_coupon) {
-      try {
-        const { data: coupon } = await supabaseAdmin
-          .from('coupons')
-          .select('id, used_count')
-          .eq('code', String(orderPayload.applied_coupon).toUpperCase().trim())
-          .single();
-
-        if (coupon) {
-          // Increment used_count
-          await supabaseAdmin
-            .from('coupons')
-            .update({ used_count: (coupon.used_count || 0) + 1 })
-            .eq('id', coupon.id);
-
-          // Log redemption
-          await supabaseAdmin.from('coupon_usages').insert({
-            coupon_id: coupon.id,
-            order_id: order.id,
-            client_email: String(order.client_email).toLowerCase().trim()
-          });
-        }
-      } catch (couponErr) {
-        console.error('Error recording coupon usage:', couponErr);
-      }
     }
 
     return NextResponse.json({ order });
