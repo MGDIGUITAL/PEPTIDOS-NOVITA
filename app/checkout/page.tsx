@@ -3,8 +3,9 @@ export const dynamic = 'force-dynamic';
 import { useCart } from '../components/CartContext';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { supabase } from '@/lib/supabase/client';
 import { REGIONS } from '@/lib/shippingRates';
 import { REGION_COMUNAS } from '@/lib/chileData';
 
@@ -23,6 +24,15 @@ const S = {
   accent:   '#3B82F6',
 };
 
+function formatRut(raw: string): string {
+  const clean = raw.replace(/[^0-9kK]/g, '').toUpperCase();
+  if (clean.length < 2) return clean;
+  const body = clean.slice(0, -1);
+  const dv   = clean.slice(-1);
+  const fmt  = body.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  return `${fmt}-${dv}`;
+}
+
 export default function CheckoutPage() {
   const { cart, cartTotal } = useCart();
   const router = useRouter();
@@ -32,12 +42,38 @@ export default function CheckoutPage() {
 
   // Form states
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [clientEmail, setClientEmail] = useState('');
   const [clientPhone, setClientPhone] = useState('');
   const [clientRut, setClientRut] = useState('');
   const [clientName, setClientName] = useState('');
   const [clientLastname, setClientLastname] = useState('');
   const [clientAddress, setClientAddress] = useState('');
+
+  // Auto-cargar datos si el cliente inició sesión
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        setIsLoggedIn(true);
+        const u = session.user;
+        if (u.email) setClientEmail(u.email);
+        
+        const meta = u.user_metadata || {};
+        const fullName = (meta.full_name as string) || '';
+        if (fullName) {
+          const parts = fullName.trim().split(' ');
+          setClientName(parts[0] || '');
+          setClientLastname(parts.slice(1).join(' ') || '');
+        }
+
+        if (meta.rut) setClientRut(formatRut(meta.rut));
+        if (meta.phone) setClientPhone(meta.phone);
+        if (meta.address) setClientAddress(meta.address);
+        if (meta.region_id) setSelectedRegionId(meta.region_id);
+        if (meta.comuna) setSelectedComuna(meta.comuna);
+      }
+    });
+  }, []);
 
   const selectedRegion = REGIONS.find(r => r.id === selectedRegionId);
   const shippingCost = 0; // Despacho a domicilio priority incluido
@@ -112,6 +148,20 @@ export default function CheckoutPage() {
 
       const orderData = createOrderData.order;
 
+      // Si el cliente está logeado, actualizar sus metadatos de perfil en segundo plano para recordar su dirección y datos
+      if (isLoggedIn) {
+        supabase.auth.updateUser({
+          data: {
+            full_name: `${clientName} ${clientLastname}`.trim(),
+            phone: clientPhone,
+            rut: clientRut,
+            address: clientAddress,
+            region_id: selectedRegionId,
+            comuna: selectedComuna,
+          }
+        }).catch(err => console.error('Error actualizando metadatos de perfil:', err));
+      }
+
       // ─── INTEGRACIÓN FLOW ──────────────────────────────────────────
       try {
         const flowRes = await fetch('/api/checkout/create-flow-payment', {
@@ -172,6 +222,14 @@ export default function CheckoutPage() {
         {/* LADO IZQUIERDO: FORMULARIO */}
         <section className="checkout-left">
           <h2 style={{ ...sectionTitleStyle, marginTop: 0 }}>1. Información de Contacto</h2>
+          {isLoggedIn && (
+            <div style={{ padding: '12px 16px', background: 'rgba(59, 130, 246, 0.08)', border: '1px solid rgba(59, 130, 246, 0.25)', borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ color: '#60A5FA', fontSize: '0.9rem', fontWeight: 'bold' }}>✓</span>
+              <span style={{ fontSize: '0.8rem', color: '#DBEAFE', fontFamily: 'Inter, sans-serif' }}>
+                Sesión activa como <strong>{clientEmail}</strong>. Tus datos personales han sido cargados automáticamente.
+              </span>
+            </div>
+          )}
           <div style={{ display: 'flex', gap: 16 }}>
             <div style={{ flex: 1 }}>
               <label style={labelStyle}>Correo Electrónico *</label>
@@ -179,7 +237,7 @@ export default function CheckoutPage() {
             </div>
             <div style={{ flex: 1 }}>
               <label style={labelStyle}>RUT *</label>
-              <input type="text" value={clientRut} onChange={e => setClientRut(e.target.value)} placeholder="12.345.678-9" className="input-field" style={inputStyle} />
+              <input type="text" value={clientRut} onChange={e => setClientRut(formatRut(e.target.value))} placeholder="12.345.678-9" maxLength={12} className="input-field" style={inputStyle} />
             </div>
           </div>
           <div>
