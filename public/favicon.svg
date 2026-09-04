@@ -1,15 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
-  <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" stop-color="#1A1A1A"/>
-      <stop offset="100%" stop-color="#050505"/>
-    </radialGradient>
-    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F4E0A5"/>
-      <stop offset="50%" stop-color="#D4B878"/>
-      <stop offset="100%" stop-color="#B8975A"/>
-    </linearGradient>
-  </defs>
-  <rect width="48" height="48" rx="10" fill="url(#bg)"/>
-  <path d="M 24 8 L 8 40 L 13 40 L 17.5 28 L 30.5 28 L 35 40 L 40 40 L 24 8 Z M 19.5 24 L 24 14 L 28.5 24 Z" fill="url(#gold)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#000000"/>
+  <rect x="16" y="16" width="480" height="480" rx="80" fill="none" stroke="#222222" stroke-width="8"/>
+  <!-- Stylized N for NOVA Performance -->
+  <path d="M 124 372 V 140 H 184 L 328 308 V 140 H 388 V 372 H 328 L 184 204 V 372 Z" fill="#FFFFFF"/>
+  <rect x="124" y="376" width="264" height="12" fill="#E6E2D3" rx="4"/>
 </svg>

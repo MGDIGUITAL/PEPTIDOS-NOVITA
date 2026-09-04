@@ -1,11 +1,7 @@
-import { NextResponse } from 'next/server';
-import { getFlowPaymentStatus, verifyFlowWebhook } from '@/lib/flow';
-import { supabaseAdmin } from '@/lib/supabase/server';
-import nodemailer from 'nodemailer';
+require('dotenv').config();
+const nodemailer = require('nodemailer');
 
-
-// ─── HTML de la Boleta / Comprobante de Compra ────────────────────────────────
-function buildBoletaHtml(order: any, items: any[]) {
+function buildBoletaHtml(order, items) {
   const orderDate = new Date(order.created_at).toLocaleDateString('es-CL', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
@@ -170,7 +166,7 @@ function buildBoletaHtml(order: any, items: any[]) {
                     <p style="margin:0;font-size:12px;color:#999;line-height:1.6;">
                       Tu pedido será gestionado a la brevedad. Para cualquier consulta sobre tu envío, por favor cita el número de orden
                       <strong style="color:#FFF;">#${orderNum}</strong> al correo
-                      <a href="mailto:Cnovoadrust@gmail.com" style="color:#EEE;text-decoration:underline;">Cnovoadrust@gmail.com</a>
+                      <a href="mailto:peptidosnovita@gmail.com" style="color:#EEE;text-decoration:underline;">peptidosnovita@gmail.com</a>
                     </p>
                   </td>
                 </tr>
@@ -199,152 +195,59 @@ function buildBoletaHtml(order: any, items: any[]) {
 </html>`;
 }
 
-// ─── Rate Limiter en memoria (anti-spam / anti-DoS) ───────────────────────────
-// Máximo 30 requests por IP por minuto. Se resetea cada 60 segundos.
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_MAX      = 30;
-const RATE_LIMIT_WINDOW   = 60_000; // 1 minuto en ms
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return true;
-  }
-
-  if (entry.count >= RATE_LIMIT_MAX) return false;
-
-  entry.count++;
-  return true;
-}
-
-// ─── Headers de seguridad HTTP ─────────────────────────────────────────────────
-const SECURITY_HEADERS = {
-  'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options':        'DENY',
-  'Cache-Control':          'no-store, no-cache, must-revalidate',
+const mockOrder = {
+  id: 1054,
+  created_at: new Date().toISOString(),
+  client_name: "Cliente Prueba",
+  client_rut: "19.222.333-4",
+  client_email: "mpeg.logistica@gmail.com",
+  client_phone: "+569 98765432",
+  delivery_method: "domicilio",
+  shipping_address: "Av. Las Condes 1234, Depto 50",
+  shipping_comuna: "Las Condes",
+  shipping_region: "Región Metropolitana",
+  subtotal: 140000,
+  shipping_cost: 0,
+  total: 140000
 };
 
-// ─── Webhook principal (POST) ──────────────────────────────────────────────────
-export async function POST(request: Request) {
-  // 1. Rate limiting por IP
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('x-real-ip') ||
-    '0.0.0.0';
+const mockItems = [
+  {
+    product_title: "Retatrutide RT20",
+    size: "20mg*1",
+    quantity: 1,
+    price: 140000
+  }
+];
 
-  if (!checkRateLimit(ip)) {
-    return NextResponse.json(
-      { error: 'Too Many Requests' },
-      { status: 429, headers: SECURITY_HEADERS }
-    );
+async function sendTest() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+  
+  if (!user || !pass) {
+    console.error("Faltan credenciales de Gmail en .env");
+    return;
   }
 
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
+
+  const html = buildBoletaHtml(mockOrder, mockItems);
+
   try {
-    const formData = await request.formData();
-
-    // Extraer TODOS los campos del formData para verificación HMAC
-    const allParams: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      allParams[key] = String(value);
+    await transporter.sendMail({
+      from: `"NOVA Performance®" <${user}>`,
+      to: "mpeg.logistica@gmail.com",
+      bcc: "Christophernovoad@gmail.com",
+      subject: "Comprobante de Compra #01054 — NOVA Performance® (PRUEBA)",
+      html
     });
-
-    const token = allParams['token'];
-
-    if (!token) {
-      return NextResponse.json(
-        { error: 'Token no provisto' },
-        { status: 400, headers: SECURITY_HEADERS }
-      );
-    }
-
-    // 2. Verificación HMAC-SHA256 del webhook (anti-hack)
-    // Flow envía el campo 's' con la firma del payload.
-    // Si no coincide con nuestra clave secreta, rechazamos la request.
-    if (!verifyFlowWebhook(allParams)) {
-      // Log de intento de manipulación
-      console.error(`[Flow Webhook] ⚠️ Firma HMAC inválida — IP: ${ip} — token: ${token}`);
-
-      // Registrar en Supabase como alerta de seguridad
-      await supabaseAdmin.from('security_events').insert({
-        event_type:  'flow_webhook_invalid_signature',
-        ip_address:  ip,
-        payload:     JSON.stringify(allParams),
-        created_at:  new Date().toISOString(),
-      }).then(() => {}).catch(() => {}); // Silencioso si la tabla no existe aún
-
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401, headers: SECURITY_HEADERS }
-      );
-    }
-
-    // 3. Verificar estado del pago con Flow (fuente de verdad)
-    const paymentStatus = await getFlowPaymentStatus(token);
-    const orderId = paymentStatus.commerceOrder;
-
-    let newStatus = 'Pendiente';
-    if (paymentStatus.status === 2) newStatus = 'Pagado';
-    else if (paymentStatus.status === 3 || paymentStatus.status === 4) newStatus = 'Cancelado';
-
-    // 4. Actualizar orden en Supabase
-    await supabaseAdmin
-      .from('orders')
-      .update({
-        status:       newStatus,
-        flow_token:   token,
-        flow_status:  paymentStatus.status,
-        flow_order:   paymentStatus.flowOrder,
-        paid_at:      paymentStatus.status === 2 ? new Date().toISOString() : null,
-      })
-      .eq('id', orderId);
-
-    // 5. Si el pago fue exitoso → enviar comprobante por email
-    if (paymentStatus.status === 2) {
-      try {
-        const { data: order } = await supabaseAdmin
-          .from('orders').select('*').eq('id', orderId).single();
-        const { data: items } = await supabaseAdmin
-          .from('order_items').select('*').eq('order_id', orderId);
-
-        if (order && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
-          });
-
-          const orderNum = String(order.order_number || order.id).padStart(5, '0');
-
-          await transporter.sendMail({
-            from:    `"NOVA Performance®" <${process.env.GMAIL_USER}>`,
-            to:      order.client_email,
-            bcc:     'Christophernovoad@gmail.com', // Copia oculta al admin para notificación de venta
-            subject: `Comprobante de Compra #${orderNum} — NOVA Performance®`,
-            html:    buildBoletaHtml(order, items || [])
-          });
-
-          console.log(`[Flow Webhook] Comprobante enviado a ${order.client_email}`);
-        }
-      } catch (emailErr) {
-        // Email falla silenciosamente — no bloqueamos la confirmación a Flow
-        console.error('[Flow Webhook] Error enviando comprobante:', emailErr);
-      }
-    }
-
-    return NextResponse.json(
-      { success: true },
-      { status: 200, headers: SECURITY_HEADERS }
-    );
-
-  } catch (error: any) {
-    console.error('[Flow Webhook] Error crítico:', error.message);
-    // Devolver 200 igualmente para que Flow no reintente en bucle
-    return NextResponse.json(
-      { success: false, detail: 'Internal processing error' },
-      { status: 200, headers: SECURITY_HEADERS }
-    );
+    console.log("Correo enviado a mpeg.logistica@gmail.com");
+  } catch (error) {
+    console.error("Error enviando correo:", error);
   }
 }
 
+sendTest();

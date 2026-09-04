@@ -6,15 +6,12 @@ import { useCart } from './CartContext';
 
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────
 const S = {
-  offWhite: '#FDFCF8',
-  ivory:    '#F3F0E9',
-  nude:     '#E3DBCC',
-  nudeDark: '#C8BBA8',
-  obsidian: '#101010',
-  charcoal: '#1E1E1E',
-  muted:    '#7A7468',
-  gold:     '#B8975A',
-  goldLight:'#D4B878',
+  black:    '#000000',
+  surface:  '#0A0A0A',
+  border:   '#222222',
+  ivory:    '#E6E2D3',
+  white:    '#FFFFFF',
+  muted:    '#888888',
 };
 
 export default function ProductDetailClient({ product }: { product: any }) {
@@ -30,11 +27,6 @@ export default function ProductDetailClient({ product }: { product: any }) {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
 
   const handleAddToCart = () => {
-    if (product.sizes && product.sizes.length > 0 && !selectedSize) {
-      alert('Por favor, selecciona una talla antes de añadir a la bolsa.');
-      return;
-    }
-
     addToCart(
       {
         id: product.id,
@@ -47,8 +39,12 @@ export default function ProductDetailClient({ product }: { product: any }) {
     );
   };
 
+  const formattedPrice = product.sale_price
+    ? Math.round(product.sale_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+    : '0';
+
   return (
-    <div style={{ background: S.ivory, minHeight: '100vh', fontFamily: 'Inter, sans-serif', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
+    <div style={{ background: S.black, color: S.white, minHeight: '100vh', fontFamily: 'Inter, sans-serif', width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
       
       {/* Dynamic Styles for Mobile Responsiveness */}
       <style>{`
@@ -81,11 +77,11 @@ export default function ProductDetailClient({ product }: { product: any }) {
           width: 100%;
           min-width: 0;
           aspect-ratio: 1 / 1;
-          background-color: ${S.offWhite};
-          border: 1px solid ${S.nude};
+          background-color: #050505;
+          border: 1px solid ${S.border};
           border-radius: 12px;
           overflow: hidden;
-          box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+          box-shadow: 0 8px 30px rgba(0,0,0,0.8);
         }
 
         @media (max-width: 868px) {
@@ -133,24 +129,24 @@ export default function ProductDetailClient({ product }: { product: any }) {
         }
       `}</style>
 
-      {/* NAVBAR SUPER SIMPLE PARA VOLVER */}
-      <nav style={{ padding: '16px 5%', background: S.offWhite, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${S.nude}`, position: 'sticky', top: 0, zIndex: 50 }}>
-        <Link href="/" style={{ fontFamily: 'Cinzel, serif', fontSize: '1.2rem', fontWeight: 600, color: S.obsidian, textDecoration: 'none', letterSpacing: '0.08em', display: 'flex', alignItems: 'center', gap: 6 }}>
-          AMORA <span style={{ fontSize: '0.75rem', fontWeight: 400, letterSpacing: '0.15em', color: S.gold }}>JEWELRY</span>
+      {/* NAVBAR */}
+      <nav style={{ padding: '16px 5%', background: S.surface, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${S.border}`, position: 'sticky', top: 0, zIndex: 50 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button onClick={openCart} style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontSize: '1.2rem' }}>🛒</span>
+          <button onClick={openCart} style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center', color: S.white }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             {cartCount > 0 && (
-              <span style={{ position: 'absolute', top: -6, right: -6, background: S.obsidian, color: S.offWhite, borderRadius: '50%', width: 18, height: 18, fontSize: '0.6rem', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ position: 'absolute', top: -6, right: -6, background: S.ivory, color: S.black, borderRadius: '50%', width: 18, height: 18, fontSize: '0.65rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {cartCount}
               </span>
             )}
           </button>
           
-          <Link href="/" style={{ color: S.charcoal, textDecoration: 'none', fontSize: '0.82rem', fontFamily: 'Cinzel, serif', letterSpacing: '0.05em', borderBottom: `1px solid ${S.nudeDark}`, paddingBottom: 2 }}>
-            ← Volver
+          <Link href="/" style={{ color: S.ivory, textDecoration: 'none', fontSize: '0.82rem', fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', borderBottom: `1px solid ${S.border}`, paddingBottom: 2 }}>
+            ← Volver al Catálogo
           </Link>
         </div>
       </nav>
@@ -172,10 +168,10 @@ export default function ProductDetailClient({ product }: { product: any }) {
                   style={{ 
                     position: 'relative', width: '70px', height: '70px', cursor: 'pointer',
                     borderRadius: '8px', overflow: 'hidden',
-                    border: activeImage === img ? `2px solid ${S.gold}` : `1px solid ${S.nude}`,
+                    border: activeImage === img ? `2px solid ${S.ivory}` : `1px solid ${S.border}`,
                     transition: 'all 0.2s ease',
                     flexShrink: 0,
-                    background: S.offWhite
+                    background: '#050505'
                   }}
                 >
                   <Image src={img} alt={`Vista ${idx + 1}`} fill style={{ objectFit: 'contain', padding: '4px' }} />
@@ -186,42 +182,48 @@ export default function ProductDetailClient({ product }: { product: any }) {
 
           {/* Imagen Principal Contenida */}
           <div className="pdetail-main-img-box">
-            <Image 
-              src={activeImage} 
-              alt={product.title} 
-              fill 
-              style={{ objectFit: 'contain', padding: '16px' }} 
-              priority 
-            />
+            {activeImage ? (
+              <Image 
+                src={activeImage} 
+                alt={product.title} 
+                fill 
+                style={{ objectFit: 'contain', padding: '16px' }} 
+                priority 
+              />
+            ) : (
+              <div style={{ width:'100%', height:'100%', display:'flex', alignItems:'center', justifyContent:'center', color:S.muted, fontFamily:'Outfit,sans-serif' }}>
+                Péptido NOVA Performance
+              </div>
+            )}
           </div>
         </div>
 
         {/* Lado Derecho: Detalles e información */}
         <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
-          <p style={{ fontFamily: 'Cinzel, serif', color: S.gold, letterSpacing: '2px', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '8px', fontWeight: 600 }}>
-            {product.category}
+          <p style={{ fontFamily: 'Outfit, sans-serif', color: S.ivory, letterSpacing: '2px', fontSize: '0.75rem', textTransform: 'uppercase', marginBottom: '8px', fontWeight: 700 }}>
+            {product.category || 'PÉPTIDO DE INVESTIGACIÓN'}
           </p>
           
-          <h1 className="pdetail-title" style={{ fontSize: '1.8rem', color: S.obsidian, fontWeight: 400, marginBottom: '14px', lineHeight: 1.25, fontFamily: 'Cormorant Garamond, serif' }}>
+          <h1 className="pdetail-title font-display" style={{ fontSize: '2.2rem', color: S.white, fontWeight: 800, marginBottom: '14px', lineHeight: 1.2, textTransform: 'uppercase' }}>
             {product.title}
           </h1>
           
-          <div className="pdetail-price" style={{ fontSize: '1.4rem', color: S.obsidian, fontWeight: 500, marginBottom: '20px', fontFamily: 'Cinzel, serif' }}>
-            ${product.sale_price?.toLocaleString('es-CL')} <span style={{ fontSize: '0.75rem', color: S.muted, fontWeight: 400 }}>CLP</span>
+          <div className="pdetail-price font-display" style={{ fontSize: '1.6rem', color: S.ivory, fontWeight: 800, marginBottom: '20px' }} suppressHydrationWarning>
+            ${formattedPrice} <span style={{ fontSize: '0.75rem', color: S.muted, fontWeight: 400 }}>CLP</span>
           </div>
 
-          <div style={{ width: '40px', height: '2px', backgroundColor: S.gold, marginBottom: '24px' }} />
+          <div style={{ width: '40px', height: '2px', backgroundColor: S.ivory, marginBottom: '24px' }} />
 
-          {/* Descripción con formato preservado */}
-          <div style={{ color: S.charcoal, fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '32px', whiteSpace: 'pre-wrap', background: S.offWhite, padding: '20px', borderRadius: '10px', border: `1px solid ${S.nude}` }}>
-            {product.description}
+          {/* Descripción */}
+          <div style={{ color: '#CCCCCC', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '32px', whiteSpace: 'pre-wrap', background: S.surface, padding: '20px', borderRadius: '8px', border: `1px solid ${S.border}` }}>
+            {product.description || 'Compuesto químico producido bajo estrictos estándares analíticos HPLC (>99% pureza) destinado exclusivamente a investigación científica (Research Use Only).'}
           </div>
 
-          {/* Selector de Tallas */}
+          {/* Selector de Tallas / Variaciones si aplican */}
           {product.sizes && product.sizes.length > 0 && (
             <div style={{ marginBottom: '28px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                <span style={{ fontSize: '0.82rem', color: S.obsidian, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tallas Disponibles:</span>
+                <span style={{ fontSize: '0.82rem', color: S.ivory, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', fontFamily: 'Outfit,sans-serif' }}>Formulaciones:</span>
               </div>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                 {product.sizes.map((size: string) => (
@@ -230,15 +232,15 @@ export default function ProductDetailClient({ product }: { product: any }) {
                     onClick={() => setSelectedSize(size)}
                     style={{
                       padding: '8px 16px',
-                      background: selectedSize === size ? S.obsidian : S.offWhite,
-                      color: selectedSize === size ? S.offWhite : S.obsidian,
-                      border: `1px solid ${selectedSize === size ? S.obsidian : S.nudeDark}`,
+                      background: selectedSize === size ? S.white : S.surface,
+                      color: selectedSize === size ? S.black : S.white,
+                      border: `1px solid ${selectedSize === size ? S.white : S.border}`,
                       cursor: 'pointer',
-                      borderRadius: '20px',
+                      borderRadius: '4px',
                       fontSize: '0.82rem',
-                      fontWeight: selectedSize === size ? 600 : 400,
+                      fontFamily: 'Outfit,sans-serif',
+                      fontWeight: selectedSize === size ? 800 : 400,
                       transition: 'all 0.2s ease',
-                      boxShadow: selectedSize === size ? '0 4px 12px rgba(0,0,0,0.15)' : 'none'
                     }}
                   >
                     {size}
@@ -248,50 +250,54 @@ export default function ProductDetailClient({ product }: { product: any }) {
             </div>
           )}
 
-          {/* Botón Añadir a la Bolsa */}
+          {/* Botones de Acción */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <button 
               className="pdetail-add-btn"
               onClick={handleAddToCart}
               style={{
-                padding: '16px 24px',
-                backgroundColor: S.obsidian,
-                color: S.offWhite,
+                padding: '18px 24px',
+                backgroundColor: S.white,
+                color: S.black,
                 border: 'none',
-                borderRadius: '8px',
-                fontFamily: 'Cinzel, serif',
-                letterSpacing: '2px',
-                fontSize: '0.88rem',
-                fontWeight: 600,
+                borderRadius: '4px',
+                fontFamily: 'Outfit, sans-serif',
+                letterSpacing: '0.14em',
+                fontSize: '0.85rem',
+                fontWeight: 800,
+                textTransform: 'uppercase',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 width: '100%',
-                boxShadow: '0 4px 16px rgba(16,16,16,0.15)'
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8
               }}
-              onMouseOver={e => e.currentTarget.style.backgroundColor = S.charcoal}
-              onMouseOut={e => e.currentTarget.style.backgroundColor = S.obsidian}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = S.ivory; e.currentTarget.style.boxShadow = '0 0 20px rgba(230,226,211,0.4)'; }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = S.white; e.currentTarget.style.boxShadow = 'none'; }}
             >
-              AÑADIR A LA BOLSA
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
+              <span>AÑADIR AL CARRITO</span>
             </button>
 
             <a
               href={`https://wa.me/56951555556?text=${encodeURIComponent(
-                `Hola Amora Jewelry, me gustaría pedir el producto "${product.title}"${
-                  selectedSize ? ` (Talla: ${selectedSize})` : ''
-                } - $${product.sale_price?.toLocaleString('es-CL')}`
+                `Hola NOVA Performance, quisiera consultar por el compuesto de investigación "${product.title}" - $${formattedPrice}`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                padding: '14px 24px',
+                padding: '16px 24px',
                 backgroundColor: '#25D366',
                 color: '#FFFFFF',
                 border: 'none',
-                borderRadius: '8px',
-                fontFamily: 'Cinzel, serif',
-                letterSpacing: '1.5px',
+                borderRadius: '4px',
+                fontFamily: 'Outfit, sans-serif',
+                letterSpacing: '0.12em',
                 fontSize: '0.82rem',
-                fontWeight: 600,
+                fontWeight: 800,
+                textTransform: 'uppercase',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 width: '100%',
@@ -300,17 +306,16 @@ export default function ProductDetailClient({ product }: { product: any }) {
                 justifyContent: 'center',
                 gap: '10px',
                 textDecoration: 'none',
-                boxShadow: '0 4px 14px rgba(37,211,102,0.25)'
               }}
             >
-              <span style={{ fontSize: '1.1rem' }}>💬</span> PEDIR VÍA WHATSAPP
+              <span>💬</span> CONSULTAR TÉCNICAMENTE POR WHATSAPP
             </a>
           </div>
           
-          <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.8rem', color: S.muted, background: 'rgba(184,151,90,0.06)', padding: '16px', borderRadius: '8px', border: `1px solid rgba(184,151,90,0.2)` }}>
-            <p style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>✨ <strong>Envío asegurado</strong> a todo Chile</p>
-            <p style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>💎 <strong>Joyería hipoalergénica</strong> libre de níquel</p>
-            <p style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>🎁 <strong>Empaque premium</strong> ideal para regalo incluido</p>
+          <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.8rem', color: S.muted, background: S.surface, padding: '16px 20px', borderRadius: '6px', border: `1px solid ${S.border}` }}>
+            <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>🔬 <strong>Pureza Analítica Certificada</strong> &gt;99% HPLC por lote</p>
+            <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>📦 <strong>Empaque Neutro y Discreto</strong> a todo Chile</p>
+            <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>📋 <strong>Research Use Only (RUO)</strong> Compuesto de investigación</p>
           </div>
         </div>
 

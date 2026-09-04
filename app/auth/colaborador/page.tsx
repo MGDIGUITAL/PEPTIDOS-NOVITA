@@ -71,12 +71,11 @@ export default function ColaboradorAuthPage() {
       </div>
 
       {/* Nav mínimo con estética del sitio */}
-      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(16,16,16,0.5)', backdropFilter: 'blur(12px)', borderBottom: `1px solid rgba(200,187,168,0.2)`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/">
-          <Image src="/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" width={160} height={38}
-            style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)' }} />
+          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} />
         </Link>
-        <Link href="/" style={{ fontFamily: 'Cinzel,serif', fontSize: '0.62rem', letterSpacing: '0.12em', color: 'rgba(253,252,248,0.5)', textDecoration: 'none', textTransform: 'uppercase' }}>
+        <Link href="/" style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.72rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
           ← Volver a la tienda
         </Link>
       </nav>
@@ -85,24 +84,24 @@ export default function ColaboradorAuthPage() {
       <div style={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 1rem' }}>
         <div style={{
           width: '100%', maxWidth: 400,
-          background: 'rgba(253,252,248,0.10)', backdropFilter: 'blur(24px)',
-          border: `1px solid rgba(200,187,168,0.35)`,
-          borderRadius: 16, padding: '44px 40px',
-          boxShadow: '0 24px 80px rgba(0,0,0,0.4)',
+          background: S.surface, backdropFilter: 'blur(24px)',
+          border: `1px solid ${S.border}`,
+          borderRadius: 12, padding: '44px 40px',
+          boxShadow: '0 24px 80px rgba(0,0,0,0.8)',
         }}>
 
           {/* Header con divider estilo sitio */}
           <div style={{ textAlign: 'center', marginBottom: 36 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 18 }}>
-              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,transparent,rgba(200,187,168,0.6))` }} />
-              <span style={{ fontFamily: 'Cinzel,serif', color: S.nudeDk, fontSize: '0.58rem', letterSpacing: '0.22em', textTransform: 'uppercase' }}>Área Interna</span>
-              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,rgba(200,187,168,0.6),transparent)` }} />
+              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,transparent,${S.ivory})` }} />
+              <span style={{ fontFamily: 'Outfit,sans-serif', color: S.ivory, fontSize: '0.6rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700 }}>Área Interna</span>
+              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,${S.ivory},transparent)` }} />
             </div>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.5rem', fontWeight: 400, color: S.offWhite, letterSpacing: '0.02em', marginBottom: 8 }}>
+            <h1 className="font-display" style={{ fontSize: '1.5rem', fontWeight: 800, color: S.white, letterSpacing: '0.02em', marginBottom: 8, textTransform: 'uppercase' }}>
               Acceso Colaborador
             </h1>
-            <p style={{ color: 'rgba(253,252,248,0.5)', fontSize: '0.78rem', fontFamily: 'Inter, sans-serif' }}>
-              Área exclusiva para el equipo Amora Jewelry
+            <p style={{ color: S.muted, fontSize: '0.78rem', fontFamily: 'Inter, sans-serif' }}>
+              Área exclusiva para el equipo NOVA Performance®
             </p>
           </div>
 
@@ -114,32 +113,32 @@ export default function ColaboradorAuthPage() {
 
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <div>
-              <label style={{ ...lbl, color: S.nudeDk }}>Correo electrónico</label>
+              <label style={{ ...lbl, color: S.ivory }}>Correo electrónico</label>
               <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
-                placeholder="colaborador@amorajewelry.cl" style={inp} />
+                placeholder="colaborador@novaperformance.cl" style={inp} />
             </div>
             <div>
-              <label style={{ ...lbl, color: S.nudeDk }}>Contraseña</label>
+              <label style={{ ...lbl, color: S.ivory }}>Contraseña</label>
               <input type="password" required value={pass} onChange={e => setPass(e.target.value)}
                 placeholder="••••••••" style={inp} />
             </div>
             <button type="submit" disabled={loading} style={{
               marginTop: 4, padding: '14px',
-              background: loading ? 'rgba(184,151,90,0.5)' : S.gold,
-              color: '#fff', border: 'none', borderRadius: 6,
-              fontFamily: 'Cinzel, serif', fontSize: '0.7rem', letterSpacing: '0.16em',
-              textTransform: 'uppercase', cursor: loading ? 'wait' : 'pointer', fontWeight: 500,
-              transition: 'background 0.2s',
+              background: loading ? S.muted : S.white,
+              color: S.black, border: 'none', borderRadius: 4,
+              fontFamily: 'Outfit, sans-serif', fontSize: '0.72rem', letterSpacing: '0.16em',
+              textTransform: 'uppercase', cursor: loading ? 'wait' : 'pointer', fontWeight: 800,
+              transition: 'all 0.2s',
             }}>
               {loading ? 'Verificando…' : 'Acceder al sistema'}
             </button>
           </form>
 
-          {/* Separador dorado estilo sitio */}
+          {/* Separador estilo sitio */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '28px 0 0' }}>
-            <span style={{ flex: 1, height: 1, background: 'rgba(200,187,168,0.2)' }} />
-            <span style={{ fontFamily: 'Cinzel,serif', fontSize: '0.55rem', color: 'rgba(200,187,168,0.4)', letterSpacing: '0.14em' }}>AMORA JEWELRY</span>
-            <span style={{ flex: 1, height: 1, background: 'rgba(200,187,168,0.2)' }} />
+            <span style={{ flex: 1, height: 1, background: S.border }} />
+            <span style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.6rem', color: S.ivory, letterSpacing: '0.14em', fontWeight: 700 }}>NOVA PERFORMANCE®</span>
+            <span style={{ flex: 1, height: 1, background: S.border }} />
           </div>
         </div>
       </div>

@@ -1,33 +1,59 @@
 import { NextResponse } from 'next/server';
 import { createFlowPayment } from '@/lib/flow';
 
+// ─── Headers de seguridad ──────────────────────────────────────────────────────
+const SECURITY_HEADERS = {
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options':        'DENY',
+  'Cache-Control':          'no-store, no-cache, must-revalidate',
+};
+
 export async function POST(request: Request) {
   try {
     const { orderId, amount, email } = await request.json();
 
     if (!orderId || !amount || !email) {
-      return NextResponse.json({ error: 'Faltan parámetros' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Faltan parámetros requeridos: orderId, amount, email' },
+        { status: 400, headers: SECURITY_HEADERS }
+      );
     }
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://amorajewelry.cl';
+    // Validaciones básicas de seguridad
+    if (typeof amount !== 'number' || amount <= 0 || amount > 50_000_000) {
+      return NextResponse.json(
+        { error: 'Monto inválido' },
+        { status: 400, headers: SECURITY_HEADERS }
+      );
+    }
 
-    // Generar el pago en Flow
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      'https://peptidosnovita.cl';
+
     const flowResponse = await createFlowPayment({
-      commerceOrder: orderId.toString(),
-      subject: `Orden #${orderId} - Amora Jewelry`,
-      amount: Math.round(amount),
-      email: email,
+      commerceOrder:   orderId.toString(),
+      subject:         `Orden #${orderId} — NOVA Performance® | Peptidos Novita`,
+      amount:          Math.round(amount),
+      email,
       urlConfirmation: `${baseUrl}/api/checkout/flow-webhook`,
-      urlReturn: `${baseUrl}/api/checkout/flow-return`,
+      urlReturn:       `${baseUrl}/api/checkout/flow-return`,
+      paymentMethod:   9, // Todos los medios de pago disponibles
     });
 
-    // Flow retorna una URL y un Token. El cliente debe ser redirigido a URL?token=TOKEN
+    // El cliente debe redirigirse a esta URL para completar el pago
     const redirectUrl = `${flowResponse.url}?token=${flowResponse.token}`;
 
-    return NextResponse.json({ redirectUrl });
+    return NextResponse.json(
+      { redirectUrl, token: flowResponse.token },
+      { status: 200, headers: SECURITY_HEADERS }
+    );
 
   } catch (error: any) {
-    console.error('Error creando pago en Flow:', error);
-    return NextResponse.json({ error: error.message || 'Error interno' }, { status: 500 });
+    console.error('[Flow] Error creando pago:', error.message);
+    return NextResponse.json(
+      { error: 'No se pudo iniciar el pago. Por favor intenta nuevamente.' },
+      { status: 500, headers: SECURITY_HEADERS }
+    );
   }
 }

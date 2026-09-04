@@ -3,9 +3,9 @@ import { supabaseAdmin } from '@/lib/supabase/server';
 import StorefrontClient from './components/StorefrontClient';
 
 export const metadata: Metadata = {
-  title: 'Amora Jewelry | Joyería Premium en Chile',
-  description: 'Descubre nuestra colección exclusiva de anillos, cadenas, pulseras y aros. Joyería artesanal con diseño atemporal y pago seguro.',
-  keywords: 'joyería, anillos, cadenas, pulseras, oro, plata, joyería premium, chile',
+  title: 'Peptidos Novita | NOVA Performance®',
+  description: 'Descubre nuestra línea exclusiva de péptidos de alta pureza y vanguardia biotecnológica. Envíos discretos y seguros a todo Chile.',
+  keywords: 'peptidos, nova performance, biotecnología, peptidos chile, bienestar, alta pureza',
 };
 
 // Ensure the page always fetches fresh active products

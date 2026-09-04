@@ -31,19 +31,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://peptidosnovita.cl',
   },
-  icons: {
-    icon: [
-      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
-      { url: '/icon.png', type: 'image/png', sizes: '192x192' },
-      { url: '/favicon-32.png', type: 'image/png', sizes: '32x32' },
-      { url: '/favicon.ico', sizes: 'any' },
-    ],
-    shortcut: ['/favicon.ico'],
-    apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-  },
   robots: {
     index: true,
     follow: true,
@@ -108,7 +95,7 @@ const websiteSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

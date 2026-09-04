@@ -6,28 +6,29 @@ import { supabase } from '@/lib/supabase/client';
 
 // ─── Styles ───────────────────────────────────────────────────────────────
 const S = {
-  offWhite: '#FDFCF8',
-  ivory:    '#F3F0E9',
-  nude:     '#E3DBCC',
-  nudeDk:   '#C8BBA8',
-  obs:      '#101010',
-  muted:    '#7A7468',
-  gold:     '#B8975A',
-  error:    '#c0392b',
-  white:    '#fff',
+  black:    '#000000',
+  surface:  '#0A0A0A',
+  card:     '#121212',
+  border:   '#222222',
+  ivory:    '#E6E2D3',
+  ivoryDark:'#C4BFA9',
+  offWhite: '#EEEEEE',
+  white:    '#FFFFFF',
+  muted:    '#888888',
+  error:    '#ef4444',
 };
 
 const inp: React.CSSProperties = {
   width: '100%', padding: '12px 16px', fontSize: '0.88rem',
-  background: 'rgba(253,252,248,0.9)', border: `1px solid ${S.nude}`,
-  borderRadius: 6, color: S.obs, outline: 'none',
+  background: '#181818', border: `1px solid ${S.border}`,
+  borderRadius: 6, color: S.white, outline: 'none',
   fontFamily: 'Inter, sans-serif', boxSizing: 'border-box',
 };
 
 const lbl: React.CSSProperties = {
-  display: 'block', fontSize: '0.68rem', color: S.muted,
+  display: 'block', fontSize: '0.68rem', color: S.ivory,
   letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6,
-  fontFamily: 'Cinzel, serif',
+  fontFamily: 'Outfit, sans-serif', fontWeight: 600,
 };
 
 function formatRut(raw: string): string {
@@ -84,7 +85,6 @@ export default function ClienteAuthPage() {
       setLoading(false);
       setMsg({ type: 'err', text: error.message });
     } else {
-      // Auto-confirmar el correo y enviar email de bienvenida
       try {
         await fetch('/api/send-welcome', {
           method: 'POST',
@@ -95,7 +95,6 @@ export default function ClienteAuthPage() {
         console.error('No se pudo enviar el correo de bienvenida', err);
       }
 
-      // Iniciar sesión automáticamente
       const { error: loginErr } = await supabase.auth.signInWithPassword({
         email: cleanEmail,
         password: regPass,
@@ -111,22 +110,21 @@ export default function ClienteAuthPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', background: S.black }}>
 
       {/* Fondo */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-        <Image src="/fondo-login.png" alt="Fondo" fill priority style={{ objectFit: 'cover', objectPosition: 'center' }} />
-        {/* Overlay suave para legibilidad */}
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(253,252,248,0.55)' }} />
+        <Image src="/fondo-1.png" alt="NOVA Background" fill priority style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.35 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.65) 50%, rgba(0,0,0,0.9) 100%)' }} />
       </div>
 
       {/* Nav mínimo */}
-      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(253,252,248,0.85)', backdropFilter: 'blur(12px)', borderBottom: `1px solid ${S.nude}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/">
-          <Image src="/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" width={160} height={38} style={{ objectFit: 'contain' }} />
+          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} />
         </Link>
-        <Link href="/" style={{ fontFamily: 'Cinzel,serif', fontSize: '0.65rem', letterSpacing: '0.12em', color: S.muted, textDecoration: 'none', textTransform: 'uppercase' }}>
-          ← Volver a la tienda
+        <Link href="/" style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.72rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
+          ← Volver al catálogo
         </Link>
       </nav>
 
@@ -134,35 +132,35 @@ export default function ClienteAuthPage() {
       <div style={{ position: 'relative', zIndex: 10, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 1rem' }}>
         <div style={{
           width: '100%', maxWidth: 440,
-          background: 'rgba(253,252,248,0.92)', backdropFilter: 'blur(20px)',
-          border: `1px solid ${S.nude}`,
-          borderRadius: 16, overflow: 'hidden',
-          boxShadow: '0 16px 60px rgba(16,16,16,0.15)',
+          background: S.surface, backdropFilter: 'blur(20px)',
+          border: `1px solid ${S.border}`,
+          borderRadius: 12, overflow: 'hidden',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.9)',
         }}>
 
           {/* Header */}
           <div style={{ padding: '36px 40px 0', textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
-              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,transparent,${S.nudeDk})` }} />
-              <span style={{ fontFamily: 'Cinzel,serif', color: S.nudeDk, fontSize: '0.62rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Amora Jewelry</span>
-              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,${S.nudeDk},transparent)` }} />
+              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,transparent,${S.ivory})` }} />
+              <span style={{ fontFamily: 'Outfit,sans-serif', color: S.ivory, fontSize: '0.65rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 700 }}>NOVA Performance®</span>
+              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,${S.ivory},transparent)` }} />
             </div>
-            <h1 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.7rem', fontWeight: 400, color: S.obs, marginBottom: 6 }}>
+            <h1 className="font-display" style={{ fontSize: '1.7rem', fontWeight: 800, color: S.white, textTransform: 'uppercase', marginBottom: 6 }}>
               Mi Cuenta
             </h1>
-            <p style={{ color: S.muted, fontSize: '0.82rem', lineHeight: 1.6 }}>
-              Accede a tus cupones y beneficios exclusivos
+            <p style={{ color: S.muted, fontSize: '0.82rem', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
+              Accede a tus solicitudes y estado de pedidos
             </p>
           </div>
 
           {/* Tabs */}
-          <div style={{ display: 'flex', borderBottom: `1px solid ${S.nude}`, margin: '24px 0 0' }}>
+          <div style={{ display: 'flex', borderBottom: `1px solid ${S.border}`, margin: '24px 0 0' }}>
             {(['login', 'registro'] as const).map(t => (
               <button key={t} onClick={() => { setTab(t); setMsg(null); }} style={{
                 flex: 1, padding: '14px', background: 'none', border: 'none', cursor: 'pointer',
-                fontFamily: 'Cinzel, serif', fontSize: '0.68rem', letterSpacing: '0.12em', textTransform: 'uppercase',
-                color: tab === t ? S.gold : S.muted,
-                borderBottom: tab === t ? `2px solid ${S.gold}` : '2px solid transparent',
+                fontFamily: 'Outfit, sans-serif', fontSize: '0.72rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 700,
+                color: tab === t ? S.white : S.muted,
+                borderBottom: tab === t ? `2px solid ${S.ivory}` : '2px solid transparent',
                 transition: 'all 0.2s',
               }}>
                 {t === 'login' ? 'Ingresar' : 'Registrarse'}
