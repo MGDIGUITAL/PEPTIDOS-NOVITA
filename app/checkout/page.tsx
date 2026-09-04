@@ -76,7 +76,7 @@ export default function CheckoutPage() {
   }, []);
 
   const selectedRegion = REGIONS.find(r => r.id === selectedRegionId);
-  const shippingCost = 0; // Despacho a domicilio priority incluido
+  const shippingCost = selectedRegion ? selectedRegion.shippingCost : 0;
 
   const finalTotal = cartTotal + shippingCost;
 
@@ -380,8 +380,8 @@ export default function CheckoutPage() {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
                 <span style={{ color: S.muted, fontSize: '0.88rem' }}>Despacho a Domicilio</span>
-                <span style={{ color: '#4CAF50', fontSize: '0.88rem', fontWeight: 600 }}>
-                  INCLUIDO
+                <span style={{ color: shippingCost > 0 ? S.white : S.muted, fontSize: '0.88rem', fontWeight: 600 }}>
+                  {shippingCost > 0 ? `$${shippingCost.toLocaleString('es-CL')}` : 'Calculando...'}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: `1px solid ${S.border}`, paddingTop: 20, alignItems: 'baseline' }}>
