@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { supabaseAdmin } from '@/lib/supabase/server';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://peptidosnovita.cl';
+  const baseUrl = 'https://novaperformance.cl';
 
   // 1. Static Routes
   const staticRoutes = [

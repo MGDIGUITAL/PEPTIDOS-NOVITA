@@ -11,7 +11,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://peptidosnovita.cl'),
+  metadataBase: new URL('https://novaperformance.cl'),
   title: {
     default: 'Peptidos Novita | Péptidos de Alta Pureza en Chile',
     template: '%s | Peptidos Novita',
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     'Bienestar Biológico',
     'Chile Péptidos Online',
   ],
-  authors: [{ name: 'Peptidos Novita', url: 'https://peptidosnovita.cl' }],
+  authors: [{ name: 'Peptidos Novita', url: 'https://novaperformance.cl' }],
   creator: 'Peptidos Novita',
   publisher: 'Peptidos Novita',
   alternates: {
-    canonical: 'https://peptidosnovita.cl',
+    canonical: 'https://novaperformance.cl',
   },
   robots: {
     index: true,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Peptidos Novita | Péptidos de Alta Pureza en Chile',
     description: 'Catálogo especializado de péptidos premium con estándares de máxima calidad. Envíos a todo Chile.',
-    url: 'https://peptidosnovita.cl',
+    url: 'https://novaperformance.cl',
     siteName: 'Peptidos Novita',
     locale: 'es_CL',
     type: 'website',
@@ -70,9 +70,9 @@ const storeSchema = {
   '@context': 'https://schema.org',
   '@type': 'OnlineStore',
   name: 'Peptidos Novita',
-  url: 'https://peptidosnovita.cl',
-  logo: 'https://peptidosnovita.cl/icon-512.png',
-  image: 'https://peptidosnovita.cl/og-image.png',
+  url: 'https://novaperformance.cl',
+  logo: 'https://novaperformance.cl/icon-512.png',
+  image: 'https://novaperformance.cl/og-image.png',
   description: 'Tienda especializada en péptidos de alta pureza y productos de vanguardia biotecnológica en Chile.',
   priceRange: '$$$',
   address: {
@@ -85,10 +85,10 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Peptidos Novita',
-  url: 'https://peptidosnovita.cl',
+  url: 'https://novaperformance.cl',
   potentialAction: {
     '@type': 'SearchAction',
-    target: 'https://peptidosnovita.cl/#catalogo?q={search_term_string}',
+    target: 'https://novaperformance.cl/#catalogo?q={search_term_string}',
     'query-input': 'required name=search_term_string',
   },
 };

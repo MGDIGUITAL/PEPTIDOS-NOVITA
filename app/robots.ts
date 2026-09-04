@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/checkout/'],
     },
-    sitemap: 'https://peptidosnovita.cl/sitemap.xml',
+    sitemap: 'https://novaperformance.cl/sitemap.xml',
   };
 }

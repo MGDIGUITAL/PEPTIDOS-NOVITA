@@ -216,7 +216,7 @@ function PrintContent() {
                       alt="NOVA Performance" 
                       style={{ height: '32px', width: 'auto', display: 'block', marginBottom: '2px', filter: 'brightness(0)' }} 
                     />
-                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Péptidos de Investigación • www.peptidosnovita.cl</p>
+                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Péptidos de Investigación • www.novaperformance.cl</p>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ background: '#101010', color: '#B8975A', padding: '5px 14px', fontWeight: 'bold', fontSize: '13px', borderRadius: '4px', display: 'inline-block' }}>

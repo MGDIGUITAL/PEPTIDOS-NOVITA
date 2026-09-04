@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const description = product.description
     ? product.description.slice(0, 160).replace(/\n/g, ' ')
     : `${product.title} — Compuesto de investigación de alta pureza. Disponible en Chile. Envío discreto a todo el país.`;
-  const url = `https://peptidosnovita.cl/product/${params.id}`;
+  const url = `https://novaperformance.cl/product/${params.id}`;
 
   return {
     title,
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       type: 'website',
       images: product.image_url
         ? [{ url: product.image_url, width: 800, height: 800, alt: product.title }]
-        : [{ url: 'https://peptidosnovita.cl/og-image.png', width: 1200, height: 630, alt: 'NOVA Performance® Péptidos Chile' }],
+        : [{ url: 'https://novaperformance.cl/og-image.png', width: 1200, height: 630, alt: 'NOVA Performance® Péptidos Chile' }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -90,10 +90,10 @@ export default async function ProductPage({ params }: { params: { id: string } }
       name: 'NOVA Performance®',
     },
     category: product.category || 'Péptidos de Investigación',
-    url: `https://peptidosnovita.cl/product/${product.id}`,
+    url: `https://novaperformance.cl/product/${product.id}`,
     offers: {
       '@type': 'Offer',
-      url: `https://peptidosnovita.cl/product/${product.id}`,
+      url: `https://novaperformance.cl/product/${product.id}`,
       priceCurrency: 'CLP',
       price: product.sale_price,
       priceValidUntil: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000)
@@ -104,7 +104,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       seller: {
         '@type': 'Organization',
         name: 'NOVA Performance® | Peptidos Novita',
-        url: 'https://peptidosnovita.cl',
+        url: 'https://novaperformance.cl',
       },
       shippingDetails: {
         '@type': 'OfferShippingDetails',

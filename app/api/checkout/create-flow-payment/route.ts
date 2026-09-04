@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 
     const baseUrl =
       process.env.NEXT_PUBLIC_BASE_URL ||
-      'https://peptidosnovita.cl';
+      'https://novaperformance.cl';
 
     const flowResponse = await createFlowPayment({
       commerceOrder:   orderId.toString(),

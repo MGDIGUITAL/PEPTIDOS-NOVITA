@@ -226,7 +226,7 @@ function StatusContent() {
               />
               <p style={{ color: S.muted, fontSize: '0.75rem', marginTop: 10, lineHeight: 1.6 }}>
                 Contacto Soporte: <a href="mailto:Cnovoadrust@gmail.com" style={{ color: S.ivory, textDecoration: 'none' }}>Cnovoadrust@gmail.com</a><br/>
-                Sitio Oficial: <a href="https://peptidosnovita.cl" style={{ color: S.ivory, textDecoration: 'none' }}>peptidosnovita.cl</a>
+                Sitio Oficial: <a href="https://novaperformance.cl" style={{ color: S.ivory, textDecoration: 'none' }}>novaperformance.cl</a>
               </p>
             </div>
             <div style={{ textAlign: 'right' }}>
