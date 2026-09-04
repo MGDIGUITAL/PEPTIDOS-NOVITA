@@ -1031,9 +1031,10 @@ function Footer() {
   );
 }
 
-
 // ─── MAIN COMPONENT ───────────────────────────────────────────────────────
 export default function StorefrontClient({ products }: { products: any[] }) {
+  const [showLegalNotice, setShowLegalNotice] = useState(true);
+
   return (
     <>
       <PromoBar />
@@ -1051,6 +1052,40 @@ export default function StorefrontClient({ products }: { products: any[] }) {
       </main>
       <Footer />
       <CartSidebar />
+
+      {/* Floating Scientific Disclaimer Banner (Estilo NOVA Performance®) */}
+      {showLegalNotice && (
+        <div style={{
+          position: 'fixed', bottom: 24, left: 24, zIndex: 99,
+          maxWidth: 420, padding: '16px 20px',
+          background: 'rgba(10, 10, 10, 0.95)',
+          border: '1px solid rgba(230, 226, 211, 0.25)',
+          borderRadius: 10, backdropFilter: 'blur(16px)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ fontSize: '0.85rem' }}>⚠️</span>
+              <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.68rem', color: '#E6E2D3', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800 }}>
+                AVISO LEGAL · INVESTIGACIÓN CIENTÍFICA
+              </span>
+            </div>
+            <button 
+              onClick={() => setShowLegalNotice(false)} 
+              style={{ background: 'none', border: 'none', color: '#888888', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px', lineHeight: 1 }}
+              title="Cerrar aviso"
+            >
+              ×
+            </button>
+          </div>
+          <p style={{ margin: 0, fontSize: '0.74rem', color: '#AAAAAA', lineHeight: 1.5, fontFamily: 'Inter, sans-serif' }}>
+            Productos para investigación científica únicamente. No destinados a consumo humano. Acceso restringido a investigadores y profesionales mayores de 18 años. No son medicamentos ni cosméticos sujetos a registro sanitario ISP.{' '}
+            <Link href="/marco-regulatorio" target="_blank" style={{ color: '#FFFFFF', textDecoration: 'underline', fontWeight: 700 }}>
+              Aviso Legal
+            </Link>
+          </p>
+        </div>
+      )}
 
       {/* Floating WhatsApp Button */}
       <a href="https://wa.me/56951555556?text=Hola%20NOVA%20Performance%2C%20quisiera%20consultar%20por%20sus%20compuestos%20de%20investigaci%C3%B3n" target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp" style={{

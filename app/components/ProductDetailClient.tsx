@@ -317,6 +317,22 @@ export default function ProductDetailClient({ product }: { product: any }) {
             <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>📦 <strong>Empaque Neutro y Discreto</strong> a todo Chile</p>
             <p style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>📋 <strong>Research Use Only (RUO)</strong> Compuesto de investigación</p>
           </div>
+
+          {/* Aviso Legal & Marco Regulatorio */}
+          <div style={{ marginTop: '16px', padding: '14px 18px', background: 'rgba(10, 10, 10, 0.95)', border: '1px solid rgba(230, 226, 211, 0.22)', borderRadius: '6px', backdropFilter: 'blur(12px)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+              <span style={{ color: '#E6E2D3', fontSize: '0.85rem' }}>⚠️</span>
+              <span style={{ fontSize: '0.7rem', color: S.ivory, fontFamily: 'Outfit, sans-serif', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                Aviso Legal · Investigación Científica
+              </span>
+            </div>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: '#AAAAAA', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
+              Productos para investigación científica únicamente. No destinados a consumo humano. Acceso restringido a investigadores y profesionales mayores de 18 años. No son medicamentos ni cosméticos sujetos a registro sanitario ISP.{' '}
+              <Link href="/marco-regulatorio" target="_blank" style={{ color: S.white, textDecoration: 'underline', fontWeight: 700 }}>
+                Aviso Legal
+              </Link>
+            </p>
+          </div>
         </div>
 
       </main>

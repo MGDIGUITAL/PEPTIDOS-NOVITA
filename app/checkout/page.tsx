@@ -388,13 +388,29 @@ export default function CheckoutPage() {
               </div>
             </div>
             
-            <div style={{ marginTop: 32, padding: '16px', background: '#141414', border: `1px solid ${S.border}`, borderRadius: 8, textAlign: 'center' }}>
+            <div style={{ marginTop: 24, padding: '16px', background: '#141414', border: `1px solid ${S.border}`, borderRadius: 8, textAlign: 'center' }}>
                <div style={{ fontSize: '0.78rem', color: S.ivory, fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 4 }}>
                  🔒 Compra 100% Segura y Discreta
                </div>
                <div style={{ fontSize: '0.75rem', color: S.muted, lineHeight: 1.5 }}>
                  Envío a domicilio en embalaje térmico neutro sin marcas exteriores. Transacción asegurada por Flow / Webpay Plus.
                </div>
+            </div>
+
+            {/* ── AVISO LEGAL Y MARCO REGULATORIO (ESTILO NOVA PERFORMANCE®) ── */}
+            <div style={{ marginTop: 14, padding: '16px 18px', background: 'rgba(10, 10, 10, 0.95)', border: '1px solid rgba(230, 226, 211, 0.22)', borderRadius: 8, backdropFilter: 'blur(12px)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                <span style={{ color: '#E6E2D3', fontSize: '0.85rem' }}>⚠️</span>
+                <span style={{ fontSize: '0.7rem', color: S.ivory, fontFamily: 'Outfit, sans-serif', fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  Aviso Legal · Investigación Científica
+                </span>
+              </div>
+              <p style={{ margin: 0, fontSize: '0.75rem', color: '#AAAAAA', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
+                Productos para investigación científica únicamente. No destinados a consumo humano. Acceso restringido a investigadores y profesionales mayores de 18 años. No son medicamentos ni cosméticos sujetos a registro sanitario ISP.{' '}
+                <Link href="/marco-regulatorio" target="_blank" style={{ color: S.white, textDecoration: 'underline', fontWeight: 700 }}>
+                  Aviso Legal
+                </Link>
+              </p>
             </div>
           </div>
         </section>
