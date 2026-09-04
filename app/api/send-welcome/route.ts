@@ -8,48 +8,48 @@ const WelcomeEmailHtml = (userName: string) => `
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenido a Amora Jewelry</title>
+  <title>Bienvenido a NOVA Performance</title>
   <style>
-    body { margin: 0; padding: 0; background-color: #F3F0E9; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #FDFCF8; }
-    .header { text-align: center; padding: 30px 20px; border-bottom: 1px solid #E3DBCC; }
-    .header img { max-width: 200px; }
-    .hero-image { width: 100%; display: block; }
-    .content { padding: 40px 30px; text-align: center; color: #1E1E1E; }
-    h1 { font-size: 24px; font-weight: normal; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: #101010; }
-    p { font-size: 15px; line-height: 1.6; color: #7A7468; margin-bottom: 20px; }
-    .footer { text-align: center; padding: 20px; font-size: 12px; color: #C8BBA8; border-top: 1px solid #E3DBCC; background-color: #F3F0E9; }
+    body { margin: 0; padding: 0; background-color: #0A0A0A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #FFFFFF; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #121212; border: 1px solid #222222; border-radius: 8px; overflow: hidden; }
+    .header { text-align: center; padding: 36px 20px; background-color: #000000; border-bottom: 1px solid #222222; }
+    .header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #FFFFFF; text-transform: uppercase; }
+    .content { padding: 40px 30px; text-align: center; color: #EEEEEE; }
+    h1 { font-size: 22px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; color: #FFFFFF; }
+    p { font-size: 14px; line-height: 1.6; color: #A0A0A0; margin-bottom: 20px; }
+    .coupon-box { background: #1A1A1A; border: 1px solid #282828; padding: 20px; border-radius: 8px; margin: 24px 0; text-align: center; }
+    .coupon-code { font-size: 20px; color: #E6E2D3; font-weight: bold; letter-spacing: 3px; font-family: monospace; }
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: #666666; border-top: 1px solid #222222; background-color: #0A0A0A; }
   </style>
 </head>
 <body>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F3F0E9">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#0A0A0A">
     <tr>
       <td align="center" style="padding: 20px 0;">
         <div class="container">
-          <!-- Logo -->
+          <!-- Header -->
           <div class="header">
-            <img src="https://qrhspijmfimjxemravyz.supabase.co/storage/v1/object/public/email-assets/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" />
+            <h2>NOVA Performance®</h2>
           </div>
-          
-          <!-- Imagen Principal (GRACIAS!) -->
-          <img src="https://qrhspijmfimjxemravyz.supabase.co/storage/v1/object/public/email-assets/amora_gracias.png" alt="¡Gracias!" class="hero-image" />
           
           <!-- Contenido -->
           <div class="content">
-            <h1>¡Hola, ${userName}!</h1>
-            <p>Es un honor darte la bienvenida al mundo de <strong>Amora Jewelry</strong>.</p>
-            <p>Tu cuenta ha sido creada exitosamente. A partir de ahora, tendrás acceso a nuestras colecciones exclusivas, beneficios únicos y un proceso de compra rápido y seguro.</p>
-            <div style="background: #F3F0E9; border: 1px solid #E3DBCC; padding: 16px; border-radius: 8px; margin: 24px 0; text-align: center;">
-              <p style="margin: 0 0 6px 0; font-size: 13px; color: #7A7468; text-transform: uppercase; letter-spacing: 1px;">Regalo de Bienvenida</p>
-              <p style="margin: 0; font-size: 18px; color: #B8975A; font-weight: bold; letter-spacing: 2px;">CUPÓN: AMORAJEWELRY</p>
-              <p style="margin: 6px 0 0 0; font-size: 13px; color: #101010;">Obtén un <strong>10% de descuento</strong> en tu primera compra.</p>
+            <h1>¡Bienvenido(a), ${userName}!</h1>
+            <p>Tu cuenta ha sido creada exitosamente en <strong>NOVA Performance® (Péptidos Novita)</strong>.</p>
+            <p>A partir de ahora tienes acceso a nuestro catálogo exclusivo de péptidos de investigación analítica con certificados de pureza comprobada &gt;99% y despachos prioritarios discretos.</p>
+            
+            <div class="coupon-box">
+              <p style="margin: 0 0 6px 0; font-size: 12px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Regalo de Bienvenida</p>
+              <div class="coupon-code">CUPÓN: NOVA10</div>
+              <p style="margin: 8px 0 0 0; font-size: 13px; color: #FFFFFF;">Obtén un <strong>10% de descuento</strong> en tu primera orden.</p>
             </div>
-            <p>Descubre el poder de la joyería atemporal.</p>
+            
+            <p style="font-size: 12px; color: #888888;">Si tienes alguna pregunta, contáctanos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
           </div>
           
           <!-- Footer -->
           <div class="footer">
-            © ${new Date().getFullYear()} Amora Jewelry. Todos los derechos reservados.<br>
+            © ${new Date().getFullYear()} NOVA Performance® · Péptidos Novita.<br>
             Chile
           </div>
         </div>
@@ -97,10 +97,10 @@ export async function POST(request: Request) {
     });
 
     const info = await transporter.sendMail({
-      from: '"Amora Jewelry" <' + process.env.GMAIL_USER + '>',
+      from: '"NOVA Performance" <' + process.env.GMAIL_USER + '>',
       to: email,
-      subject: 'Bienvenido a Amora Jewelry',
-      html: WelcomeEmailHtml(name || 'Amante de las Joyas'),
+      subject: 'Bienvenido a NOVA Performance',
+      html: WelcomeEmailHtml(name || 'Investigador'),
     });
 
     return NextResponse.json({ success: true, data: info });

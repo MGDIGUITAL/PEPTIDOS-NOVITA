@@ -199,7 +199,7 @@ function PrintContent() {
         {orders.map((order) => {
           const items = (order.order_items && order.order_items.length > 0) 
             ? order.order_items 
-            : [{ id: 'fallback', quantity: 1, product_title: 'Joya Amora Jewelry', price: (order.subtotal || order.total || 15990) }];
+            : [{ id: 'fallback', quantity: 1, product_title: 'Péptido NOVA Performance', price: (order.subtotal || order.total || 15990) }];
 
           const itemsSubtotal = items.reduce((sum: number, item: any) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
           const shippingCost = order.shipping_cost || 0;
@@ -212,11 +212,11 @@ function PrintContent() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #101010', paddingBottom: '12px', marginBottom: '16px' }}>
                   <div>
                     <img 
-                      src="/Amora_Jewelry_logo_header_480x114.png" 
-                      alt="Amora Jewelry" 
-                      style={{ height: '38px', width: 'auto', display: 'block', marginBottom: '2px' }} 
+                      src="/logo-nova-white.png" 
+                      alt="NOVA Performance" 
+                      style={{ height: '32px', width: 'auto', display: 'block', marginBottom: '2px', filter: 'brightness(0)' }} 
                     />
-                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Alta Joyería en Chile • www.amorajewelry.cl</p>
+                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Péptidos de Investigación • www.peptidosnovita.cl</p>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ background: '#101010', color: '#B8975A', padding: '5px 14px', fontWeight: 'bold', fontSize: '13px', borderRadius: '4px', display: 'inline-block' }}>

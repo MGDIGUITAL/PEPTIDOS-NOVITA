@@ -3,7 +3,7 @@ import { z } from 'zod';
 // ─── Shipping Profiles ──────────────────────────────────────────────────
 export const SHIPPING_PROFILES = [
   { id: 'shipping_standard', label: 'Envío Estándar Nacional', days: '5-7 días hábiles' },
-  { id: 'shipping_express',  label: 'Envío Express Amora',    days: '1-2 días hábiles' },
+  { id: 'shipping_express',  label: 'Envío Express Priority',    days: '1-2 días hábiles' },
   { id: 'shipping_free',     label: 'Envío Gratis (joyería pequeña)', days: '7-10 días hábiles' },
 ] as const;
 

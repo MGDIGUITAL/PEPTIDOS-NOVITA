@@ -436,7 +436,7 @@ export default function NewProductModal({ isOpen, onClose, onSuccess, productToE
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 140px', gap: 14 }}>
                 <div>
                   <label style={labelStyle}>Título *</label>
-                  <input {...register('title')} placeholder="Anillo Solitario de Diamante Amora" style={inputStyle} />
+                  <input {...register('title')} placeholder="Péptido Semaglutide 5mg - NOVA Performance" style={inputStyle} />
                   {errors.title && <p style={errorStyle}>{errors.title.message}</p>}
                 </div>
                 <div>

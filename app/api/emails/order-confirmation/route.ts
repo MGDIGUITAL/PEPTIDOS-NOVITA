@@ -7,51 +7,52 @@ const OrderConfirmationHtml = (orderId: string, name: string, total: number, met
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmación de Orden</title>
+  <title>Confirmación de Orden - NOVA Performance</title>
   <style>
-    body { margin: 0; padding: 0; background-color: #F3F0E9; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #FDFCF8; }
-    .header { text-align: center; padding: 30px 20px; border-bottom: 1px solid #E3DBCC; }
-    .header img { max-width: 200px; }
-    .content { padding: 40px 30px; text-align: center; color: #1E1E1E; }
-    h1 { font-size: 22px; font-weight: normal; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; color: #101010; }
-    .order-number { font-size: 18px; color: #B8975A; font-weight: bold; margin-bottom: 30px; }
-    p { font-size: 15px; line-height: 1.6; color: #7A7468; margin-bottom: 20px; }
-    .details { text-align: left; background: #F3F0E9; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
-    .details h3 { margin-top: 0; font-size: 14px; text-transform: uppercase; color: #101010; letter-spacing: 1px; }
-    .footer { text-align: center; padding: 20px; font-size: 12px; color: #C8BBA8; border-top: 1px solid #E3DBCC; background-color: #F3F0E9; }
+    body { margin: 0; padding: 0; background-color: #0A0A0A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #FFFFFF; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #121212; border: 1px solid #222222; border-radius: 8px; overflow: hidden; }
+    .header { text-align: center; padding: 36px 20px; background-color: #000000; border-bottom: 1px solid #222222; }
+    .header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #FFFFFF; text-transform: uppercase; }
+    .content { padding: 40px 30px; text-align: center; color: #EEEEEE; }
+    h1 { font-size: 20px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; color: #FFFFFF; }
+    .order-number { font-size: 18px; color: #E6E2D3; font-weight: bold; margin-bottom: 24px; }
+    p { font-size: 14px; line-height: 1.6; color: #A0A0A0; margin-bottom: 20px; }
+    .details { text-align: left; background: #1A1A1A; padding: 20px; border-radius: 8px; border: 1px solid #282828; margin-bottom: 30px; }
+    .details h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; color: #E6E2D3; letter-spacing: 1px; }
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: #666666; border-top: 1px solid #222222; background-color: #0A0A0A; }
   </style>
 </head>
 <body>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F3F0E9">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#0A0A0A">
     <tr>
       <td align="center" style="padding: 20px 0;">
         <div class="container">
-          <!-- Logo -->
+          <!-- Header -->
           <div class="header">
-            <img src="https://qrhspijmfimjxemravyz.supabase.co/storage/v1/object/public/email-assets/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" />
+            <h2>NOVA Performance®</h2>
           </div>
           
           <!-- Contenido -->
           <div class="content">
-            <h1>¡Gracias por tu compra, ${name}!</h1>
+            <h1>¡Gracias por tu pedido, ${name}!</h1>
             <div class="order-number">Orden #${orderId}</div>
             
-            <p>Hemos recibido tu pedido correctamente. Nuestro equipo ya está trabajando para prepararlo con el máximo cuidado y detalle.</p>
+            <p>Hemos recibido tu pago de manera exitosa y tu orden ya está en nuestro centro logístico para ser empaquetada con empaque neutro y discreto de alta seguridad.</p>
             
             <div class="details">
               <h3>Resumen del Pedido</h3>
-              <p style="margin: 5px 0;"><strong>Total Pagado:</strong> $${total.toLocaleString('es-CL')} CLP</p>
-              <p style="margin: 5px 0;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio' : 'Retiro en Blue Express'}</p>
-              <p style="margin: 5px 0;"><strong>Dirección/Punto:</strong> ${address}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Total Pagado:</strong> $${total.toLocaleString('es-CL')} CLP</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio Priority' : 'Retiro en Punto Blue Express'}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Destino / Dirección:</strong> ${address}</p>
             </div>
             
-            <p>Te enviaremos otro correo en cuanto tu pedido sea despachado.</p>
+            <p>Te enviaremos el número de seguimiento de Blue Express tan pronto como el paquete sea despachado.</p>
+            <p style="font-size: 12px; color: #888888;">Para cualquier duda sobre tu despacho, contáctanos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
           </div>
           
           <!-- Footer -->
           <div class="footer">
-            © ${new Date().getFullYear()} Amora Jewelry. Todos los derechos reservados.<br>
+            © ${new Date().getFullYear()} NOVA Performance® · Péptidos Novita.<br>
             Chile
           </div>
         </div>
@@ -82,10 +83,12 @@ export async function POST(request: Request) {
       }
     });
 
+    const recipientList = [email, 'mpeg.logistica@gmail.com', 'Christophernovoad@gmail.com'].filter(Boolean).join(', ');
+
     const info = await transporter.sendMail({
-      from: '"Amora Jewelry" <' + process.env.GMAIL_USER + '>',
-      to: email,
-      subject: `Confirmación de Pedido #${orderId} - Amora Jewelry`,
+      from: '"NOVA Performance" <' + process.env.GMAIL_USER + '>',
+      to: recipientList,
+      subject: `Confirmación de Pedido #${orderId} - NOVA Performance`,
       html: OrderConfirmationHtml(orderId, name, total, method, address),
     });
 

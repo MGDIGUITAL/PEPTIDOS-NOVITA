@@ -262,7 +262,7 @@ export default function AdminEnvios() {
       {/* ── HEADER NO PRINT ──────────────────────────────────────────────── */}
       <header className="no-print" style={{ padding: '24px 5%', background: S.obsidian, color: S.offWhite, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <Image src="/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" width={140} height={33} style={{ filter: 'invert(1)' }} />
+          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={160} height={36} style={{ objectFit: 'contain' }} />
           <div style={{ width: 1, height: 24, background: S.charcoal }}></div>
           <h1 style={{ margin: 0, fontFamily: 'Cinzel, serif', fontSize: '1.2rem', color: S.gold }}>Módulo de Resumen de Envíos</h1>
         </div>

@@ -7,63 +7,63 @@ const OrderShippedHtml = (orderId: string, name: string, method: string, address
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tu Orden va en Camino</title>
+  <title>Tu Orden va en Camino - NOVA Performance</title>
   <style>
-    body { margin: 0; padding: 0; background-color: #F3F0E9; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #FDFCF8; }
-    .header { text-align: center; padding: 30px 20px; border-bottom: 1px solid #E3DBCC; }
-    .header img { max-width: 200px; }
-    .content { padding: 40px 30px; text-align: center; color: #1E1E1E; }
-    h1 { font-size: 22px; font-weight: normal; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; color: #101010; }
-    .order-number { font-size: 18px; color: #B8975A; font-weight: bold; margin-bottom: 30px; }
-    p { font-size: 15px; line-height: 1.6; color: #7A7468; margin-bottom: 20px; }
-    .details { text-align: left; background: #F3F0E9; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
-    .details h3 { margin-top: 0; font-size: 14px; text-transform: uppercase; color: #101010; letter-spacing: 1px; }
-    .tracking-box { background: #FDFCF8; border: 1px dashed #B8975A; padding: 15px; border-radius: 6px; margin: 20px 0; text-align: center; }
-    .tracking-code { font-family: monospace; font-size: 18px; font-weight: bold; color: #101010; letter-spacing: 1px; }
-    .btn-track { display: inline-block; background-color: #101010; color: #B8975A !important; text-decoration: none; padding: 12px 24px; border-radius: 4px; font-weight: bold; font-size: 14px; margin-top: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .footer { text-align: center; padding: 20px; font-size: 12px; color: #C8BBA8; border-top: 1px solid #E3DBCC; background-color: #F3F0E9; }
+    body { margin: 0; padding: 0; background-color: #0A0A0A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #FFFFFF; }
+    .container { max-width: 600px; margin: 0 auto; background-color: #121212; border: 1px solid #222222; border-radius: 8px; overflow: hidden; }
+    .header { text-align: center; padding: 36px 20px; background-color: #000000; border-bottom: 1px solid #222222; }
+    .header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #FFFFFF; text-transform: uppercase; }
+    .content { padding: 40px 30px; text-align: center; color: #EEEEEE; }
+    h1 { font-size: 20px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; color: #FFFFFF; }
+    .order-number { font-size: 18px; color: #E6E2D3; font-weight: bold; margin-bottom: 24px; }
+    p { font-size: 14px; line-height: 1.6; color: #A0A0A0; margin-bottom: 20px; }
+    .details { text-align: left; background: #1A1A1A; padding: 20px; border-radius: 8px; border: 1px solid #282828; margin-bottom: 30px; }
+    .details h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; color: #E6E2D3; letter-spacing: 1px; }
+    .tracking-box { background: #181818; border: 1px dashed #E6E2D3; padding: 20px; border-radius: 6px; margin: 24px 0; text-align: center; }
+    .tracking-code { font-family: monospace; font-size: 20px; font-weight: bold; color: #FFFFFF; letter-spacing: 2px; }
+    .btn-track { display: inline-block; background-color: #FFFFFF; color: #000000 !important; text-decoration: none; padding: 14px 28px; border-radius: 6px; font-weight: 800; font-size: 13px; margin-top: 16px; text-transform: uppercase; letter-spacing: 1px; }
+    .footer { text-align: center; padding: 24px; font-size: 12px; color: #666666; border-top: 1px solid #222222; background-color: #0A0A0A; }
   </style>
 </head>
 <body>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#F3F0E9">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#0A0A0A">
     <tr>
       <td align="center" style="padding: 20px 0;">
         <div class="container">
-          <!-- Logo -->
+          <!-- Header -->
           <div class="header">
-            <img src="https://qrhspijmfimjxemravyz.supabase.co/storage/v1/object/public/email-assets/Amora_Jewelry_logo_header_480x114.png" alt="Amora Jewelry" />
+            <h2>NOVA Performance®</h2>
           </div>
           
           <!-- Contenido -->
           <div class="content">
-            <h1>¡Excelentes noticias, ${name}!</h1>
+            <h1>¡Tu paquete ha sido despachado, ${name}!</h1>
             <div class="order-number">Orden #${orderId}</div>
             
-            <p>Tu paquete ya ha sido preparado y entregado a <strong>Blue Express</strong>. Va oficialmente en camino.</p>
+            <p>Tu orden ha sido procesada y entregada exitosamente al servicio de Courier <strong>Blue Express</strong>. Va oficialmente en camino.</p>
             
             ${trackingNumber ? `
               <div class="tracking-box">
-                <p style="margin: 0 0 8px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; color: #7A7468;">Número de Seguimiento Blue Express</p>
+                <p style="margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888888;">Número de Seguimiento Blue Express</p>
                 <div class="tracking-code">${trackingNumber}</div>
-                <a href="https://www.blue.cl/" target="_blank" class="btn-track">Rastrear mi pedido</a>
+                <a href="https://www.blue.cl/" target="_blank" class="btn-track">Rastrear Envío en Blue Express</a>
               </div>
             ` : `
-              <p>El número de seguimiento estará disponible en las próximas horas.</p>
+              <p>El código de seguimiento en línea se activará durante las próximas horas.</p>
             `}
 
             <div class="details">
               <h3>Destino del Envío</h3>
-              <p style="margin: 5px 0;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio' : 'Retiro en Blue Express'}</p>
-              <p style="margin: 5px 0;"><strong>Dirección/Punto:</strong> ${address}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio' : 'Retiro en Blue Express'}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Dirección / Punto:</strong> ${address}</p>
             </div>
             
-            <p>Gracias por confiar en nosotros para resaltar tu estilo.</p>
+            <p style="font-size: 12px; color: #888888;">Si tienes dudas con el estado de tu despacho, escríbenos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
           </div>
           
           <!-- Footer -->
           <div class="footer">
-            © ${new Date().getFullYear()} Amora Jewelry. Todos los derechos reservados.<br>
+            © ${new Date().getFullYear()} NOVA Performance® · Péptidos Novita.<br>
             Chile
           </div>
         </div>
@@ -94,10 +94,12 @@ export async function POST(request: Request) {
       }
     });
 
+    const recipientList = [email, 'mpeg.logistica@gmail.com', 'Christophernovoad@gmail.com'].filter(Boolean).join(', ');
+
     const info = await transporter.sendMail({
-      from: '"Amora Jewelry" <' + process.env.GMAIL_USER + '>',
-      to: email,
-      subject: `Tu pedido #${orderId} va en camino 📦`,
+      from: '"NOVA Performance" <' + process.env.GMAIL_USER + '>',
+      to: recipientList,
+      subject: `Tu pedido #${orderId} de NOVA Performance va en camino 📦`,
       html: OrderShippedHtml(orderId, name, method, address, trackingNumber),
     });
 
