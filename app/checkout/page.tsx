@@ -163,7 +163,7 @@ export default function CheckoutPage() {
         <Link href="/">
           <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
-        <Link href="/carrito" style={{ fontSize: '0.75rem', fontFamily: 'Outfit, sans-serif', color: S.ivory, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 600 }}>
+        <Link href="/?cart=open" style={{ fontSize: '0.75rem', fontFamily: 'Outfit, sans-serif', color: S.ivory, letterSpacing: '0.12em', textTransform: 'uppercase', textDecoration: 'none', fontWeight: 600 }}>
           ← Volver al carrito
         </Link>
       </header>

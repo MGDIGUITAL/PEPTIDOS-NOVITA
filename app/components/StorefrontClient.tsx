@@ -65,6 +65,16 @@ function Navbar() {
     return () => listener.subscription.unsubscribe();
   }, []);
 
+  // Abrir carrito si se navega con ?cart=open desde checkout
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.search.includes('cart=')) {
+      openCart();
+      const url = new URL(window.location.href);
+      url.searchParams.delete('cart');
+      window.history.replaceState({}, '', url.pathname + (url.search ? url.search : ''));
+    }
+  }, [openCart]);
+
   // Cerrar menú al clicar fuera
   useEffect(() => {
     const handler = (e: MouseEvent) => {
