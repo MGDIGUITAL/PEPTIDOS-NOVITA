@@ -488,67 +488,11 @@ export default function CheckoutPage() {
               </div>
             )}
 
-            {/* Sección de Cupones */}
-            <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20, marginBottom: 20 }}>
-              <div style={{ display: 'flex', gap: 10 }}>
-                <input 
-                  type="text" 
-                  placeholder="CÓDIGO DE CUPÓN" 
-                  value={couponCode} 
-                  onChange={e => setCouponCode(e.target.value.toUpperCase())}
-                  disabled={!!appliedCoupon}
-                  style={{
-                    flex: 1, padding: '12px 14px', border: `1px solid ${S.border}`, 
-                    background: '#141414', color: S.white, fontSize: '0.85rem', outline: 'none', borderRadius: 6,
-                    fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em'
-                  }} 
-                />
-                {appliedCoupon ? (
-                  <button 
-                    type="button"
-                    onClick={handleRemoveCoupon}
-                    style={{
-                      background: S.border, color: S.white, border: 'none', borderRadius: 6,
-                      padding: '12px 16px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700
-                    }}
-                  >
-                    Quitar
-                  </button>
-                ) : (
-                  <button 
-                    type="button"
-                    onClick={handleApplyCoupon}
-                    disabled={isApplyingCoupon || !couponCode}
-                    style={{
-                      background: S.white, color: S.black, border: 'none', borderRadius: 6,
-                      padding: '12px 18px', cursor: (isApplyingCoupon || !couponCode) ? 'not-allowed' : 'pointer', 
-                      fontSize: '0.8rem', fontWeight: 800, opacity: (isApplyingCoupon || !couponCode) ? 0.6 : 1,
-                      textTransform: 'uppercase'
-                    }}
-                  >
-                    {isApplyingCoupon ? '...' : 'Aplicar'}
-                  </button>
-                )}
-              </div>
-              {couponError && <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: '8px 0 0 0' }}>{couponError}</p>}
-              {appliedCoupon && (
-                <p style={{ color: '#4CAF50', fontSize: '0.8rem', margin: '8px 0 0 0', fontWeight: 600 }}>
-                  ✓ Cupón {appliedCoupon.code} aplicado ({appliedCoupon.discount_type === 'percent' ? `${appliedCoupon.discount_value}%` : `$${Number(appliedCoupon.discount_value).toLocaleString('es-CL')}`} desc.)
-                </p>
-              )}
-            </div>
-
             <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
                 <span style={{ color: S.muted, fontSize: '0.88rem' }}>Subtotal</span>
                 <span style={{ color: S.white, fontSize: '0.92rem' }}>${cartTotal.toLocaleString('es-CL')}</span>
               </div>
-              {discountAmount > 0 && (
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12, color: '#4CAF50' }}>
-                  <span style={{ fontSize: '0.88rem' }}>Descuento ({appliedCoupon?.code})</span>
-                  <span style={{ fontSize: '0.92rem', fontWeight: 600 }}>-${discountAmount.toLocaleString('es-CL')}</span>
-                </div>
-              )}
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
                 <span style={{ color: S.muted, fontSize: '0.88rem' }}>Despacho Priority</span>
                 <span style={{ color: '#4CAF50', fontSize: '0.88rem', fontWeight: 600 }}>

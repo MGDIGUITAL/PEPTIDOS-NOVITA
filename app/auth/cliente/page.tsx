@@ -240,7 +240,7 @@ export default function ClienteAuthPage() {
                   {loading ? 'Creando cuenta…' : 'Crear Cuenta Gratis'}
                 </button>
                 <p style={{ textAlign: 'center', fontSize: '0.78rem', color: S.muted, lineHeight: 1.5, fontFamily: 'Inter, sans-serif' }}>
-                  Al registrarte obtendrás acceso a cupones de descuento exclusivos.
+                  Al registrarte podrás realizar seguimiento en tiempo real a tus solicitudes y órdenes.
                 </p>
               </form>
             )}

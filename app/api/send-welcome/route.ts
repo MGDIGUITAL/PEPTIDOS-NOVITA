@@ -38,11 +38,7 @@ const WelcomeEmailHtml = (userName: string) => `
             <p>Tu cuenta ha sido creada exitosamente en <strong>NOVA Performance® (Péptidos Novita)</strong>.</p>
             <p>A partir de ahora tienes acceso a nuestro catálogo exclusivo de péptidos de investigación analítica con certificados de pureza comprobada &gt;99% y despachos prioritarios discretos.</p>
             
-            <div class="coupon-box">
-              <p style="margin: 0 0 6px 0; font-size: 12px; color: #888888; text-transform: uppercase; letter-spacing: 1px;">Regalo de Bienvenida</p>
-              <div class="coupon-code">CUPÓN: NOVA10</div>
-              <p style="margin: 8px 0 0 0; font-size: 13px; color: #FFFFFF;">Obtén un <strong>10% de descuento</strong> en tu primera orden.</p>
-            </div>
+
             
             <p style="font-size: 12px; color: #888888;">Si tienes alguna pregunta, contáctanos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
           </div>
