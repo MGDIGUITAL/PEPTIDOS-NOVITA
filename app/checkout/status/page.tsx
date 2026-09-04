@@ -282,7 +282,7 @@ function StatusContent() {
               <SectionLabel icon={<IconTruck />} label="Método de Despacho" />
               <div style={{ fontSize: '0.85rem', padding: '14px 18px', background: S.card, border: `1px solid ${S.border}`, borderRadius: 8 }}>
                 <p style={{ margin: '0 0 6px', color: S.ivory, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
-                  Despacho a Domicilio Priority (Blue Express)
+                  Despacho a Domicilio por el equipo de logística de NOVA Performance®
                 </p>
                 <p style={{ margin: 0, color: S.white, fontWeight: 500 }}>
                   {order.shipping_address ? `${order.shipping_address}, ${order.shipping_comuna} — ${order.shipping_region}` : `${order.shipping_comuna} — ${order.shipping_region}`}

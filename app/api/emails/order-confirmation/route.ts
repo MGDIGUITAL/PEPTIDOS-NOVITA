@@ -42,11 +42,11 @@ const OrderConfirmationHtml = (orderId: string, name: string, total: number, met
             <div class="details">
               <h3>Resumen del Pedido</h3>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Total Pagado:</strong> $${total.toLocaleString('es-CL')} CLP</p>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio Priority (Blue Express)</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio por el equipo de logística de NOVA Performance®</p>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Destino / Dirección:</strong> ${address}</p>
             </div>
             
-            <p>Te enviaremos el número de seguimiento de Blue Express tan pronto como el paquete sea despachado.</p>
+            <p>Te enviaremos la confirmación y el número de seguimiento tan pronto como el paquete sea despachado.</p>
             <p style="font-size: 12px; color: #888888;">Para cualquier duda sobre tu despacho, contáctanos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
           </div>
           

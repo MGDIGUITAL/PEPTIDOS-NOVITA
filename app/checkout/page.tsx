@@ -249,7 +249,7 @@ export default function CheckoutPage() {
           <div style={{ padding: '16px 20px', background: '#141414', border: `1px solid ${S.border}`, borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
             <span style={{ fontSize: '1.2rem' }}>🏠</span>
             <div>
-              <div style={{ fontSize: '0.85rem', color: S.white, fontWeight: 700 }}>Envío Directo a Domicilio (Blue Express)</div>
+              <div style={{ fontSize: '0.85rem', color: S.white, fontWeight: 700 }}>Despacho a Domicilio por el equipo de logística de NOVA Performance®</div>
               <div style={{ fontSize: '0.78rem', color: S.muted }}>Empaque térmico neutro y discreto garantizado a todo Chile.</div>
             </div>
           </div>

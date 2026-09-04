@@ -40,13 +40,12 @@ const OrderShippedHtml = (orderId: string, name: string, method: string, address
             <h1>¡Tu paquete ha sido despachado, ${name}!</h1>
             <div class="order-number">Orden #${orderId}</div>
             
-            <p>Tu orden ha sido procesada y entregada exitosamente al servicio de Courier <strong>Blue Express</strong>. Va oficialmente en camino.</p>
+            <p>Tu orden ha sido procesada y entregada exitosamente a nuestro equipo de distribución y courier para envío prioritario. Va oficialmente en camino a tu domicilio.</p>
             
             ${trackingNumber ? `
               <div class="tracking-box">
-                <p style="margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888888;">Número de Seguimiento Blue Express</p>
+                <p style="margin: 0 0 8px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #888888;">Número de Seguimiento</p>
                 <div class="tracking-code">${trackingNumber}</div>
-                <a href="https://www.blue.cl/" target="_blank" class="btn-track">Rastrear Envío en Blue Express</a>
               </div>
             ` : `
               <p>El código de seguimiento en línea se activará durante las próximas horas.</p>
@@ -54,7 +53,7 @@ const OrderShippedHtml = (orderId: string, name: string, method: string, address
 
             <div class="details">
               <h3>Destino del Envío</h3>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio Priority (Blue Express)</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio por el equipo de logística de NOVA Performance®</p>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Dirección / Punto:</strong> ${address}</p>
             </div>
             
