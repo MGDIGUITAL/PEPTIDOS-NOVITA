@@ -267,13 +267,14 @@ export async function POST(request: Request) {
       // Log de intento de manipulación
       console.error(`[Flow Webhook] ⚠️ Firma HMAC inválida — IP: ${ip} — token: ${token}`);
 
-      // Registrar en Supabase como alerta de seguridad
-      await supabaseAdmin.from('security_events').insert({
-        event_type:  'flow_webhook_invalid_signature',
-        ip_address:  ip,
-        payload:     JSON.stringify(allParams),
-        created_at:  new Date().toISOString(),
-      }).then(() => {}).catch(() => {}); // Silencioso si la tabla no existe aún
+      try {
+        await supabaseAdmin.from('security_events').insert({
+          event_type:  'flow_webhook_invalid_signature',
+          ip_address:  ip,
+          payload:     JSON.stringify(allParams),
+          created_at:  new Date().toISOString(),
+        });
+      } catch { /* Silencioso si la tabla no existe aún */ }
 
       return NextResponse.json(
         { error: 'Unauthorized' },
