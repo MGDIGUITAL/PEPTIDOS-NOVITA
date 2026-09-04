@@ -356,9 +356,10 @@ function StatusContent() {
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
               <div style={{ marginTop: 2 }}><IconMail /></div>
               <p style={{ margin: 0, color: S.muted, fontSize: '0.8rem', lineHeight: 1.7 }}>
-                Hemos enviado una confirmación formal al correo{' '}
-                <strong style={{ color: S.white }}>{order?.client_email}</strong>.<br/>
-                Para consultas sobre tu envío cita el N° de Orden{' '}
+                <strong style={{ color: S.white }}>¡Gracias por tu compra!</strong> Hemos enviado una confirmación formal al correo{' '}
+                <strong style={{ color: S.ivory }}>{order?.client_email}</strong>.<br/>
+                Tu pedido ya está siendo preparado y será despachado de forma discreta y segura a tu domicilio por nuestro equipo de logística de <strong style={{ color: S.white }}>NOVA Performance®</strong>.<br/>
+                Para consultas sobre tu envío, por favor cita tu N° de Orden{' '}
                 <strong style={{ color: S.ivory }}>#{String(orderId).padStart(5, '0')}</strong>.
               </p>
             </div>

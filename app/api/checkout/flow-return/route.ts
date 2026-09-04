@@ -6,11 +6,12 @@ export async function POST(request: Request) {
   const token = formData.get('token');
 
   if (!token) {
-    return NextResponse.redirect(new URL('/checkout?error=NoToken', request.url));
+    return NextResponse.redirect(new URL('/checkout?error=NoToken', request.url), 303);
   }
 
   // Redirigir al cliente a una página de estado donde leeremos el token
-  return NextResponse.redirect(new URL(`/checkout/status?token=${token}`, request.url));
+  // IMPORTANTE: 303 (See Other) fuerza que el navegador haga GET en vez de repetir el POST
+  return NextResponse.redirect(new URL(`/checkout/status?token=${token}`, request.url), 303);
 }
 
 // Algunos casos (dependiendo del medio de pago) podrían venir por GET
