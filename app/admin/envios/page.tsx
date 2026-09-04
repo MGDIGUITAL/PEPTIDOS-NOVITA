@@ -516,7 +516,7 @@ export default function AdminEnvios() {
                     <h3 style={{ fontSize: '0.9rem', color: S.muted, textTransform: 'uppercase', marginBottom: 12 }}>Contenido del Paquete</h3>
                     <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                       {(!order.order_items || order.order_items.length === 0) ? (
-                        <li style={{ padding: '8px 0', fontSize: '0.85rem', color: S.muted }}>1x Joya Amora (Detalle no especificado)</li>
+                        <li style={{ padding: '8px 0', fontSize: '0.85rem', color: S.muted }}>1x Péptido NOVA Performance (Detalle no especificado)</li>
                       ) : (
                         order.order_items.map((item: any) => (
                           <li key={item.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: `1px solid ${S.nude}`, alignItems: 'center' }}>
@@ -544,7 +544,7 @@ export default function AdminEnvios() {
         {activePrintOrders.map((order) => {
           const items = (order.order_items && order.order_items.length > 0) 
             ? order.order_items 
-            : [{ id: 'fallback', quantity: 1, product_title: 'Joya Amora Jewelry', price: (order.subtotal || order.total || 15990) }];
+            : [{ id: 'fallback', quantity: 1, product_title: 'Péptido NOVA Performance', price: (order.subtotal || order.total || 15990) }];
 
           const itemsSubtotal = items.reduce((sum: number, item: any) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
           const shippingCost = order.shipping_cost || 0;
@@ -557,11 +557,11 @@ export default function AdminEnvios() {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #101010', paddingBottom: '12px', marginBottom: '16px' }}>
                   <div>
                     <img 
-                      src="/Amora_Jewelry_logo_header_480x114.png" 
-                      alt="Amora Jewelry" 
-                      style={{ height: '38px', width: 'auto', display: 'block', marginBottom: '2px' }} 
+                      src="/logo-nova-white.png" 
+                      alt="NOVA Performance" 
+                      style={{ height: '38px', width: 'auto', display: 'block', marginBottom: '2px', filter: 'invert(1)' }} 
                     />
-                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Alta Joyería en Chile • www.amorajewelry.cl</p>
+                    <p style={{ margin: 0, fontSize: '9px', color: '#666', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Biología & Rendimiento • www.novaperformance.cl</p>
                   </div>
                   <div style={{ textAlign: 'right' }}>
                     <div style={{ background: '#101010', color: '#B8975A', padding: '5px 14px', fontWeight: 'bold', fontSize: '13px', borderRadius: '4px', display: 'inline-block' }}>
@@ -705,12 +705,12 @@ export default function AdminEnvios() {
                     </div>
                     <div style={{ position: 'relative', display: 'inline-block', padding: '6px 12px', border: '1.5px dashed #101010', borderRadius: '8px', background: '#FDFCF8' }}>
                       <img 
-                        src="/Amora_Jewelry_logo_mark.png" 
-                        alt="Amora Jewelry Mark" 
-                        style={{ width: '28px', height: 'auto', display: 'block', margin: '0 auto 2px auto', opacity: 0.85 }} 
+                        src="/logo-nova-white.png" 
+                        alt="NOVA Performance Logo" 
+                        style={{ width: '60px', height: 'auto', display: 'block', margin: '0 auto 2px auto', filter: 'invert(1)' }} 
                       />
                       <div style={{ fontSize: '9px', fontWeight: 'bold', color: '#101010', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                        AMORA JEWELRY
+                        NOVA PERFORMANCE®
                       </div>
                       <div style={{ fontSize: '8px', color: '#2E7D32', fontWeight: 'bold', marginTop: '2px' }}>
                         ✓ REVISADO & APROBADO

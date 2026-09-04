@@ -133,7 +133,7 @@ function PrintContent() {
       {/* Floating Control Toolbar (Hidden when printing) */}
       <div className="no-print">
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/Amora_Jewelry_logo_header_480x114.png" alt="Amora" style={{ height: '24px', filter: 'invert(1)' }} />
+          <img src="/logo-nova-white.png" alt="NOVA Performance" style={{ height: '24px', objectFit: 'contain' }} />
           <span style={{ fontWeight: 'bold', color: '#B8975A', fontSize: '14px' }}>
             Vista de Impresión — {orders.length} {orders.length === 1 ? 'Nota A4' : 'Notas A4 Pendientes'}
           </span>
@@ -360,12 +360,12 @@ function PrintContent() {
                     </div>
                     <div style={{ position: 'relative', display: 'inline-block', padding: '6px 12px', border: '1.5px dashed #101010', borderRadius: '8px', background: '#FDFCF8' }}>
                       <img 
-                        src="/Amora_Jewelry_logo_mark.png" 
-                        alt="Amora Jewelry Mark" 
-                        style={{ width: '28px', height: 'auto', display: 'block', margin: '0 auto 2px auto', opacity: 0.85 }} 
+                        src="/logo-nova-white.png" 
+                        alt="NOVA Performance Logo" 
+                        style={{ width: '60px', height: 'auto', display: 'block', margin: '0 auto 2px auto', filter: 'invert(1)' }} 
                       />
                       <div style={{ fontSize: '9px', fontWeight: 'bold', color: '#101010', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                        AMORA JEWELRY
+                        NOVA PERFORMANCE®
                       </div>
                       <div style={{ fontSize: '8px', color: '#2E7D32', fontWeight: 'bold', marginTop: '2px' }}>
                         ✓ REVISADO & APROBADO
