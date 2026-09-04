@@ -584,30 +584,41 @@ function FeaturedProducts({ products }: { products: any[] }) {
 // ─── SECOND BANNER ────────────────────────────────────────────────────────
 function SecondBanner() {
   return (
-    <section id="novedades" style={{ position:'relative', height:480, overflow:'hidden', display:'flex', alignItems:'center', background: S.black }}>
-      <Image src="/fondo-1.png" alt="NOVA Performance Biotech" fill style={{ objectFit:'cover', objectPosition:'center center', opacity: 0.2 }} />
-      <div style={{ position:'absolute', inset:0, background:'linear-gradient(to right, rgba(0,0,0,0.95) 30%, rgba(0,0,0,0.5) 100%), linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.85) 100%)' }} />
-      <div style={{ position:'relative', zIndex:1, maxWidth:1320, margin:'0 auto', padding:'0 2rem' }}>
-        <div style={{ maxWidth:540 }}>
-          <div style={{ marginBottom:16, display:'flex', alignItems:'center', gap:10 }}>
-            <span style={{ color:S.ivory, fontSize:'0.75rem', fontFamily:'Outfit,sans-serif', letterSpacing:'0.2em', textTransform:'uppercase', fontWeight:800 }}>
-              ✦ TECNOLOGÍA & PUREZA ANALÍTICA
-            </span>
-          </div>
-          <h2 className="font-display section-title" style={{ fontSize:'clamp(2.2rem,5vw,3.8rem)', fontWeight:800, lineHeight:1.1, color:S.white, marginBottom:20, textTransform:'uppercase' }}>
-            Estándar de Pureza<br /><span style={{ color: S.ivory }}>Investigación Superior</span>
-          </h2>
-          <p style={{ color:'rgba(255,255,255,0.7)', marginBottom:32, lineHeight:1.75, fontSize:'0.95rem' }}>
-            Cada compuesto producido por NOVA PERFORMANCE® cuenta con estrictos controles de calidad HPLC superior al 99% y certificación por lote para uso en investigación científica.
-          </p>
-          <a href="#catalogo" style={{ display:'inline-flex', alignItems:'center', gap:10, background:S.white, color:S.black, fontFamily:'Outfit,sans-serif', fontSize:'0.8rem', fontWeight:800, letterSpacing:'0.16em', textTransform:'uppercase', padding:'16px 36px', textDecoration:'none', transition:'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)', borderRadius:4 }}
-            onMouseEnter={e=>{ e.currentTarget.style.background=S.ivory; e.currentTarget.style.boxShadow='0 0 22px rgba(230,226,211,0.5)'; }}
-            onMouseLeave={e=>{ e.currentTarget.style.background=S.white; e.currentTarget.style.boxShadow='none'; }}
-          >
-            <span>Ver Compuestos</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-        </div>
+    <section id="novedades" style={{ position:'relative', height:480, overflow:'hidden', display:'flex', alignItems:'center', justifyContent: 'center', background: S.black }}>
+      <style>{`
+        @keyframes pulseGlow {
+          0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+          70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+        @keyframes slowPan {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+          100% { transform: scale(1); }
+        }
+        .animated-banner-bg {
+          animation: slowPan 25s ease-in-out infinite;
+        }
+        .animated-btn {
+          animation: pulseGlow 2.5s infinite;
+        }
+        .animated-btn:hover {
+          animation: none;
+          transform: scale(1.05) translateY(-3px);
+          box-shadow: 0 15px 30px rgba(255,255,255,0.3) !important;
+        }
+      `}</style>
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+        <Image src="/items.png" alt="NOVA Performance Biotech" fill className="animated-banner-bg" style={{ objectFit:'cover', objectPosition:'center center', opacity: 0.6 }} />
+      </div>
+      <div style={{ position:'relative', zIndex:1 }}>
+        <a href="#catalogo" className="animated-btn" style={{ display:'inline-flex', alignItems:'center', gap:10, background:S.white, color:S.black, fontFamily:'Outfit,sans-serif', fontSize:'0.9rem', fontWeight:800, letterSpacing:'0.16em', textTransform:'uppercase', padding:'20px 48px', textDecoration:'none', transition:'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', borderRadius:6 }}
+          onMouseEnter={e=>{ e.currentTarget.style.background=S.ivory; }}
+          onMouseLeave={e=>{ e.currentTarget.style.background=S.white; }}
+        >
+          <span>Ver Compuestos</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: 'translateX(0)' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
   );
@@ -617,63 +628,63 @@ function SecondBanner() {
 const REVIEWS_DATA = [
   {
     id: 1,
-    name: 'Dr. Matías E.',
+    name: 'Matías E.',
     location: 'Las Condes, Santiago',
     product: 'BPC-157 5mg (HPLC >99.4%)',
     date: 'Hace 2 días',
     rating: 5,
     tag: 'Trazabilidad & COA',
-    comment: 'Recepción impecable con cadena de frío protegida. Solicitamos el Certificado de Análisis (COA) vía WhatsApp y nos adjuntaron el informe espectrométrico en menos de 10 minutos. Altísima solubilidad y estabilidad de formulación.',
+    comment: 'Me ayudó muchísimo con una tendinitis en el hombro que arrastraba hace meses por el crossfit. El pedido llegó súper rápido a la casa y súper bien frío. Te responden al toque por WhatsApp si tienes alguna duda.',
   },
   {
     id: 2,
-    name: 'Dra. Camila S.',
+    name: 'Camila S.',
     location: 'Viña del Mar, Valparaíso',
     product: 'TB-500 5mg Research Grade',
     date: 'Hace 4 días',
     rating: 5,
     tag: 'Calidad & Pureza',
-    comment: 'Excelente consistencia entre lotes para ensayos celulares in vitro. El vial de liofilizado presenta un disco perfecto sin apelmazamiento. La comunicación técnica directa brinda una seguridad absoluta.',
+    comment: 'Excelente para la recuperación después de entrenar. Llevo usándolo un par de semanas y la diferencia es brutal, casi no ando adolorida. Se disuelve súper fácil en el agua, se nota altiro la buena calidad.',
   },
   {
     id: 3,
-    name: 'Laboratorio Biomédico R.',
+    name: 'Rodrigo M.',
     location: 'Concepción, Biobío',
     product: 'CJC-1295 + Ipamorelin Blend',
     date: 'Hace 1 semana',
     rating: 5,
     tag: 'Despacho & Discreción',
-    comment: 'Despacho en empaque neutro blindado sin rotulación externa, tal como se requiere para material de investigación sensible. Entregado en 24h hábiles por courier prioritario.',
+    comment: 'Mi paquete llegó en menos de 24 horas y en una cajita súper piola, sin logos ni nada, lo que se agradece caleta por privacidad. He estado durmiendo como nunca y ando con harta energía durante el día.',
   },
   {
     id: 4,
-    name: 'Investigador Álvaro G.',
+    name: 'Daniela G.',
     location: 'Antofagasta',
     product: 'GHK-Cu 50mg Bio-Active',
     date: 'Hace 1 semana',
     rating: 5,
     tag: 'Calidad & Pureza',
-    comment: 'Tono azul cobalto intenso característico del complejo cúprico de alta pureza. Excelente tasa de disolución y cero residuos en suspensión. Definitivamente nuestro proveedor principal en Chile.',
+    comment: 'Lo empecé a incluir en mi rutina para la piel y me ha funcionado increíble. El color azul es súper intenso, se nota que no viene pateado con nada raro. Todo súper higiénico. Seguiré comprándoles de todas maneras.',
   },
   {
     id: 5,
-    name: 'Dr. Fernando V.',
+    name: 'Fernando V.',
     location: 'La Serena, Coquimbo',
     product: 'NAD+ 100mg Ultra-Pure',
     date: 'Hace 2 semanas',
     rating: 5,
     tag: 'Trazabilidad & COA',
-    comment: 'Standard analítico superior. Sellado al vacío con indicador térmico de conservación. Procedimientos de compra y gestión por canal directo sumamente eficaces.',
+    comment: 'Llevo un rato sintiéndome súper cansado y esto me ha dado mucha más vitalidad para rendir en la pega y en el gym. Venía súper bien sellado al vacío, lo que me dio mucha confianza. ¡Un 7 la atención!',
   },
   {
     id: 6,
-    name: 'Dra. Isidora P.',
+    name: 'Isidora P.',
     location: 'Temuco, Araucanía',
     product: 'Tirzepatide Research 10mg',
     date: 'Hace 2 semanas',
     rating: 5,
     tag: 'Despacho & Discreción',
-    comment: 'Empaque de transporte ultraseguro y discreto. Cumplimiento riguroso del marco de compuestos de investigación (Research Use Only). Totalmente recomendado para la comunidad científica.',
+    comment: 'He logrado controlar la ansiedad por la comida de forma súper efectiva. El envío fue rapidísimo al sur y venía muy bien empaquetado y protegido. Muy responsables, es mi segundo pedido y 100% confiables.',
   },
 ];
 
@@ -692,7 +703,13 @@ function TestimonialsSection() {
         {/* Header / Summary */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 18px', background: S.surface, border: `1px solid ${S.border}`, borderRadius: 30, marginBottom: 18 }}>
-            <span style={{ color: S.ivory, fontSize: '0.85rem' }}>★ ★ ★ ★ ★</span>
+            <span style={{ color: '#F5A623', fontSize: '0.85rem', display: 'flex', gap: 2 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </span>
             <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.12em', color: S.white, fontWeight: 700 }}>
               4.9 / 5.0 REVIEWS DE INVESTIGACIÓN VERIFICADOS
             </span>
@@ -708,13 +725,16 @@ function TestimonialsSection() {
           {/* Badges de Confianza */}
           <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginTop: 24, fontSize: '0.78rem', color: S.ivory, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', fontWeight: 600 }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <span style={{ color: '#4CAF50' }}>✓</span> Lotes Verificados HPLC
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Lotes Verificados HPLC
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <span>🔒</span> Empaque 100% Discreto
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Empaque 100% Discreto
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <span>🚚</span> Envíos a todo Chile
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              Envíos a todo Chile
             </span>
           </div>
         </div>
@@ -766,8 +786,10 @@ function TestimonialsSection() {
               <div>
                 {/* Rating & Tag Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                  <div style={{ color: S.ivory, letterSpacing: '2px', fontSize: '0.9rem' }}>
-                    {'★'.repeat(r.rating)}
+                  <div style={{ display: 'flex', gap: 2, color: '#F5A623' }}>
+                    {Array.from({ length: r.rating }).map((_, i) => (
+                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    ))}
                   </div>
                   <span style={{
                     fontSize: '0.65rem',
