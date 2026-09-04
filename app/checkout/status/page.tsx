@@ -282,12 +282,10 @@ function StatusContent() {
               <SectionLabel icon={<IconTruck />} label="Método de Despacho" />
               <div style={{ fontSize: '0.85rem', padding: '14px 18px', background: S.card, border: `1px solid ${S.border}`, borderRadius: 8 }}>
                 <p style={{ margin: '0 0 6px', color: S.ivory, fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>
-                  {order.delivery_method === 'domicilio' ? 'Despacho a Domicilio Priority' : 'Retiro en Punto Blue Express'}
+                  Despacho a Domicilio Priority (Blue Express)
                 </p>
                 <p style={{ margin: 0, color: S.white, fontWeight: 500 }}>
-                  {order.delivery_method === 'domicilio'
-                    ? `${order.shipping_address}, ${order.shipping_comuna} — ${order.shipping_region}`
-                    : order.pickup_point_name}
+                  {order.shipping_address ? `${order.shipping_address}, ${order.shipping_comuna} — ${order.shipping_region}` : `${order.shipping_comuna} — ${order.shipping_region}`}
                 </p>
               </div>
             </div>

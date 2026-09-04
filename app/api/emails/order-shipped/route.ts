@@ -54,7 +54,7 @@ const OrderShippedHtml = (orderId: string, name: string, method: string, address
 
             <div class="details">
               <h3>Destino del Envío</h3>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio' : 'Retiro en Blue Express'}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio Priority (Blue Express)</p>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Dirección / Punto:</strong> ${address}</p>
             </div>
             

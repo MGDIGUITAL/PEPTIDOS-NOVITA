@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { REGIONS } from '@/lib/shippingRates';
-import { PICKUP_POINTS } from '@/lib/pickupPoints';
 import { REGION_COMUNAS } from '@/lib/chileData';
 
 const S = {
@@ -21,7 +20,6 @@ const S = {
   offWhite: '#EEEEEE',
   white:    '#FFFFFF',
   muted:    '#888888',
-  gold:     '#C4BFA9',
   accent:   '#3B82F6',
 };
 
@@ -29,10 +27,8 @@ export default function CheckoutPage() {
   const { cart, cartTotal } = useCart();
   const router = useRouter();
   
-  const [deliveryMethod, setDeliveryMethod] = useState<'domicilio' | 'retiro'>('domicilio');
   const [selectedRegionId, setSelectedRegionId] = useState('');
   const [selectedComuna, setSelectedComuna] = useState('');
-  const [selectedPickupPoint, setSelectedPickupPoint] = useState('');
 
   // Form states
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -44,33 +40,9 @@ export default function CheckoutPage() {
   const [clientAddress, setClientAddress] = useState('');
 
   const selectedRegion = REGIONS.find(r => r.id === selectedRegionId);
-  const baseShippingCost = selectedRegion ? selectedRegion.shippingCost : 0;
-  const shippingCost = 0; // Envío gratuito o calculado al procesar
+  const shippingCost = 0; // Despacho a domicilio priority incluido
 
-  // Coupon integration states
-  const [couponCode, setCouponCode] = useState('');
-  const [appliedCoupon, setAppliedCoupon] = useState<any | null>(null);
-  const [couponError, setCouponError] = useState('');
-  const [isApplyingCoupon, setIsApplyingCoupon] = useState(false);
-
-  let discountAmount = 0;
-  if (appliedCoupon) {
-    if (appliedCoupon.discount_type === 'percent') {
-      discountAmount = Math.round((cartTotal * Number(appliedCoupon.discount_value)) / 100);
-    } else {
-      discountAmount = Math.min(Number(appliedCoupon.discount_value), cartTotal);
-    }
-  }
-
-  const finalTotal = Math.max(0, cartTotal - discountAmount) + shippingCost;
-
-  // Filtrar comunas y puntos de retiro
-  const availableComunas = Array.from(new Set(
-    PICKUP_POINTS.filter(p => selectedRegion && p.region.includes(selectedRegion.name.split(' ')[0]))
-                 .map(p => p.comuna)
-  ));
-  
-  const availablePoints = PICKUP_POINTS.filter(p => p.comuna === selectedComuna);
+  const finalTotal = cartTotal + shippingCost;
 
   // Styling helpers
   const inputStyle: React.CSSProperties = {
@@ -92,57 +64,13 @@ export default function CheckoutPage() {
     textTransform: 'uppercase'
   };
 
-  const handleApplyCoupon = async () => {
-    if (!couponCode.trim()) return;
-    if (!clientEmail.trim()) {
-      setCouponError('Debes ingresar tu correo electrónico antes de aplicar un cupón.');
-      return;
-    }
-
-    setIsApplyingCoupon(true);
-    setCouponError('');
-
-    try {
-      const res = await fetch('/api/checkout/validate-coupon', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          code: couponCode.toUpperCase().trim(),
-          email: clientEmail
-        })
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setAppliedCoupon(data.coupon);
-        setCouponError('');
-      } else {
-        setCouponError(data.error || 'Código de cupón inválido.');
-        setAppliedCoupon(null);
-      }
-    } catch (err: any) {
-      setCouponError('Error conectando con el servidor.');
-    } finally {
-      setIsApplyingCoupon(false);
-    }
-  };
-
-  const handleRemoveCoupon = () => {
-    setAppliedCoupon(null);
-    setCouponCode('');
-    setCouponError('');
-  };
-
   const handleSubmit = async () => {
     if (!clientEmail || !clientName || !clientRut) {
       alert('Por favor completa los campos obligatorios (Nombre, RUT, Correo).');
       return;
     }
-    if (deliveryMethod === 'domicilio' && (!selectedRegionId || !selectedComuna || !clientAddress)) {
-      alert('Por favor completa tu dirección de despacho.');
-      return;
-    }
-    if (deliveryMethod === 'retiro' && (!selectedRegionId || !selectedComuna || !selectedPickupPoint)) {
-      alert('Por favor selecciona un punto de retiro.');
+    if (!selectedRegionId || !selectedComuna || !clientAddress) {
+      alert('Por favor completa tu dirección de despacho a domicilio.');
       return;
     }
     if (cart.length === 0) return;
@@ -154,18 +82,18 @@ export default function CheckoutPage() {
         client_rut: clientRut,
         client_email: clientEmail,
         client_phone: clientPhone,
-        delivery_method: deliveryMethod,
+        delivery_method: 'domicilio',
         shipping_region: selectedRegion?.name || '',
         shipping_comuna: selectedComuna,
-        shipping_address: deliveryMethod === 'domicilio' ? clientAddress : null,
-        pickup_point_name: deliveryMethod === 'retiro' ? selectedPickupPoint : null,
-        pickup_point_address: deliveryMethod === 'retiro' ? PICKUP_POINTS.find(p => p.name === selectedPickupPoint)?.address || null : null,
+        shipping_address: clientAddress,
+        pickup_point_name: null,
+        pickup_point_address: null,
         subtotal: cartTotal,
         shipping_cost: shippingCost,
         total: finalTotal,
         status: 'Pendiente',
-        applied_coupon: appliedCoupon ? appliedCoupon.code : null,
-        discount_amount: discountAmount
+        applied_coupon: null,
+        discount_amount: 0
       };
 
       const itemsPayload = cart.map(item => ({
@@ -259,170 +187,68 @@ export default function CheckoutPage() {
             </div>
           </div>
           <div>
-            <label style={labelStyle}>Teléfono de Contacto</label>
+            <label style={labelStyle}>Teléfono de Contacto *</label>
             <input type="tel" value={clientPhone} onChange={e => setClientPhone(e.target.value)} placeholder="+56 9 1234 5678" className="input-field" style={inputStyle} />
           </div>
 
-          <h2 style={sectionTitleStyle}>2. Método de Entrega</h2>
-          <div style={{ display: 'flex', gap: 16, marginBottom: '24px' }}>
-            <button 
-              type="button"
-              onClick={() => setDeliveryMethod('domicilio')}
-              style={{
-                flex: 1, padding: '16px', borderRadius: 8,
-                border: `1px solid ${deliveryMethod === 'domicilio' ? S.ivory : S.border}`,
-                background: deliveryMethod === 'domicilio' ? '#1c1c1c' : '#121212',
-                cursor: 'pointer', fontFamily: 'Inter, sans-serif', color: deliveryMethod === 'domicilio' ? S.white : S.muted,
-                fontWeight: deliveryMethod === 'domicilio' ? 600 : 400,
-                fontSize: '0.88rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
-              }}>
-              <span>🏠</span> Despacho a Domicilio
-            </button>
-            <button 
-              type="button"
-              onClick={() => { setDeliveryMethod('retiro'); setSelectedComuna(''); setSelectedPickupPoint(''); }}
-              style={{
-                flex: 1, padding: '16px', borderRadius: 8,
-                border: `1px solid ${deliveryMethod === 'retiro' ? S.ivory : S.border}`,
-                background: deliveryMethod === 'retiro' ? '#1c1c1c' : '#121212',
-                cursor: 'pointer', fontFamily: 'Inter, sans-serif', color: deliveryMethod === 'retiro' ? S.white : S.muted,
-                fontWeight: deliveryMethod === 'retiro' ? 600 : 400,
-                fontSize: '0.88rem', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8
-              }}>
-              <span>🏪</span> Punto Blue Express
-            </button>
+          <h2 style={sectionTitleStyle}>2. Dirección de Despacho a Domicilio</h2>
+          <div style={{ padding: '16px 20px', background: '#141414', border: `1px solid ${S.border}`, borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontSize: '1.2rem' }}>🏠</span>
+            <div>
+              <div style={{ fontSize: '0.85rem', color: S.white, fontWeight: 700 }}>Envío Directo a Domicilio (Blue Express)</div>
+              <div style={{ fontSize: '0.78rem', color: S.muted }}>Empaque térmico neutro y discreto garantizado a todo Chile.</div>
+            </div>
           </div>
 
-          {deliveryMethod === 'domicilio' ? (
-            <>
-              <h2 style={sectionTitleStyle}>3. Dirección de Despacho</h2>
-              <div style={{ display: 'flex', gap: 16 }}>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Nombre *</label>
-                  <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder="Tu nombre" className="input-field" style={inputStyle} />
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Apellidos</label>
-                  <input type="text" value={clientLastname} onChange={e => setClientLastname(e.target.value)} placeholder="Tus apellidos" className="input-field" style={inputStyle} />
-                </div>
-              </div>
-              <div>
-                <label style={labelStyle}>Dirección Completa *</label>
-                <input type="text" value={clientAddress} onChange={e => setClientAddress(e.target.value)} placeholder="Calle, número, departamento o dpto..." className="input-field" style={inputStyle} />
-              </div>
-              <div style={{ display: 'flex', gap: 16 }}>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Región *</label>
-                  <select 
-                    value={selectedRegionId}
-                    onChange={e => setSelectedRegionId(e.target.value)}
-                    className="input-field" 
-                    style={{ ...inputStyle, cursor: 'pointer' }}
-                  >
-                    <option value="">Selecciona tu región</option>
-                    {REGIONS.map(region => (
-                      <option key={region.id} value={region.id}>
-                        {region.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Ciudad / Comuna *</label>
-                  <select 
-                    value={selectedComuna}
-                    onChange={e => setSelectedComuna(e.target.value)}
-                    className="input-field" 
-                    style={{ ...inputStyle, cursor: 'pointer' }}
-                    disabled={!selectedRegionId}
-                  >
-                    <option value="">Selecciona comuna</option>
-                    {selectedRegionId && REGION_COMUNAS[selectedRegionId]?.map(comuna => (
-                      <option key={comuna} value={comuna}>{comuna}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <h2 style={sectionTitleStyle}>3. Selección de Punto de Retiro</h2>
-              <div style={{ display: 'flex', gap: 16 }}>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Región *</label>
-                  <select 
-                    value={selectedRegionId}
-                    onChange={e => { setSelectedRegionId(e.target.value); setSelectedComuna(''); setSelectedPickupPoint(''); }}
-                    className="input-field" 
-                    style={{ ...inputStyle, cursor: 'pointer' }}
-                  >
-                    <option value="">Selecciona tu región</option>
-                    {REGIONS.map(region => (
-                      <option key={region.id} value={region.id}>
-                        {region.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label style={labelStyle}>Comuna *</label>
-                  <select 
-                    value={selectedComuna}
-                    onChange={e => { setSelectedComuna(e.target.value); setSelectedPickupPoint(''); }}
-                    className="input-field" 
-                    style={{ ...inputStyle, cursor: 'pointer' }}
-                    disabled={!selectedRegionId || availableComunas.length === 0}
-                  >
-                    <option value="">Selecciona comuna</option>
-                    {availableComunas.map(comuna => (
-                      <option key={comuna} value={comuna}>{comuna}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+          <div style={{ display: 'flex', gap: 16 }}>
+            <div style={{ flex: 1 }}>
+              <label style={labelStyle}>Nombre *</label>
+              <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} placeholder="Tu nombre" className="input-field" style={inputStyle} />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={labelStyle}>Apellidos</label>
+              <input type="text" value={clientLastname} onChange={e => setClientLastname(e.target.value)} placeholder="Tus apellidos" className="input-field" style={inputStyle} />
+            </div>
+          </div>
+          <div>
+            <label style={labelStyle}>Dirección Completa (Calle, Número, Depto) *</label>
+            <input type="text" value={clientAddress} onChange={e => setClientAddress(e.target.value)} placeholder="Ej: Av. Las Condes 1234, Depto 502" className="input-field" style={inputStyle} />
+          </div>
+          <div style={{ display: 'flex', gap: 16 }}>
+            <div style={{ flex: 1 }}>
+              <label style={labelStyle}>Región *</label>
+              <select 
+                value={selectedRegionId}
+                onChange={e => { setSelectedRegionId(e.target.value); setSelectedComuna(''); }}
+                className="input-field" 
+                style={{ ...inputStyle, cursor: 'pointer' }}
+              >
+                <option value="">Selecciona tu región</option>
+                {REGIONS.map(region => (
+                  <option key={region.id} value={region.id}>
+                    {region.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={labelStyle}>Ciudad / Comuna *</label>
+              <select 
+                value={selectedComuna}
+                onChange={e => setSelectedComuna(e.target.value)}
+                className="input-field" 
+                style={{ ...inputStyle, cursor: 'pointer' }}
+                disabled={!selectedRegionId}
+              >
+                <option value="">Selecciona comuna</option>
+                {selectedRegionId && REGION_COMUNAS[selectedRegionId]?.map(comuna => (
+                  <option key={comuna} value={comuna}>{comuna}</option>
+                ))}
+              </select>
+            </div>
+          </div>
 
-              {selectedComuna && availablePoints.length > 0 && (
-                <div style={{ marginTop: 16 }}>
-                  <label style={labelStyle}>Puntos Blue Express Disponibles</label>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    {availablePoints.map(point => (
-                      <label 
-                        key={point.name}
-                        style={{
-                          display: 'flex', alignItems: 'flex-start', gap: 12, padding: '16px', borderRadius: 8,
-                          border: `1px solid ${selectedPickupPoint === point.name ? S.ivory : S.border}`,
-                          background: selectedPickupPoint === point.name ? '#1c1c1c' : '#141414',
-                          cursor: 'pointer', transition: 'all 0.2s'
-                        }}
-                      >
-                        <input 
-                          type="radio" 
-                          name="pickupPoint" 
-                          value={point.name}
-                          checked={selectedPickupPoint === point.name}
-                          onChange={e => setSelectedPickupPoint(e.target.value)}
-                          style={{ marginTop: 4, accentColor: S.white }}
-                        />
-                        <div>
-                          <div style={{ color: S.white, fontWeight: 600, fontSize: '0.9rem', marginBottom: 4 }}>
-                            {point.name}
-                          </div>
-                          <div style={{ color: S.muted, fontSize: '0.8rem', marginBottom: 4 }}>
-                            {point.address}
-                          </div>
-                          <div style={{ color: S.ivory, fontSize: '0.75rem', fontWeight: 500 }}>
-                            🕒 {point.hours}
-                          </div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
-          )}
-
-          <h2 style={sectionTitleStyle}>4. Pasarela de Pago Oficial</h2>
+          <h2 style={sectionTitleStyle}>3. Pasarela de Pago Oficial</h2>
           <div style={{ padding: '24px', border: `1px solid ${S.border}`, background: '#141414', borderRadius: 8, marginBottom: '32px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <input type="radio" id="flow" name="payment" defaultChecked style={{ accentColor: S.white, transform: 'scale(1.2)' }} />
@@ -494,7 +320,7 @@ export default function CheckoutPage() {
                 <span style={{ color: S.white, fontSize: '0.92rem' }}>${cartTotal.toLocaleString('es-CL')}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
-                <span style={{ color: S.muted, fontSize: '0.88rem' }}>Despacho Priority</span>
+                <span style={{ color: S.muted, fontSize: '0.88rem' }}>Despacho a Domicilio</span>
                 <span style={{ color: '#4CAF50', fontSize: '0.88rem', fontWeight: 600 }}>
                   INCLUIDO
                 </span>
@@ -513,7 +339,7 @@ export default function CheckoutPage() {
                  🔒 Compra 100% Segura y Discreta
                </div>
                <div style={{ fontSize: '0.75rem', color: S.muted, lineHeight: 1.5 }}>
-                 Envío en embalaje térmico neutro sin marcas exteriores. Transacción asegurada por Flow / Webpay Plus.
+                 Envío a domicilio en embalaje térmico neutro sin marcas exteriores. Transacción asegurada por Flow / Webpay Plus.
                </div>
             </div>
           </div>

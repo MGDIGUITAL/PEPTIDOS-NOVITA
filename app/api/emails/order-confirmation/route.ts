@@ -42,7 +42,7 @@ const OrderConfirmationHtml = (orderId: string, name: string, total: number, met
             <div class="details">
               <h3>Resumen del Pedido</h3>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Total Pagado:</strong> $${total.toLocaleString('es-CL')} CLP</p>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> ${method === 'domicilio' ? 'Despacho a Domicilio Priority' : 'Retiro en Punto Blue Express'}</p>
+              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio Priority (Blue Express)</p>
               <p style="margin: 6px 0; color: #FFFFFF;"><strong>Destino / Dirección:</strong> ${address}</p>
             </div>
             
