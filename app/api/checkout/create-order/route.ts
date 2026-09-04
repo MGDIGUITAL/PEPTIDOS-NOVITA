@@ -14,8 +14,6 @@ export async function POST(request: Request) {
       shipping_region: orderPayload.shipping_region,
       shipping_comuna: orderPayload.shipping_comuna,
       shipping_address: orderPayload.shipping_address,
-      pickup_point_name: orderPayload.pickup_point_name || null,
-      pickup_point_address: orderPayload.pickup_point_address || null,
       subtotal: orderPayload.subtotal,
       shipping_cost: orderPayload.shipping_cost,
       total: orderPayload.total,

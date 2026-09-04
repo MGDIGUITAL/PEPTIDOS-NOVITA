@@ -86,8 +86,6 @@ export default function CheckoutPage() {
         shipping_region: selectedRegion?.name || '',
         shipping_comuna: selectedComuna,
         shipping_address: clientAddress,
-        pickup_point_name: null,
-        pickup_point_address: null,
         subtotal: cartTotal,
         shipping_cost: shippingCost,
         total: finalTotal,
