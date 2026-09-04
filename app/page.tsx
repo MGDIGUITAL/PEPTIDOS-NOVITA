@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 // Ensure the page always fetches fresh active products
 export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function StorefrontPage() {
   const { data: products, error } = await supabaseAdmin
