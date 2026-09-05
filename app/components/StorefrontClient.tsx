@@ -25,7 +25,7 @@ const CATS = ['Todos', 'Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos 
 function PromoBar() {
   return (
     <div className="promo-bar" style={{ padding:'10px 0', textAlign:'center', color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:600, letterSpacing:'0.18em', background:S.black, borderBottom:`1px solid ${S.border}` }}>
-      ✦ COBERTURA NACIONAL &nbsp;·&nbsp; ENVÍO DISCRETO A TODO CHILE &nbsp;·&nbsp; DESPACHO A DOMICILIO Y PUNTOS DE RETIRO ✦
+      ✦ COBERTURA NACIONAL &nbsp;·&nbsp; ENVÍO A TODO CHILE &nbsp;·&nbsp; DESPACHO GRATIS POR LA COMPRA DE 2 PRODUCTOS &nbsp;·&nbsp; DESPACHO A DOMICILIO Y PUNTOS DE RETIRO ✦
     </div>
   );
 }
@@ -994,55 +994,55 @@ function Footer() {
         </div>
       )}
 
-      <footer style={{ background: '#000000', borderTop: `1px solid #222222`, paddingTop: 64 }}>
+      <footer style={{ background: '#FFFFFF', borderTop: `1px solid #E5E5E5`, paddingTop: 64 }}>
         <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 2rem' }}>
 
           {/* ── MAIN FOOTER GRID ── */}
-          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '260px 1fr 1fr 1fr', gap: 48, paddingBottom: 56, borderBottom: `1px solid #222222` }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '260px 1fr 1fr 1fr', gap: 48, paddingBottom: 56, borderBottom: `1px solid #E5E5E5` }}>
 
             {/* Col 1 — Brand */}
             <div>
-              <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain', marginBottom: 20 }} />
-              <p style={{ color: '#CCCCCC', fontSize: '0.82rem', lineHeight: 1.8 }}>
+              <Image src="/logo-nova-bw.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain', marginBottom: 20 }} />
+              <p style={{ color: '#444444', fontSize: '0.82rem', lineHeight: 1.8 }}>
                 NOVA PERFORMANCE® — Compuestos de vanguardia biotecnológica y alta pureza para investigación científica.
               </p>
             </div>
 
             {/* Col 2 — Categorías */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Categorías</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Categorías</div>
               {['Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos GHRH', 'Accesorios'].map(cat => (
-                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#AAAAAA', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
+                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#555555', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
                 >{cat}</a>
               ))}
             </div>
 
             {/* Col 3 — Info & Ayuda */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Información & Ayuda</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Información & Ayuda</div>
               <button
                 onClick={() => setActiveModal('Cómo comprar')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#AAAAAA', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#555555', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
               >
                 Cómo Comprar →
               </button>
               <button
                 onClick={() => setActiveModal('Envíos')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#AAAAAA', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#555555', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
               >
                 Política de Envíos →
               </button>
               <Link
                 href="/marco-regulatorio"
-                style={{ display: 'block', color: '#FFFFFF', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 600, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#E6E2D3')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#FFFFFF')}
+                style={{ display: 'block', color: '#000000', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 600, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#555555')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#000000')}
               >
                 Marco Regulatorio y Legal →
               </Link>
@@ -1050,14 +1050,14 @@ function Footer() {
 
             {/* Col 4 — Medios de Pago */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Medios de Pago</div>
-              <p style={{ color: '#AAAAAA', fontSize: '0.78rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Medios de Pago</div>
+              <p style={{ color: '#444444', fontSize: '0.78rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
                 Paga de forma segura con tarjeta de débito, crédito o transferencia.
               </p>
               {/* Payment logos strip */}
               <div className="payment-logos-wrap" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
                 {/* Webpay Plus */}
-                <div style={{ background: '#111111', border: '1px solid #2A2A2A', borderRadius: 6, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#000000', border: '1px solid #000000', borderRadius: 6, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="72" height="22" viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="10" cy="14" r="9" fill="#D42C2C"/>
                     <path d="M6 14 Q10 6 14 14 Q10 22 6 14Z" fill="#1A4A9A"/>
@@ -1067,24 +1067,24 @@ function Footer() {
                   </svg>
                 </div>
                 {/* Visa */}
-                <div style={{ background: '#1A3A8F', border: '1px solid #2A4AAF', borderRadius: 6, padding: '6px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#1A3A8F', border: '1px solid #1A3A8F', borderRadius: 6, padding: '6px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="46" height="16" viewBox="0 0 58 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <text x="0" y="16" fontFamily="Arial" fontWeight="900" fontSize="18" fill="#FFFFFF" letterSpacing="1">VISA</text>
                   </svg>
                 </div>
                 {/* Mastercard */}
-                <div style={{ background: '#111111', border: '1px solid #2A2A2A', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5 }}>
+                <div style={{ background: '#FFFFFF', border: '1px solid #E0E0E0', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5 }}>
                   <svg width="36" height="22" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="14" cy="14" r="12" fill="#EB001B"/>
                     <circle cx="30" cy="14" r="12" fill="#F79E1B"/>
                     <path d="M22 5.25A12 12 0 0 1 22 22.75A12 12 0 0 1 22 5.25Z" fill="#FF5F00"/>
                   </svg>
-                  <span style={{ fontFamily: 'Arial', fontSize: '0.62rem', color: '#CCCCCC', fontWeight: 600 }}>mastercard</span>
+                  <span style={{ fontFamily: 'Arial', fontSize: '0.62rem', color: '#111111', fontWeight: 700 }}>mastercard</span>
                 </div>
                 {/* Redcompra */}
-                <div style={{ background: '#1B3F9E', border: '1px solid #2A52BF', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#1B3F9E', border: '1px solid #1B3F9E', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <span style={{ fontFamily: 'Arial', fontWeight: 800, fontSize: '0.7rem', color: '#FFFFFF', letterSpacing: '0.04em' }}>red</span>
-                  <span style={{ fontFamily: 'Arial', fontWeight: 400, fontSize: '0.7rem', color: '#CCCCCC', marginLeft: 2 }}>compra</span>
+                  <span style={{ fontFamily: 'Arial', fontWeight: 400, fontSize: '0.7rem', color: '#E0E0E0', marginLeft: 2 }}>compra</span>
                 </div>
               </div>
             </div>
@@ -1093,13 +1093,13 @@ function Footer() {
 
           {/* ── BOTTOM BAR ── */}
           <div className="footer-bottom-bar" style={{ padding: '22px 0', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
-            <span style={{ color: '#666666', fontSize: '0.72rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em' }}>
+            <span style={{ color: '#555555', fontSize: '0.72rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em' }}>
               © {new Date().getFullYear()} NOVA PERFORMANCE®. TODOS LOS DERECHOS RESERVADOS.
             </span>
             <div style={{ display: 'flex', gap: 20 }}>
-              <Link href="/marco-regulatorio" style={{ color: '#888888', fontSize: '0.72rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+              <Link href="/marco-regulatorio" style={{ color: '#555555', fontSize: '0.72rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
               >
                 Aviso Legal / Marco Regulatorio
               </Link>
