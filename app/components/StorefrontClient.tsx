@@ -564,7 +564,16 @@ function Products({ products }: { products: any[] }) {
 
 // ─── FEATURED PRODUCTS ──────────────────────────────────────────────────────
 function FeaturedProducts({ products }: { products: any[] }) {
-  const featured = products.slice(0, 4);
+  // Excluir Agua/Accesorios y mostrar exclusivamente los péptidos de 10mg destacados
+  const nonWater = products.filter(p => {
+    const title = (p.title || '').toLowerCase();
+    return !title.includes('agua') && p.category !== 'Accesorios';
+  });
+
+  const mg10Products = nonWater.filter(p => (p.title || '').toLowerCase().includes('10mg'));
+  const otherProducts = nonWater.filter(p => !(p.title || '').toLowerCase().includes('10mg'));
+
+  const featured = [...mg10Products, ...otherProducts].slice(0, 4);
   if (featured.length === 0) return null;
 
   return (
