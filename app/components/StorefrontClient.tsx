@@ -1002,45 +1002,45 @@ function Footer() {
 
             {/* Col 1 — Brand */}
             <div>
-              <Image src="/logo-nova-bw.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain', marginBottom: 20 }} />
-              <p style={{ color: '#444444', fontSize: '0.82rem', lineHeight: 1.8 }}>
+              <Image src="/logo-nova-black.png" alt="NOVA Performance®" width={190} height={42} style={{ objectFit: 'contain', marginBottom: 20, display: 'block' }} priority />
+              <p style={{ color: '#333333', fontSize: '0.84rem', lineHeight: 1.8, fontFamily: 'Inter, sans-serif' }}>
                 NOVA PERFORMANCE® — Compuestos de vanguardia biotecnológica y alta pureza para investigación científica.
               </p>
             </div>
 
             {/* Col 2 — Categorías */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Categorías</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Categorías</div>
               {['Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos GHRH', 'Accesorios'].map(cat => (
-                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#555555', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#444444', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
                 >{cat}</a>
               ))}
             </div>
 
             {/* Col 3 — Info & Ayuda */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Información & Ayuda</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Información & Ayuda</div>
               <button
                 onClick={() => setActiveModal('Cómo comprar')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#555555', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#444444', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
               >
                 Cómo Comprar →
               </button>
               <button
                 onClick={() => setActiveModal('Envíos')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#555555', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#444444', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
               >
                 Política de Envíos →
               </button>
               <Link
                 href="/marco-regulatorio"
-                style={{ display: 'block', color: '#000000', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 600, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                style={{ display: 'block', color: '#000000', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 700, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#555555')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#000000')}
               >
@@ -1050,8 +1050,8 @@ function Footer() {
 
             {/* Col 4 — Medios de Pago */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Medios de Pago</div>
-              <p style={{ color: '#444444', fontSize: '0.78rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Medios de Pago</div>
+              <p style={{ color: '#444444', fontSize: '0.8rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
                 Paga de forma segura con tarjeta de débito, crédito o transferencia.
               </p>
               {/* Payment logos strip */}
@@ -1093,11 +1093,11 @@ function Footer() {
 
           {/* ── BOTTOM BAR ── */}
           <div className="footer-bottom-bar" style={{ padding: '22px 0', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
-            <span style={{ color: '#555555', fontSize: '0.72rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em' }}>
+            <span style={{ color: '#555555', fontSize: '0.74rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.1em', fontWeight: 600 }}>
               © {new Date().getFullYear()} NOVA PERFORMANCE®. TODOS LOS DERECHOS RESERVADOS.
             </span>
             <div style={{ display: 'flex', gap: 20 }}>
-              <Link href="/marco-regulatorio" style={{ color: '#555555', fontSize: '0.72rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'color 0.2s' }}
+              <Link href="/marco-regulatorio" style={{ color: '#555555', fontSize: '0.74rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em', fontWeight: 600, transition: 'color 0.2s' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
                 onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
               >
