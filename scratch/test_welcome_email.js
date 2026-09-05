@@ -1,10 +1,34 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import path from 'path';
-import fs from 'fs';
-import { supabaseAdmin } from '@/lib/supabase/server';
+require('dotenv').config({ path: 'd:/PEPTIDOS/.env' });
+const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
-const WelcomeEmailHtml = (userName: string) => `
+async function main() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+
+  console.log('GMAIL_USER:', user);
+  console.log('GMAIL_PASS:', pass ? '***' : 'NOT SET');
+
+  if (!user || !pass) {
+    console.error('Error: Credenciales de Gmail no encontradas.');
+    process.exit(1);
+  }
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
+
+  const bienvenidoPath = path.join(__dirname, '../public/correo/bienvenido.png');
+  const graciasPath    = path.join(__dirname, '../public/correo/gracias.png');
+
+  console.log('Bienvenido path exists:', fs.existsSync(bienvenidoPath));
+  console.log('Gracias path exists:', fs.existsSync(graciasPath));
+
+  const userName = 'Vision Code';
+
+  const html = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -66,72 +90,30 @@ const WelcomeEmailHtml = (userName: string) => `
 </html>
 `;
 
-export async function POST(request: Request) {
   try {
-    const { email, name, userId } = await request.json();
-
-    if (!email) {
-      return NextResponse.json({ error: 'Falta el correo' }, { status: 400 });
-    }
-
-    // Auto-confirmar usuario en Supabase Auth
-    try {
-      if (userId) {
-        await supabaseAdmin.auth.admin.updateUserById(userId, { email_confirm: true });
-      } else {
-        const { data } = await supabaseAdmin.auth.admin.listUsers();
-        const target = data?.users?.find((u: any) => u.email?.toLowerCase() === email.toLowerCase());
-        if (target) {
-          await supabaseAdmin.auth.admin.updateUserById(target.id, { email_confirm: true });
-        }
-      }
-    } catch (authErr) {
-      console.error('Error auto-confirmando usuario en Supabase:', authErr);
-    }
-
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
-      console.log('--- SIMULANDO ENVÍO DE CORREO (Faltan credenciales de Gmail) ---');
-      return NextResponse.json({ success: true, mocked: true });
-    }
-
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS
-      }
-    });
-
-    const bienvenidoPath = path.join(process.cwd(), 'public/correo/bienvenido.png');
-    const graciasPath    = path.join(process.cwd(), 'public/correo/gracias.png');
-
-    const attachments: any[] = [];
-    if (fs.existsSync(bienvenidoPath)) {
-      attachments.push({
-        filename: 'bienvenido.png',
-        path: bienvenidoPath,
-        cid: 'bienvenido_img'
-      });
-    }
-    if (fs.existsSync(graciasPath)) {
-      attachments.push({
-        filename: 'gracias.png',
-        path: graciasPath,
-        cid: 'gracias_img'
-      });
-    }
-
     const info = await transporter.sendMail({
-      from: '"NOVA Performance" <' + process.env.GMAIL_USER + '>',
-      to: email,
+      from: '"NOVA Performance" <' + user + '>',
+      to: 'vision.code.vs@gmail.com',
       subject: 'Bienvenido a Nova Performance',
-      html: WelcomeEmailHtml(name || 'Cliente'),
-      attachments
+      html,
+      attachments: [
+        {
+          filename: 'bienvenido.png',
+          path: bienvenidoPath,
+          cid: 'bienvenido_img'
+        },
+        {
+          filename: 'gracias.png',
+          path: graciasPath,
+          cid: 'gracias_img'
+        }
+      ]
     });
 
-    return NextResponse.json({ success: true, data: info });
-  } catch (error: any) {
-    console.error('Error enviando correo:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.log('SUCCESS! Email enviado correctamente:', info.messageId);
+  } catch (err) {
+    console.error('ERROR enviando correo:', err);
   }
 }
+
+main();
