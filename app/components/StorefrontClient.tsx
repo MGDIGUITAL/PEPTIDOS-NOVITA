@@ -110,7 +110,7 @@ function Navbar() {
 
   return (
     <>
-      <nav style={{ position:'sticky', top:0, zIndex:100, background:navBg, borderBottom:`1px solid ${S.border}`, backdropFilter:'blur(20px)', transition:'all 0.3s', width:'100%' }}>
+      <nav style={{ width:'100%', background:'transparent' }}>
 
         
         <div className="nav-inner-container" style={{ maxWidth:1320, margin:'0 auto', padding:'0 2rem', height:72, display:'flex', alignItems:'center', justifyContent:'space-between' }}>
@@ -1130,10 +1130,29 @@ function Footer() {
 export default function StorefrontClient({ products }: { products: any[] }) {
   const [showLegalNotice, setShowLegalNotice] = useState(true);
 
+  // Garantizar que la vista móvil y de escritorio siempre inicie en scroll (0,0) para mostrar la navbar al ingresar
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }
+  }, []);
+
   return (
     <>
-      <PromoBar />
-      <Navbar />
+      <header style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        width: '100%',
+        background: 'rgba(0, 0, 0, 0.95)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: `1px solid ${S.border}`,
+        transition: 'all 0.3s'
+      }}>
+        <PromoBar />
+        <Navbar />
+      </header>
       <main>
         {/* H1 SEO accesible para lectores de pantalla y motores de búsqueda */}
         <h1 className="sr-only" style={{ display: 'none' }}>NOVA Performance® — Péptidos & Compuestos de Investigación Biotecnológica en Chile</h1>
