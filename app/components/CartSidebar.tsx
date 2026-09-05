@@ -126,6 +126,68 @@ export default function CartSidebar() {
         {/* Footer */}
         {cart.length > 0 && (
           <div style={{ padding: '24px', borderTop: `1px solid ${S.border}`, background: S.surface }}>
+            
+            {/* ── BANNER DE DESPACHO GRATIS ── */}
+            {(() => {
+              const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+              const isFreeShipping = totalItems >= 2;
+              return (
+                <div style={{
+                  padding: '10px 14px', borderRadius: 6, marginBottom: 16,
+                  background: isFreeShipping ? 'rgba(34, 197, 94, 0.12)' : 'rgba(230, 226, 211, 0.1)',
+                  border: `1px solid ${isFreeShipping ? 'rgba(34, 197, 94, 0.4)' : 'rgba(230, 226, 211, 0.3)'}`,
+                  color: isFreeShipping ? '#22c55e' : S.ivory,
+                  fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', fontWeight: 800,
+                  letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center'
+                }}>
+                  {isFreeShipping 
+                    ? '🎉 ¡DESPACHO GRATIS APLICADO (2+ PRODUCTOS)!' 
+                    : '🚚 ¡LLEVA 1 PRODUCTO MÁS Y TÚ DESPACHO SERÁ 100% GRATIS!'}
+                </div>
+              );
+            })()}
+
+            {/* ── RECOMENDACIÓN DE AGUA BACTERIOSTÁTICA ── */}
+            {(() => {
+              const hasAgua = cart.some(item => (item.title || '').toLowerCase().includes('agua') || item.productId === '9');
+              const { addToCart } = useCart();
+              return (
+                <div style={{ background: '#141414', border: `1px solid ${hasAgua ? 'rgba(34, 197, 94, 0.4)' : S.border}`, borderRadius: 8, padding: '14px 16px', marginBottom: 18 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                    <span style={{ fontSize: '1rem' }}>💧</span>
+                    <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.72rem', color: S.ivory, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 800 }}>
+                      RECOMENDACIÓN IMPORTANTE
+                    </span>
+                  </div>
+                  <p style={{ margin: '0 0 10px', fontSize: '0.76rem', color: S.muted, lineHeight: 1.5, fontFamily: 'Inter, sans-serif' }}>
+                    Para disolver y reconstituir adecuadamente tus péptidos para su consumo, es indispensable contar con <strong>Agua Bacteriostática 3ml</strong>.
+                  </p>
+                  {hasAgua ? (
+                    <div style={{ color: '#22c55e', fontSize: '0.76rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif' }}>
+                      <span>✓</span> Agua Bacteriostática incluida en tu carrito
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() => addToCart({
+                        id: 9,
+                        title: 'Agua Bacteriostática 3ml — Solvente para Reconstitución de Péptidos',
+                        price: 7990,
+                        category: 'Accesorios'
+                      }, 1, '3ml')}
+                      style={{
+                        width: '100%', padding: '10px 14px', background: S.ivory, color: S.black,
+                        border: 'none', borderRadius: 4, cursor: 'pointer', fontFamily: 'Outfit, sans-serif',
+                        fontSize: '0.74rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 800,
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      + Añadir Agua Bacteriostática ($7.990)
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
+
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 16, alignItems: 'baseline' }}>
               <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.82rem', color: S.muted, textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700 }}>Subtotal</span>
               <span className="font-display" style={{ fontSize: '1.4rem', color: S.ivory, fontWeight: 800 }} suppressHydrationWarning>
@@ -133,7 +195,7 @@ export default function CartSidebar() {
               </span>
             </div>
             <p style={{ fontSize: '0.75rem', color: S.muted, marginBottom: 20, lineHeight: 1.5 }}>
-              Despacho discreto con rotulación neutra. Los costos de envío se aplican al finalizar.
+              Despacho discreto con rotulación neutra a todo Chile.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <Link href="/checkout" onClick={closeCart} style={{

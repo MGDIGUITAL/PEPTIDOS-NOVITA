@@ -34,7 +34,7 @@ function formatRut(raw: string): string {
 }
 
 export default function CheckoutPage() {
-  const { cart, cartTotal } = useCart();
+  const { cart, cartTotal, addToCart } = useCart();
   const router = useRouter();
   
   const [selectedRegionId, setSelectedRegionId] = useState('');
@@ -75,10 +75,14 @@ export default function CheckoutPage() {
     });
   }, []);
 
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const isFreeShipping = totalItems >= 2;
   const selectedRegion = REGIONS.find(r => r.id === selectedRegionId);
-  const shippingCost = selectedRegion ? selectedRegion.shippingCost : 0;
+  const rawShippingCost = selectedRegion ? selectedRegion.shippingCost : 0;
+  const shippingCost = isFreeShipping ? 0 : rawShippingCost;
 
   const finalTotal = cartTotal + shippingCost;
+  const hasAgua = cart.some(item => (item.title || '').toLowerCase().includes('agua') || item.productId === '9' || item.id === '9');
 
   // Styling helpers
   const inputStyle: React.CSSProperties = {
@@ -251,13 +255,33 @@ export default function CheckoutPage() {
           </div>
 
           <h2 style={sectionTitleStyle}>2. Dirección de Despacho a Domicilio</h2>
-          <div style={{ padding: '16px 20px', background: '#141414', border: `1px solid ${S.border}`, borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontSize: '1.2rem' }}>🏠</span>
-            <div>
-              <div style={{ fontSize: '0.85rem', color: S.white, fontWeight: 700 }}>Despacho a Domicilio por el equipo de logística de NOVA Performance®</div>
-              <div style={{ fontSize: '0.78rem', color: S.muted }}>Empaque térmico neutro y discreto garantizado a todo Chile.</div>
+          
+          {/* Banner Promocional Despacho Gratis por 2+ productos */}
+          {isFreeShipping ? (
+            <div style={{ padding: '14px 18px', background: 'rgba(34, 197, 94, 0.12)', border: '1px solid rgba(34, 197, 94, 0.4)', borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }}>🎉</span>
+              <div>
+                <div style={{ fontSize: '0.82rem', color: '#22c55e', fontWeight: 800, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  ¡DESPACHO A DOMICILIO GRATIS APLICADO!
+                </div>
+                <div style={{ fontSize: '0.78rem', color: S.offWhite }}>
+                  Has llevado 2 o más productos. Tu despacho a domicilio es 100% costo $0 a todo Chile.
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div style={{ padding: '14px 18px', background: 'rgba(230, 226, 211, 0.08)', border: '1px solid rgba(230, 226, 211, 0.3)', borderRadius: 8, marginBottom: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
+              <span style={{ fontSize: '1.3rem' }}>🚚</span>
+              <div>
+                <div style={{ fontSize: '0.82rem', color: S.ivory, fontWeight: 800, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  A partir de la compra de 2 productos, ¡el despacho es GRATIS!
+                </div>
+                <div style={{ fontSize: '0.78rem', color: S.muted }}>
+                  Llevas {totalItems} producto en tu carro. Agrega 1 producto más para activar despacho gratis.
+                </div>
+              </div>
+            </div>
+          )}
 
           <div style={{ display: 'flex', gap: 16 }}>
             <div style={{ flex: 1 }}>
@@ -346,7 +370,7 @@ export default function CheckoutPage() {
                 Tu carrito está vacío. <Link href="/" style={{ color: S.white, textDecoration: 'underline' }}>Volver al catálogo</Link>.
               </div>
             ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 32 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 24 }}>
                 {cart.map(item => (
                   <div key={item.id} style={{ display: 'flex', gap: 16, alignItems: 'center', paddingBottom: 16, borderBottom: `1px solid ${S.border}` }}>
                     <div style={{ width: 60, height: 60, background: '#181818', position: 'relative', flexShrink: 0, border: `1px solid ${S.border}`, borderRadius: 6, overflow: 'hidden' }}>
@@ -373,15 +397,62 @@ export default function CheckoutPage() {
               </div>
             )}
 
+            {/* ── CARD RECOMENDACIÓN AGUA BACTERIOSTÁTICA 3ML ── */}
+            <div style={{ background: '#141414', border: `1px solid ${hasAgua ? 'rgba(34, 197, 94, 0.4)' : 'rgba(230, 226, 211, 0.35)'}`, borderRadius: 8, padding: '16px 18px', marginBottom: 24 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                <span style={{ fontSize: '1.1rem' }}>💧</span>
+                <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.74rem', color: S.ivory, letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 800 }}>
+                  RECOMENDACIÓN IMPORTANTE DE CONSUMO
+                </span>
+              </div>
+              <p style={{ margin: '0 0 12px', fontSize: '0.78rem', color: S.muted, lineHeight: 1.55, fontFamily: 'Inter, sans-serif' }}>
+                Es necesario comprar <strong>Agua Bacteriostática 3ml</strong> para disolver y reconstituir los demás productos para su consumo y uso.
+              </p>
+              {hasAgua ? (
+                <div style={{ color: '#22c55e', fontSize: '0.78rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif' }}>
+                  <span>✓</span> Agua Bacteriostática agregada a tu orden
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => addToCart({
+                    id: 9,
+                    productId: '9',
+                    title: 'Agua Bacteriostática 3ml — Solvente para Reconstitución de Péptidos',
+                    price: 7990,
+                    category: 'Accesorios',
+                    image_url: '/AGUA BACTERIOSTATICA VIAL RECTANGULAR EDITABLE.png'
+                  }, 1, '3ml')}
+                  style={{
+                    width: '100%', padding: '11px 16px', background: S.ivory, color: S.black,
+                    border: 'none', borderRadius: 6, cursor: 'pointer', fontFamily: 'Outfit, sans-serif',
+                    fontSize: '0.75rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 800,
+                    transition: 'all 0.2s', boxShadow: '0 2px 8px rgba(230,226,211,0.2)'
+                  }}
+                >
+                  + Añadir Agua Bacteriostática 3ml ($7.990)
+                </button>
+              )}
+            </div>
+
             <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 20 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
                 <span style={{ color: S.muted, fontSize: '0.88rem' }}>Subtotal</span>
                 <span style={{ color: S.white, fontSize: '0.92rem' }}>${cartTotal.toLocaleString('es-CL')}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20, alignItems: 'center' }}>
                 <span style={{ color: S.muted, fontSize: '0.88rem' }}>Despacho a Domicilio</span>
-                <span style={{ color: shippingCost > 0 ? S.white : S.muted, fontSize: '0.88rem', fontWeight: 600 }}>
-                  {shippingCost > 0 ? `$${shippingCost.toLocaleString('es-CL')}` : 'Calculando...'}
+                <span style={{ color: isFreeShipping ? '#22c55e' : (shippingCost > 0 ? S.white : S.muted), fontSize: '0.88rem', fontWeight: 700 }}>
+                  {isFreeShipping ? (
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span>$0</span>
+                      <span style={{ fontSize: '0.72rem', color: '#22c55e', background: 'rgba(34,197,94,0.15)', padding: '2px 8px', borderRadius: 4, fontWeight: 800 }}>GRATIS (2+ PRODUCTOS)</span>
+                    </span>
+                  ) : selectedRegion ? (
+                    `$${shippingCost.toLocaleString('es-CL')}`
+                  ) : (
+                    'Selecciona tu región'
+                  )}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: `1px solid ${S.border}`, paddingTop: 20, alignItems: 'baseline' }}>

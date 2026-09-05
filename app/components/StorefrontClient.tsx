@@ -23,12 +23,16 @@ const CATS = ['Todos', 'Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos 
 
 // ─── PROMO BAR ────────────────────────────────────────────────────────────
 function PromoBar() {
+  const { cartCount } = useCart();
   return (
-    <div className="promo-bar" style={{ padding:'10px 0', textAlign:'center', color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:600, letterSpacing:'0.18em', background:S.black, borderBottom:`1px solid ${S.border}` }}>
-      ✦ COBERTURA NACIONAL &nbsp;·&nbsp; ENVÍO A TODO CHILE &nbsp;·&nbsp; DESPACHO GRATIS POR LA COMPRA DE 2 PRODUCTOS ✦
+    <div className="promo-bar" style={{ padding:'10px 0', textAlign:'center', color: cartCount >= 2 ? '#22c55e' : S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:600, letterSpacing:'0.18em', background:S.black, borderBottom:`1px solid ${S.border}`, transition:'all 0.3s' }}>
+      {cartCount === 0 && '✦ COBERTURA NACIONAL · ENVÍO A TODO CHILE · SI COMPRAS 2 PRODUCTOS, TIENES DESPACHO GRATIS ✦'}
+      {cartCount === 1 && '🚚 ¡LLEVA 1 PRODUCTO MÁS Y TÚ DESPACHO SERÁ 100% GRATIS! ✦'}
+      {cartCount >= 2 && '🎉 ¡DESPACHO GRATIS APLICADO POR LA COMPRA DE 2 O MÁS PRODUCTOS! ✦'}
     </div>
   );
 }
+
 
 // ─── NAVBAR ───────────────────────────────────────────────────────────────
 function Navbar() {
