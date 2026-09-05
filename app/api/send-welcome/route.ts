@@ -4,67 +4,79 @@ import path from 'path';
 import fs from 'fs';
 import { supabaseAdmin } from '@/lib/supabase/server';
 
-const WelcomeEmailHtml = (userName: string) => `
-<!DOCTYPE html>
-<html lang="es">
+const WelcomeEmailHtml = (userName: string) => `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bienvenido a Nova Performance</title>
-  <style>
-    body { margin: 0; padding: 0; background-color: #050505; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #FFFFFF; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #0A0A0A; border: 1px solid #222222; border-radius: 12px; overflow: hidden; }
-    .header { text-align: center; padding: 28px 20px; background-color: #000000; border-bottom: 1px solid #222222; }
-    .header h2 { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: 3px; color: #FFFFFF; text-transform: uppercase; }
-    .banner-img { width: 100%; height: auto; display: block; }
-    .content { padding: 36px 30px; text-align: center; color: #CCCCCC; }
-    h1 { font-size: 22px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 16px; color: #FFFFFF; }
-    p { font-size: 14.5px; line-height: 1.7; color: #AAAAAA; margin: 0 0 20px; }
-    .gracias-img { width: 100%; height: auto; display: block; margin: 24px 0; border-radius: 8px; }
-    .btn { display: inline-block; padding: 14px 28px; background-color: #FFFFFF; color: #000000; font-weight: 800; font-size: 13px; text-decoration: none; border-radius: 6px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 10px; }
-    .footer { text-align: center; padding: 24px; font-size: 11px; color: #666666; border-top: 1px solid #222222; background-color: #050505; letter-spacing: 1px; }
-  </style>
 </head>
-<body>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#050505">
+<body style="margin:0;padding:0;min-width:100%;background-color:#000000;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000000">
     <tr>
-      <td align="center" style="padding: 30px 15px;">
-        <div class="container">
-          <!-- Header -->
-          <div class="header">
-            <h2>NOVA PERFORMANCE®</h2>
-          </div>
+      <td align="center" style="padding:20px 10px;">
+        <!-- Canvas 9:16 Inmersivo (max-width 460px) -->
+        <table role="presentation" width="100%" style="max-width:460px;background-color:#0A0A0A;border:1px solid #222222;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.9);" border="0" cellspacing="0" cellpadding="0">
+          
+          <!-- BRAND HEADER -->
+          <tr>
+            <td style="padding:22px 20px;text-align:center;background-color:#000000;border-bottom:1px solid #1A1A1A;">
+              <span style="font-family:Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:4px;color:#FFFFFF;text-transform:uppercase;">NOVA PERFORMANCE®</span>
+            </td>
+          </tr>
 
-          <!-- Imagen 1: Bienvenido -->
-          <img src="cid:bienvenido_img" alt="Bienvenido a Nova Performance" class="banner-img" />
+          <!-- HERO IMAGE (BIENVENIDO 9:16) -->
+          <tr>
+            <td style="padding:0;background-color:#000000;">
+              <img src="cid:bienvenido_img" alt="Bienvenido a Nova Performance" style="width:100%;height:auto;display:block;border:none;" />
+            </td>
+          </tr>
 
-          <!-- Contenido -->
-          <div class="content">
-            <h1>¡Bienvenido(a), ${userName}!</h1>
-            <p>Muchas gracias por registrarte en <strong>NOVA Performance®</strong>.</p>
-            <p>Tu cuenta ha sido creada con éxito. A partir de ahora tienes acceso a nuestro catálogo exclusivo de compuestos de vanguardia biotecnológica y alta pureza para investigación científica.</p>
+          <!-- CONTENIDO INMERSIVO -->
+          <tr>
+            <td style="padding:32px 28px 36px;text-align:center;background-color:#0A0A0A;">
+              <p style="margin:0 0 10px;font-size:10px;letter-spacing:3px;color:#888888;text-transform:uppercase;font-weight:700;">BIENVENIDA OFICIAL</p>
+              <h1 style="margin:0 0 16px;font-size:22px;font-weight:900;letter-spacing:1px;color:#FFFFFF;text-transform:uppercase;line-height:1.25;">
+                ¡HOLA, ${(userName || 'INVESTIGADOR').toUpperCase()}!
+              </h1>
+              
+              <p style="margin:0 0 22px;font-size:13.5px;line-height:1.65;color:#CCCCCC;font-weight:400;">
+                Gracias por registrarte en <strong style="color:#FFFFFF;">NOVA Performance®</strong>.<br>
+                Tu cuenta está activa. A partir de este momento tienes acceso preferencial a nuestro catálogo de compuestos de investigación biotecnológica de alta pureza.
+              </p>
 
-            <!-- Imagen 2: Gracias -->
-            <img src="cid:gracias_img" alt="¡Gracias por preferirnos!" class="gracias-img" />
+              <!-- CTA BUTTON -->
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:12px;margin-bottom:24px;">
+                <tr>
+                  <td align="center">
+                    <a href="https://novaperformance.cl/auth/cliente" style="display:inline-block;width:84%;padding:16px 0;background-color:#FFFFFF;color:#000000;font-family:Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:2.5px;text-decoration:none;text-transform:uppercase;border-radius:8px;box-shadow:0 4px 20px rgba(255,255,255,0.15);">
+                      ACCEDER A MI CUENTA →
+                    </a>
+                  </td>
+                </tr>
+              </table>
 
-            <p style="font-size: 13px; color: #888888;">
-              Puedes acceder a tu panel de cliente en cualquier momento para revisar tus órdenes y gestionar tu perfil.
-            </p>
+              <p style="margin:0;font-size:11px;color:#666666;line-height:1.5;">
+                ¿Necesitas asistencia o cotizaciones personalizadas?<br>
+                Escríbenos a <a href="mailto:Cnovoadrust@gmail.com" style="color:#888888;text-decoration:underline;">Cnovoadrust@gmail.com</a>
+              </p>
+            </td>
+          </tr>
 
-            <a href="https://novaperformance.cl/auth/cliente" class="btn">Ir a mi Cuenta</a>
-          </div>
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:20px 24px;text-align:center;background-color:#050505;border-top:1px solid #1A1A1A;">
+              <span style="font-size:10px;letter-spacing:3px;color:#555555;text-transform:uppercase;">novaperformance.cl</span><br>
+              <span style="font-size:10px;color:#444444;margin-top:4px;display:block;">© ${new Date().getFullYear()} NOVA Performance®. Todos los derechos reservados.</span>
+            </td>
+          </tr>
 
-          <!-- Footer -->
-          <div class="footer">
-            © ${new Date().getFullYear()} NOVA Performance® · Todos los derechos reservados.<br>Chile
-          </div>
-        </div>
+        </table>
       </td>
     </tr>
   </table>
 </body>
-</html>
-`;
+</html>`;
 
 export async function POST(request: Request) {
   try {
@@ -103,21 +115,12 @@ export async function POST(request: Request) {
     });
 
     const bienvenidoPath = path.join(process.cwd(), 'public/correo/bienvenido.png');
-    const graciasPath    = path.join(process.cwd(), 'public/correo/gracias.png');
-
     const attachments: any[] = [];
     if (fs.existsSync(bienvenidoPath)) {
       attachments.push({
         filename: 'bienvenido.png',
         path: bienvenidoPath,
         cid: 'bienvenido_img'
-      });
-    }
-    if (fs.existsSync(graciasPath)) {
-      attachments.push({
-        filename: 'gracias.png',
-        path: graciasPath,
-        cid: 'gracias_img'
       });
     }
 

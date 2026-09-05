@@ -1,67 +1,105 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import path from 'path';
+import fs from 'fs';
 
-const OrderConfirmationHtml = (orderId: string, name: string, total: number, method: string, address: string) => `
-<!DOCTYPE html>
-<html lang="es">
+const OrderConfirmationHtml = (orderId: string, name: string, total: number, method: string, address: string) => `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirmación de Orden - NOVA Performance</title>
-  <style>
-    body { margin: 0; padding: 0; background-color: #0A0A0A; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #FFFFFF; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #121212; border: 1px solid #222222; border-radius: 8px; overflow: hidden; }
-    .header { text-align: center; padding: 36px 20px; background-color: #000000; border-bottom: 1px solid #222222; }
-    .header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 2px; color: #FFFFFF; text-transform: uppercase; }
-    .content { padding: 40px 30px; text-align: center; color: #EEEEEE; }
-    h1 { font-size: 20px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; color: #FFFFFF; }
-    .order-number { font-size: 18px; color: #E6E2D3; font-weight: bold; margin-bottom: 24px; }
-    p { font-size: 14px; line-height: 1.6; color: #A0A0A0; margin-bottom: 20px; }
-    .details { text-align: left; background: #1A1A1A; padding: 20px; border-radius: 8px; border: 1px solid #282828; margin-bottom: 30px; }
-    .details h3 { margin-top: 0; font-size: 13px; text-transform: uppercase; color: #E6E2D3; letter-spacing: 1px; }
-    .footer { text-align: center; padding: 24px; font-size: 12px; color: #666666; border-top: 1px solid #222222; background-color: #0A0A0A; }
-  </style>
+  <title>Comprobante de Compra #${orderId} — NOVA Performance</title>
 </head>
-<body>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#0A0A0A">
+<body style="margin:0;padding:0;min-width:100%;background-color:#000000;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000000">
     <tr>
-      <td align="center" style="padding: 20px 0;">
-        <div class="container">
-          <!-- Header -->
-          <div class="header">
-            <h2>NOVA Performance®</h2>
-          </div>
+      <td align="center" style="padding:20px 10px;">
+        <!-- Canvas 9:16 Inmersivo (max-width 460px) -->
+        <table role="presentation" width="100%" style="max-width:460px;background-color:#0A0A0A;border:1px solid #222222;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.9);" border="0" cellspacing="0" cellpadding="0">
           
-          <!-- Contenido -->
-          <div class="content">
-            <h1>¡Gracias por tu pedido, ${name}!</h1>
-            <div class="order-number">Orden #${orderId}</div>
-            
-            <p>Hemos recibido tu pago de manera exitosa y tu orden ya está en nuestro centro logístico para ser empaquetada con empaque neutro y discreto de alta seguridad.</p>
-            
-            <div class="details">
-              <h3>Resumen del Pedido</h3>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Total Pagado:</strong> $${total.toLocaleString('es-CL')} CLP</p>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Método de Entrega:</strong> Despacho a Domicilio por el equipo de logística de NOVA Performance®</p>
-              <p style="margin: 6px 0; color: #FFFFFF;"><strong>Destino / Dirección:</strong> ${address}</p>
-            </div>
-            
-            <p>Te enviaremos la confirmación y el número de seguimiento tan pronto como el paquete sea despachado.</p>
-            <p style="font-size: 12px; color: #888888;">Para cualquier duda sobre tu despacho, contáctanos a <a href="mailto:Cnovoadrust@gmail.com" style="color: #E6E2D3; text-decoration: underline;">Cnovoadrust@gmail.com</a></p>
-          </div>
-          
-          <!-- Footer -->
-          <div class="footer">
-            © ${new Date().getFullYear()} NOVA Performance® · Péptidos Novita.<br>
-            Chile
-          </div>
-        </div>
+          <!-- BRAND HEADER -->
+          <tr>
+            <td style="padding:22px 20px;text-align:center;background-color:#000000;border-bottom:1px solid #1A1A1A;">
+              <span style="font-family:Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:4px;color:#FFFFFF;text-transform:uppercase;">NOVA PERFORMANCE®</span>
+            </td>
+          </tr>
+
+          <!-- HERO IMAGE (GRACIAS 9:16) -->
+          <tr>
+            <td style="padding:0;background-color:#000000;">
+              <img src="cid:gracias_img" alt="¡Gracias por tu compra!" style="width:100%;height:auto;display:block;border:none;" />
+            </td>
+          </tr>
+
+          <!-- BANDA DE ORDEN -->
+          <tr>
+            <td style="background-color:#111111;padding:16px 24px;border-bottom:1px solid #222222;">
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                    <span style="font-size:10px;color:#888888;display:block;letter-spacing:2px;text-transform:uppercase;">NÚMERO DE ORDEN</span>
+                    <span style="font-size:16px;color:#FFFFFF;font-weight:900;letter-spacing:1px;">ORDEN #${orderId}</span>
+                  </td>
+                  <td style="text-align:right;">
+                    <span style="font-size:11px;color:#AAAAAA;">${new Date().toLocaleDateString('es-CL')}</span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- DETALLE COMPLETO -->
+          <tr>
+            <td style="padding:28px 24px;">
+
+              <!-- DATOS CLIENTE -->
+              <p style="margin:0 0 12px;font-size:10px;letter-spacing:2.5px;color:#888888;text-transform:uppercase;font-weight:700;border-bottom:1px solid #1E1E1E;padding-bottom:8px;">DATOS DEL CLIENTE</p>
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom:24px;">
+                <tr>
+                  <td width="100%" style="padding:4px 0;vertical-align:top;">
+                    <span style="font-size:10px;color:#666666;display:block;text-transform:uppercase;">Nombre</span>
+                    <span style="font-size:12.5px;color:#FFFFFF;font-weight:700;">${name}</span>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- MÉTODO DE DESPACHO -->
+              <p style="margin:0 0 12px;font-size:10px;letter-spacing:2.5px;color:#888888;text-transform:uppercase;font-weight:700;border-bottom:1px solid #1E1E1E;padding-bottom:8px;">DESPACHO Y ENTREGA</p>
+              <div style="background-color:#121212;border:1px solid #222222;border-radius:8px;padding:14px 16px;margin-bottom:24px;">
+                <span style="font-size:10px;color:#888888;display:block;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;">${method || 'Despacho a Domicilio'}</span>
+                <span style="font-size:12.5px;color:#FFFFFF;font-weight:700;line-height:1.4;">${address}</span>
+              </div>
+
+              <!-- TOTALES -->
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color:#121212;border:1px solid #222222;border-radius:8px;padding:14px 16px;margin-bottom:20px;">
+                <tr>
+                  <td style="font-size:13px;color:#FFFFFF;font-weight:900;letter-spacing:1px;text-transform:uppercase;">TOTAL PAGADO</td>
+                  <td style="font-size:16px;color:#FFFFFF;text-align:right;font-weight:900;">$${total.toLocaleString('es-CL')} CLP</td>
+                </tr>
+              </table>
+
+              <p style="margin:0;font-size:11px;color:#666666;line-height:1.5;text-align:center;">
+                Tu orden está siendo empaquetada con empaque neutro y discreto de alta seguridad.<br>
+                Consultas: <a href="mailto:Cnovoadrust@gmail.com" style="color:#888888;text-decoration:underline;">Cnovoadrust@gmail.com</a>
+              </p>
+
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:20px 24px;text-align:center;background-color:#050505;border-top:1px solid #1A1A1A;">
+              <span style="font-size:10px;letter-spacing:3px;color:#555555;text-transform:uppercase;">novaperformance.cl</span><br>
+              <span style="font-size:10px;color:#444444;margin-top:4px;display:block;">© ${new Date().getFullYear()} NOVA Performance®. Todos los derechos reservados.</span>
+            </td>
+          </tr>
+
+        </table>
       </td>
     </tr>
   </table>
 </body>
-</html>
-`;
+</html>`;
 
 export async function POST(request: Request) {
   try {
@@ -83,6 +121,16 @@ export async function POST(request: Request) {
       }
     });
 
+    const graciasPath = path.join(process.cwd(), 'public/correo/gracias.png');
+    const attachments: any[] = [];
+    if (fs.existsSync(graciasPath)) {
+      attachments.push({
+        filename: 'gracias.png',
+        path: graciasPath,
+        cid: 'gracias_img'
+      });
+    }
+
     const recipientList = [email, 'mpeg.logistica@gmail.com', 'Christophernovoad@gmail.com'].filter(Boolean).join(', ');
 
     const info = await transporter.sendMail({
@@ -90,6 +138,7 @@ export async function POST(request: Request) {
       to: recipientList,
       subject: `Confirmación de Pedido #${orderId} - NOVA Performance`,
       html: OrderConfirmationHtml(orderId, name, total, method, address),
+      attachments
     });
 
     return NextResponse.json({ success: true, data: info });

@@ -1,12 +1,87 @@
-import { NextResponse } from 'next/server';
-import { getFlowPaymentStatus, verifyFlowWebhook } from '@/lib/flow';
-import { supabaseAdmin } from '@/lib/supabase/server';
-import nodemailer from 'nodemailer';
-import path from 'path';
-import fs from 'fs';
+require('dotenv').config({ path: 'd:/PEPTIDOS/.env' });
+const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
-// ─── HTML de la Boleta / Comprobante de Compra (9:16 INMERSIVO CON GRACIAS.PNG) ──
-function buildBoletaHtml(order: any, items: any[]) {
+// ─── 1. CORREO DE BIENVENIDA (SOLO BIENVENIDO.PNG — FORMATO 9:16 INMERSIVO) ─────
+function buildWelcomeHtml(name) {
+  return `<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido a Nova Performance</title>
+</head>
+<body style="margin:0;padding:0;min-width:100%;background-color:#000000;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#000000">
+    <tr>
+      <td align="center" style="padding:20px 10px;">
+        <!-- Canvas 9:16 Inmersivo (max-width 460px) -->
+        <table role="presentation" width="100%" style="max-width:460px;background-color:#0A0A0A;border:1px solid #222222;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.9);" border="0" cellspacing="0" cellpadding="0">
+          
+          <!-- BRAND HEADER -->
+          <tr>
+            <td style="padding:22px 20px;text-align:center;background-color:#000000;border-bottom:1px solid #1A1A1A;">
+              <span style="font-family:Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:4px;color:#FFFFFF;text-transform:uppercase;">NOVA PERFORMANCE®</span>
+            </td>
+          </tr>
+
+          <!-- HERO IMAGE (BIENVENIDO 9:16) -->
+          <tr>
+            <td style="padding:0;background-color:#000000;">
+              <img src="cid:bienvenido_img" alt="Bienvenido a Nova Performance" style="width:100%;height:auto;display:block;border:none;" />
+            </td>
+          </tr>
+
+          <!-- CONTENIDO INMERSIVO -->
+          <tr>
+            <td style="padding:32px 28px 36px;text-align:center;background-color:#0A0A0A;">
+              <p style="margin:0 0 10px;font-size:10px;letter-spacing:3px;color:#888888;text-transform:uppercase;font-weight:700;">BIENVENIDA OFICIAL</p>
+              <h1 style="margin:0 0 16px;font-size:22px;font-weight:900;letter-spacing:1px;color:#FFFFFF;text-transform:uppercase;line-height:1.25;">
+                ¡HOLA, ${(name || 'INVESTIGADOR').toUpperCase()}!
+              </h1>
+              
+              <p style="margin:0 0 22px;font-size:13.5px;line-height:1.65;color:#CCCCCC;font-weight:400;">
+                Gracias por registrarte en <strong style="color:#FFFFFF;">NOVA Performance®</strong>.<br>
+                Tu cuenta está activa. A partir de este momento tienes acceso preferencial a nuestro catálogo de compuestos de investigación biotecnológica de alta pureza.
+              </p>
+
+              <!-- CTA BUTTON -->
+              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:12px;margin-bottom:24px;">
+                <tr>
+                  <td align="center">
+                    <a href="https://novaperformance.cl/auth/cliente" style="display:inline-block;width:84%;padding:16px 0;background-color:#FFFFFF;color:#000000;font-family:Arial,sans-serif;font-size:12px;font-weight:900;letter-spacing:2.5px;text-decoration:none;text-transform:uppercase;border-radius:8px;box-shadow:0 4px 20px rgba(255,255,255,0.15);">
+                      ACCEDER A MI CUENTA →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="margin:0;font-size:11px;color:#666666;line-height:1.5;">
+                ¿Necesitas asistencia o cotizaciones personalizadas?<br>
+                Escríbenos a <a href="mailto:Cnovoadrust@gmail.com" style="color:#888888;text-decoration:underline;">Cnovoadrust@gmail.com</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- FOOTER -->
+          <tr>
+            <td style="padding:20px 24px;text-align:center;background-color:#050505;border-top:1px solid #1A1A1A;">
+              <span style="font-size:10px;letter-spacing:3px;color:#555555;text-transform:uppercase;">novaperformance.cl</span><br>
+              <span style="font-size:10px;color:#444444;margin-top:4px;display:block;">© ${new Date().getFullYear()} NOVA Performance®. Todos los derechos reservados.</span>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+// ─── 2. CORREO DE COMPROBANTE DE COMPRA (SOLO GRACIAS!.PNG — FORMATO 9:16) ─────
+function buildPurchaseConfirmationHtml(order, items) {
   const orderNum = String(order.order_number || order.id).padStart(5, '0');
   const orderDate = new Date(order.created_at).toLocaleDateString('es-CL', {
     weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
@@ -168,143 +243,78 @@ function buildBoletaHtml(order: any, items: any[]) {
 </html>`;
 }
 
-// ─── Rate Limiter en memoria ──────────────────────────────────────────────────
-const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_MAX      = 30;
-const RATE_LIMIT_WINDOW   = 60_000;
+async function sendBothTestEmails() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+  const toEmail = 'vision.code.vs@gmail.com';
 
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const entry = rateLimitMap.get(ip);
-  if (!entry || now > entry.resetAt) {
-    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
-    return true;
-  }
-  if (entry.count >= RATE_LIMIT_MAX) return false;
-  entry.count++;
-  return true;
-}
-
-const SECURITY_HEADERS = {
-  'X-Content-Type-Options': 'nosniff',
-  'X-Frame-Options':        'DENY',
-  'Cache-Control':          'no-store, no-cache, must-revalidate',
-};
-
-// ─── Webhook principal (POST) ──────────────────────────────────────────────────
-export async function POST(request: Request) {
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    request.headers.get('x-real-ip') ||
-    '0.0.0.0';
-
-  if (!checkRateLimit(ip)) {
-    return NextResponse.json(
-      { error: 'Too Many Requests' },
-      { status: 429, headers: SECURITY_HEADERS }
-    );
+  if (!user || !pass) {
+    console.error('Faltan credenciales de Gmail');
+    return;
   }
 
-  try {
-    const formData = await request.formData();
-    const allParams: Record<string, string> = {};
-    formData.forEach((value, key) => {
-      allParams[key] = String(value);
-    });
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
 
-    const token = allParams['token'];
-    if (!token) {
-      return NextResponse.json(
-        { error: 'Token no provisto' },
-        { status: 400, headers: SECURITY_HEADERS }
-      );
-    }
+  const bienvenidoPath = path.join(__dirname, '../public/correo/bienvenido.png');
+  const graciasPath    = path.join(__dirname, '../public/correo/gracias.png');
 
-    if (!verifyFlowWebhook(allParams)) {
-      console.error(`[Flow Webhook] ⚠️ Firma HMAC inválida — IP: ${ip} — token: ${token}`);
-      try {
-        await supabaseAdmin.from('security_events').insert({
-          event_type:  'flow_webhook_invalid_signature',
-          ip_address:  ip,
-          payload:     JSON.stringify(allParams),
-          created_at:  new Date().toISOString(),
-        });
-      } catch { /* Silencioso */ }
-
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401, headers: SECURITY_HEADERS }
-      );
-    }
-
-    const paymentStatus = await getFlowPaymentStatus(token);
-    const orderId = paymentStatus.commerceOrder;
-
-    let newStatus = 'Pendiente';
-    if (paymentStatus.status === 2) newStatus = 'Pagado';
-    else if (paymentStatus.status === 3 || paymentStatus.status === 4) newStatus = 'Cancelado';
-
-    await supabaseAdmin
-      .from('orders')
-      .update({
-        status:       newStatus,
-        flow_token:   token,
-        flow_status:  paymentStatus.status,
-        flow_order:   paymentStatus.flowOrder,
-        paid_at:      paymentStatus.status === 2 ? new Date().toISOString() : null,
-      })
-      .eq('id', orderId);
-
-    if (paymentStatus.status === 2) {
-      try {
-        const { data: order } = await supabaseAdmin
-          .from('orders').select('*').eq('id', orderId).single();
-        const { data: items } = await supabaseAdmin
-          .from('order_items').select('*').eq('order_id', orderId);
-
-        if (order && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
-          const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
-          });
-
-          const orderNum = String(order.order_number || order.id).padStart(5, '0');
-          const graciasPath = path.join(process.cwd(), 'public/correo/gracias.png');
-          const attachments: any[] = [];
-          if (fs.existsSync(graciasPath)) {
-            attachments.push({
-              filename: 'gracias.png',
-              path: graciasPath,
-              cid: 'gracias_img'
-            });
-          }
-
-          await transporter.sendMail({
-            from:    `"NOVA Performance®" <${process.env.GMAIL_USER}>`,
-            to:      order.client_email,
-            bcc:     'Christophernovoad@gmail.com',
-            subject: `Comprobante de Compra #${orderNum} — NOVA Performance®`,
-            html:    buildBoletaHtml(order, items || []),
-            attachments
-          });
-
-          console.log(`[Flow Webhook] Comprobante enviado a ${order.client_email}`);
-        }
-      } catch (emailErr) {
-        console.error('[Flow Webhook] Error enviando comprobante:', emailErr);
+  // 1. Enviar Correo de Bienvenida (SOLO BIENVENIDO.PNG)
+  console.log('Enviando Correo 1: Bienvenida...');
+  await transporter.sendMail({
+    from: `"NOVA Performance" <${user}>`,
+    to: toEmail,
+    subject: 'Bienvenido a Nova Performance',
+    html: buildWelcomeHtml('Vision Code'),
+    attachments: [
+      {
+        filename: 'bienvenido.png',
+        path: bienvenidoPath,
+        cid: 'bienvenido_img'
       }
-    }
+    ]
+  });
+  console.log('✓ Correo de Bienvenida enviado exitosamente a', toEmail);
 
-    return NextResponse.json(
-      { success: true },
-      { status: 200, headers: SECURITY_HEADERS }
-    );
+  // 2. Enviar Correo de Comprobante de Compra (SOLO GRACIAS!.PNG)
+  console.log('Enviando Correo 2: Comprobante de Compra...');
+  const mockOrder = {
+    id: 1054,
+    order_number: 1054,
+    created_at: new Date().toISOString(),
+    client_name: 'Vision Code',
+    client_rut: '19.876.543-2',
+    client_email: toEmail,
+    client_phone: '+56 9 8765 4321',
+    delivery_method: 'domicilio',
+    shipping_address: 'Av. Andrés Bello 2457, Depto 1202',
+    shipping_comuna: 'Providencia',
+    shipping_region: 'Región Metropolitana',
+    subtotal: 140000,
+    shipping_cost: 0,
+    total: 140000
+  };
 
-  } catch (error: any) {
-    console.error('[Flow Webhook] Error crítico:', error.message);
-    return NextResponse.json(
-      { success: false, detail: 'Internal processing error' },
-      { status: 200, headers: SECURITY_HEADERS }
-    );
-  }
+  const mockItems = [
+    { product_title: 'Retatrutide RT20', size: '20mg * 1 frasco', quantity: 1, price: 140000 }
+  ];
+
+  await transporter.sendMail({
+    from: `"NOVA Performance®" <${user}>`,
+    to: toEmail,
+    subject: 'Comprobante de Compra #01054 — NOVA Performance®',
+    html: buildPurchaseConfirmationHtml(mockOrder, mockItems),
+    attachments: [
+      {
+        filename: 'gracias.png',
+        path: graciasPath,
+        cid: 'gracias_img'
+      }
+    ]
+  });
+  console.log('✓ Correo de Comprobante de Compra enviado exitosamente a', toEmail);
 }
+
+sendBothTestEmails().catch(console.error);
