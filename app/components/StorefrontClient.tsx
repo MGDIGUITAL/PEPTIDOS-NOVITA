@@ -25,7 +25,7 @@ const CATS = ['Todos', 'Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos 
 function PromoBar() {
   return (
     <div className="promo-bar" style={{ padding:'10px 0', textAlign:'center', color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:600, letterSpacing:'0.18em', background:S.black, borderBottom:`1px solid ${S.border}` }}>
-      ✦ COBERTURA NACIONAL &nbsp;·&nbsp; ENVÍO A TODO CHILE &nbsp;·&nbsp; DESPACHO GRATIS POR LA COMPRA DE 2 PRODUCTOS &nbsp;·&nbsp; DESPACHO A DOMICILIO Y PUNTOS DE RETIRO ✦
+      ✦ COBERTURA NACIONAL &nbsp;·&nbsp; ENVÍO A TODO CHILE &nbsp;·&nbsp; DESPACHO GRATIS POR LA COMPRA DE 2 PRODUCTOS ✦
     </div>
   );
 }

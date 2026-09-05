@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import path from 'path';
-import fs from 'fs';
-import { supabaseAdmin } from '@/lib/supabase/server';
+require('dotenv').config({ path: 'd:/PEPTIDOS/.env' });
+const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 
-const WelcomeEmailHtml = (userName: string) => `<!DOCTYPE html>
+function buildLightWelcomeHtml(userName) {
+  return `<!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
@@ -159,66 +159,41 @@ const WelcomeEmailHtml = (userName: string) => `<!DOCTYPE html>
     </tr>
   </table>
 </body>
-</html>
-`;
+</html>`;
+}
 
-export async function POST(request: Request) {
-  try {
-    const { email, name, userId } = await request.json();
+async function sendTest() {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_PASS;
+  const toEmail = 'vision.code.vs@gmail.com';
 
-    if (!email) {
-      return NextResponse.json({ error: 'Falta el correo' }, { status: 400 });
-    }
+  if (!user || !pass) {
+    console.error('Faltan credenciales');
+    return;
+  }
 
-    // Auto-confirmar usuario en Supabase Auth
-    try {
-      if (userId) {
-        await supabaseAdmin.auth.admin.updateUserById(userId, { email_confirm: true });
-      } else {
-        const { data } = await supabaseAdmin.auth.admin.listUsers();
-        const target = data?.users?.find((u: any) => u.email?.toLowerCase() === email.toLowerCase());
-        if (target) {
-          await supabaseAdmin.auth.admin.updateUserById(target.id, { email_confirm: true });
-        }
-      }
-    } catch (authErr) {
-      console.error('Error auto-confirmando usuario en Supabase:', authErr);
-    }
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user, pass }
+  });
 
-    if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
-      console.log('--- SIMULANDO ENVÍO DE CORREO (Faltan credenciales de Gmail) ---');
-      return NextResponse.json({ success: true, mocked: true });
-    }
+  const bienvenidoPath = path.join(__dirname, '../public/correo/bienvenido.png');
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_PASS
-      }
-    });
-
-    const bienvenidoPath = path.join(process.cwd(), 'public/correo/bienvenido.png');
-    const attachments: any[] = [];
-    if (fs.existsSync(bienvenidoPath)) {
-      attachments.push({
+  console.log('Enviando correo claro/elegante (White & Ivory 9:16 con SVG icons) a', toEmail);
+  await transporter.sendMail({
+    from: `"NOVA Performance®" <${user}>`,
+    to: toEmail,
+    subject: 'Bienvenido a NOVA Performance®',
+    html: buildLightWelcomeHtml('Vision Code'),
+    attachments: [
+      {
         filename: 'bienvenido.png',
         path: bienvenidoPath,
         cid: 'bienvenido_img'
-      });
-    }
-
-    const info = await transporter.sendMail({
-      from: '"NOVA Performance" <' + process.env.GMAIL_USER + '>',
-      to: email,
-      subject: 'Bienvenido a NOVA Performance®',
-      html: WelcomeEmailHtml(name || 'Cliente'),
-      attachments
-    });
-
-    return NextResponse.json({ success: true, data: info });
-  } catch (error: any) {
-    console.error('Error enviando correo:', error);
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
+      }
+    ]
+  });
+  console.log('✓ Correo claro/elegante enviado exitosamente a', toEmail);
 }
+
+sendTest().catch(console.error);
