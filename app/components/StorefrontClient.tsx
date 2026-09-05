@@ -311,6 +311,7 @@ function Hero() {
 
       {/* Degradado sutil para integración prolija */}
       <div
+        className="hero-gradient-overlay"
         style={{
           position: 'absolute',
           inset: 0,
@@ -318,6 +319,11 @@ function Hero() {
           zIndex: 1,
           pointerEvents: 'none',
         }}
+      />
+      {/* Extra dark overlay en zona inferior para legibilidad del botón en móvil */}
+      <div
+        className="hero-mobile-bottom-overlay"
+        style={{ pointerEvents: 'none', zIndex: 2 }}
       />
 
       {/* Recuadro de botón en la zona derecha central para máxima inmersión */}
@@ -490,14 +496,14 @@ function Products({ products }: { products: any[] }) {
   }, [filter]);
 
   return (
-    <section id="catalogo" style={{ padding:'80px 1rem', background:S.black }}>
+    <section id="catalogo" style={{ padding:'80px 1rem', background:S.black }} className="section-mobile-pad">
       <div style={{ maxWidth:1400, margin:'0 auto' }}>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:40, flexWrap:'wrap', gap:16 }}>
+        <div className="catalog-header" style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:40, flexWrap:'wrap', gap:16 }}>
           <div>
             <span style={{ color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.8rem', letterSpacing:'0.2em', textTransform:'uppercase', fontWeight:800 }}>Alta Pureza</span>
             <h2 className="font-display" style={{ fontSize:'clamp(2.2rem,5vw,3.5rem)', fontWeight:800, color:S.white, textTransform:'uppercase' }}>Catálogo de Compuestos</h2>
           </div>
-          <div style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
+          <div className="catalog-filter-bar" style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
             {CATS.map(c => (
               <button key={c} onClick={() => setFilter(c)} style={{
                 fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:700,
@@ -584,7 +590,7 @@ function FeaturedProducts({ products }: { products: any[] }) {
 // ─── SECOND BANNER ────────────────────────────────────────────────────────
 function SecondBanner() {
   return (
-    <section id="novedades" style={{ position:'relative', height:480, overflow:'hidden', display:'flex', alignItems:'center', justifyContent: 'center', background: S.black }}>
+    <section id="novedades" className="second-banner-section" style={{ position:'relative', height:480, overflow:'hidden', display:'flex', alignItems:'center', justifyContent: 'center', background: S.black }}>
       <style>{`
         @keyframes pulseGlow {
           0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
@@ -740,7 +746,7 @@ function TestimonialsSection() {
         </div>
 
         {/* Filter Tabs */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 44 }}>
+        <div className="reviews-filter-bar" style={{ display: 'flex', justifyContent: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 44 }}>
           {filters.map(f => (
             <button
               key={f}
@@ -766,7 +772,7 @@ function TestimonialsSection() {
         </div>
 
         {/* Reviews Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 24 }}>
+        <div className="reviews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 24 }}>
           {filteredReviews.map(r => (
             <div
               key={r.id}
@@ -988,67 +994,121 @@ function Footer() {
         </div>
       )}
 
-      <footer style={{ background: '#000000', borderTop: `1px solid #222222`, paddingTop: 72 }}>
+      <footer style={{ background: '#000000', borderTop: `1px solid #222222`, paddingTop: 64 }}>
         <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 2rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '280px repeat(2,1fr)', gap: 48, paddingBottom: 56, borderBottom: `1px solid #222222` }}>
+
+          {/* ── MAIN FOOTER GRID ── */}
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '260px 1fr 1fr 1fr', gap: 48, paddingBottom: 56, borderBottom: `1px solid #222222` }}>
+
+            {/* Col 1 — Brand */}
             <div>
               <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain', marginBottom: 20 }} />
-              <p style={{ color: '#888888', fontSize: '0.82rem', lineHeight: 1.75, marginBottom: 24 }}>
-                NOVA PERFORMANCE® — Compuestos de vanguardia biotecnológica y alta pureza para investigación.
+              <p style={{ color: '#CCCCCC', fontSize: '0.82rem', lineHeight: 1.8 }}>
+                NOVA PERFORMANCE® — Compuestos de vanguardia biotecnológica y alta pureza para investigación científica.
               </p>
             </div>
 
+            {/* Col 2 — Categorías */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#E6E2D3', fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 700 }}>Categorías</div>
-              {['Péptidos', 'Rendimiento', 'Bienestar', 'Recuperación'].map(cat => (
-                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#888888', fontSize: '0.85rem', textDecoration: 'none', marginBottom: 12, transition: 'color 0.2s' }}
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Categorías</div>
+              {['Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos GHRH', 'Accesorios'].map(cat => (
+                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#AAAAAA', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
                 >{cat}</a>
               ))}
             </div>
 
+            {/* Col 3 — Info & Ayuda */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#E6E2D3', fontSize: '0.75rem', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 700 }}>Información & Ayuda</div>
-              <button 
-                onClick={() => setActiveModal('Cómo comprar')} 
-                style={{ display: 'block', background: 'none', border: 'none', color: '#888888', fontSize: '0.85rem', cursor: 'pointer', marginBottom: 12, textAlign: 'left', fontFamily: 'inherit', transition: 'color 0.2s' }}
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Información & Ayuda</div>
+              <button
+                onClick={() => setActiveModal('Cómo comprar')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#AAAAAA', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
               >
                 Cómo Comprar →
               </button>
-              <button 
-                onClick={() => setActiveModal('Envíos')} 
-                style={{ display: 'block', background: 'none', border: 'none', color: '#888888', fontSize: '0.85rem', cursor: 'pointer', marginBottom: 12, textAlign: 'left', fontFamily: 'inherit', transition: 'color 0.2s' }}
+              <button
+                onClick={() => setActiveModal('Envíos')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#AAAAAA', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', transition: 'color 0.2s', padding: 0 }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#AAAAAA')}
               >
                 Política de Envíos →
               </button>
-              <Link 
-                href="/marco-regulatorio" 
-                style={{ display: 'block', color: '#E6E2D3', fontSize: '0.85rem', textDecoration: 'underline', marginBottom: 12, fontWeight: 600, transition: 'color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#E6E2D3')}
+              <Link
+                href="/marco-regulatorio"
+                style={{ display: 'block', color: '#FFFFFF', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 600, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#E6E2D3')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#FFFFFF')}
               >
                 Marco Regulatorio y Legal →
               </Link>
             </div>
+
+            {/* Col 4 — Medios de Pago */}
+            <div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#FFFFFF', fontSize: '0.72rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 800, borderBottom: '1px solid #222222', paddingBottom: 12 }}>Medios de Pago</div>
+              <p style={{ color: '#AAAAAA', fontSize: '0.78rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
+                Paga de forma segura con tarjeta de débito, crédito o transferencia.
+              </p>
+              {/* Payment logos strip */}
+              <div className="payment-logos-wrap" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
+                {/* Webpay Plus */}
+                <div style={{ background: '#111111', border: '1px solid #2A2A2A', borderRadius: 6, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="72" height="22" viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="14" r="9" fill="#D42C2C"/>
+                    <path d="M6 14 Q10 6 14 14 Q10 22 6 14Z" fill="#1A4A9A"/>
+                    <path d="M7 10 Q10 5 13 10" stroke="#1A4A9A" strokeWidth="1.5" fill="none"/>
+                    <text x="22" y="12" fontFamily="Arial" fontWeight="800" fontSize="9" fill="#FFFFFF">webpay</text>
+                    <text x="22" y="23" fontFamily="Arial" fontWeight="400" fontSize="7.5" fill="#CCCCCC">plus</text>
+                  </svg>
+                </div>
+                {/* Visa */}
+                <div style={{ background: '#1A3A8F', border: '1px solid #2A4AAF', borderRadius: 6, padding: '6px 14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="46" height="16" viewBox="0 0 58 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <text x="0" y="16" fontFamily="Arial" fontWeight="900" fontSize="18" fill="#FFFFFF" letterSpacing="1">VISA</text>
+                  </svg>
+                </div>
+                {/* Mastercard */}
+                <div style={{ background: '#111111', border: '1px solid #2A2A2A', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5 }}>
+                  <svg width="36" height="22" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="14" r="12" fill="#EB001B"/>
+                    <circle cx="30" cy="14" r="12" fill="#F79E1B"/>
+                    <path d="M22 5.25A12 12 0 0 1 22 22.75A12 12 0 0 1 22 5.25Z" fill="#FF5F00"/>
+                  </svg>
+                  <span style={{ fontFamily: 'Arial', fontSize: '0.62rem', color: '#CCCCCC', fontWeight: 600 }}>mastercard</span>
+                </div>
+                {/* Redcompra */}
+                <div style={{ background: '#1B3F9E', border: '1px solid #2A52BF', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontFamily: 'Arial', fontWeight: 800, fontSize: '0.7rem', color: '#FFFFFF', letterSpacing: '0.04em' }}>red</span>
+                  <span style={{ fontFamily: 'Arial', fontWeight: 400, fontSize: '0.7rem', color: '#CCCCCC', marginLeft: 2 }}>compra</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <div style={{ padding: '24px 0', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
+          {/* ── BOTTOM BAR ── */}
+          <div className="footer-bottom-bar" style={{ padding: '22px 0', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
             <span style={{ color: '#666666', fontSize: '0.72rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em' }}>
               © {new Date().getFullYear()} NOVA PERFORMANCE®. TODOS LOS DERECHOS RESERVADOS.
             </span>
             <div style={{ display: 'flex', gap: 20 }}>
-              <Link href="/marco-regulatorio" style={{ color: '#888888', fontSize: '0.72rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif' }}>
+              <Link href="/marco-regulatorio" style={{ color: '#888888', fontSize: '0.72rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+              >
                 Aviso Legal / Marco Regulatorio
               </Link>
             </div>
           </div>
+
         </div>
       </footer>
+
     </>
   );
 }
@@ -1077,7 +1137,7 @@ export default function StorefrontClient({ products }: { products: any[] }) {
 
       {/* Floating Scientific Disclaimer Banner (Estilo NOVA Performance®) */}
       {showLegalNotice && (
-        <div style={{
+        <div className="legal-banner" style={{
           position: 'fixed', bottom: 24, left: 24, zIndex: 99,
           maxWidth: 420, padding: '16px 20px',
           background: 'rgba(10, 10, 10, 0.95)',
@@ -1110,7 +1170,7 @@ export default function StorefrontClient({ products }: { products: any[] }) {
       )}
 
       {/* Floating WhatsApp Button */}
-      <a href="https://wa.me/56951555556?text=Hola%20NOVA%20Performance%2C%20quisiera%20consultar%20por%20sus%20compuestos%20de%20investigaci%C3%B3n" target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp" style={{
+      <a href="https://wa.me/56951555556?text=Hola%20NOVA%20Performance%2C%20quisiera%20consultar%20por%20sus%20compuestos%20de%20investigaci%C3%B3n" target="_blank" rel="noopener noreferrer" aria-label="Contáctanos por WhatsApp" className="whatsapp-fab" style={{
         position:'fixed', bottom:30, right:30, zIndex:1000,
         width:56, height:56, borderRadius:'50%',
         background:'#25D366', border:'1px solid #1EBE5D',
