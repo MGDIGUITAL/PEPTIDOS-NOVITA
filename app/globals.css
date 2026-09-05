@@ -377,7 +377,9 @@ img {
 
 @media (max-width: 768px) {
   .hero-container {
-    min-height: 100svh;
+    height: 72vh !important;
+    min-height: 480px !important;
+    max-height: 620px !important;
   }
   .hero-img-desktop { display: none !important; }
   .hero-img-mobile  { display: block !important; }
@@ -386,13 +388,13 @@ img {
   .hero-btn-container {
     justify-content: center !important;
     align-items: flex-end !important;
-    padding: 0 24px 64px 24px !important;
+    padding: 0 24px 36px 24px !important;
   }
   .hero-catalog-btn {
-    padding: 17px 40px !important;
-    font-size: 0.80rem !important;
+    padding: 15px 36px !important;
+    font-size: 0.78rem !important;
     letter-spacing: 0.14em !important;
-    min-width: 200px;
+    min-width: 190px;
     justify-content: center;
   }
 }
@@ -536,6 +538,18 @@ img {
   }
   .payment-logos-wrap {
     gap: 8px !important;
+  }
+  .nav-inner-container {
+    padding: 0 1rem !important;
+    height: 58px !important;
+  }
+  .legal-banner {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    max-width: none !important;
+    padding: 12px 14px !important;
+    border-radius: 8px !important;
   }
 }
 
