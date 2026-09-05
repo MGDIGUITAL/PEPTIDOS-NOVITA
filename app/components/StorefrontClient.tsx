@@ -308,7 +308,7 @@ function Hero() {
         priority
         style={{
           objectFit: 'cover',
-          objectPosition: 'center 20%',
+          objectPosition: 'center center',
           zIndex: 0,
         }}
       />
