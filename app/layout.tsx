@@ -13,21 +13,21 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://novaperformance.cl'),
   title: {
-    default: 'Peptidos Novita | Péptidos de Alta Pureza en Chile',
-    template: '%s | Peptidos Novita',
+    default: 'NOVA Performance® | Péptidos de Alta Pureza en Chile',
+    template: '%s | NOVA Performance®',
   },
   description: 'Descubre nuestra línea exclusiva de péptidos de alta pureza y vanguardia biotecnológica. Envíos discretos y seguros a todo Chile.',
   keywords: [
-    'Peptidos Novita',
+    'NOVA Performance',
     'Péptidos Chile',
     'Biotecnología',
     'Péptidos de alta pureza',
     'Bienestar Biológico',
     'Chile Péptidos Online',
   ],
-  authors: [{ name: 'Peptidos Novita', url: 'https://novaperformance.cl' }],
-  creator: 'Peptidos Novita',
-  publisher: 'Peptidos Novita',
+  authors: [{ name: 'NOVA Performance®', url: 'https://novaperformance.cl' }],
+  creator: 'NOVA Performance®',
+  publisher: 'NOVA Performance®',
   alternates: {
     canonical: 'https://novaperformance.cl',
   },
@@ -43,10 +43,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Peptidos Novita | Péptidos de Alta Pureza en Chile',
+    title: 'NOVA Performance® | Péptidos de Alta Pureza en Chile',
     description: 'Catálogo especializado de péptidos premium con estándares de máxima calidad. Envíos a todo Chile.',
     url: 'https://novaperformance.cl',
-    siteName: 'Peptidos Novita',
+    siteName: 'NOVA Performance®',
     locale: 'es_CL',
     type: 'website',
     images: [
@@ -54,13 +54,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Peptidos Novita - Péptidos de Alta Pureza Chile',
+        alt: 'NOVA Performance® - Péptidos de Alta Pureza Chile',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Peptidos Novita | Péptidos de Alta Pureza en Chile',
+    title: 'NOVA Performance® | Péptidos de Alta Pureza en Chile',
     description: 'Catálogo especializado de péptidos premium con estándares de máxima calidad.',
     images: ['/og-image.png'],
   },
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 const storeSchema = {
   '@context': 'https://schema.org',
   '@type': 'OnlineStore',
-  name: 'Peptidos Novita',
+  name: 'NOVA Performance®',
   url: 'https://novaperformance.cl',
   logo: 'https://novaperformance.cl/icon-512.png',
   image: 'https://novaperformance.cl/og-image.png',
@@ -84,7 +84,7 @@ const storeSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Peptidos Novita',
+  name: 'NOVA Performance®',
   url: 'https://novaperformance.cl',
   potentialAction: {
     '@type': 'SearchAction',

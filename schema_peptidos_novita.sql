@@ -105,5 +105,35 @@ CREATE TRIGGER on_auth_user_created
 AFTER INSERT ON auth.users
 FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
+-- 8. Tabla de Carritos de Usuario (Recuperación de Carritos Abandonados)
+CREATE TABLE IF NOT EXISTS public.user_carts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE,
+  email TEXT NOT NULL,
+  full_name TEXT,
+  items JSONB NOT NULL DEFAULT '[]'::jsonb,
+  subtotal NUMERIC DEFAULT 0,
+  status TEXT NOT NULL DEFAULT 'active',
+  email_sent BOOLEAN DEFAULT FALSE,
+  email_sent_at TIMESTAMPTZ,
+  last_activity_at TIMESTAMPTZ DEFAULT NOW(),
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Índice para carritos abandonados
+CREATE INDEX IF NOT EXISTS idx_user_carts_abandoned ON public.user_carts (status, email_sent, updated_at);
+
+-- Habilitar RLS en user_carts
+ALTER TABLE public.user_carts ENABLE ROW LEVEL SECURITY;
+
+DO $$ BEGIN
+  IF NOT EXISTS (SELECT 1 FROM pg_policies WHERE tablename='user_carts' AND policyname='Acceso a carrito propio') THEN
+    CREATE POLICY "Acceso a carrito propio" ON public.user_carts FOR ALL TO authenticated
+    USING ((SELECT auth.uid()) = user_id) WITH CHECK ((SELECT auth.uid()) = user_id);
+  END IF;
+END $$;
+
 -- Reload schema cache for PostgREST
 NOTIFY pgrst, 'reload schema';
+

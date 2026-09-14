@@ -5,28 +5,28 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 
 const S = {
-  black:    '#000000',
-  surface:  '#0A0A0A',
-  card:     '#121212',
-  border:   '#222222',
-  ivory:    '#E6E2D3',
+  black:    '#0D0D0D',
+  surface:  '#111827',
+  card:     '#1F2937',
+  border:   '#374151',
+  plomoLight:'#9CA3AF',
   white:    '#FFFFFF',
-  muted:    '#888888',
-  error:    '#ef4444',
+  muted:    '#9CA3AF',
+  error:    '#EF4444',
 };
 
 const inpStyle: React.CSSProperties = {
   width: '100%', padding: '14px 16px', fontSize: '0.9rem',
-  background: '#141414', border: `1px solid ${S.border}`,
+  background: '#1F2937', border: `1px solid ${S.border}`,
   borderRadius: 8, color: S.white, outline: 'none',
   fontFamily: 'Inter, sans-serif', boxSizing: 'border-box',
   transition: 'all 0.2s',
 };
 
 const lblStyle: React.CSSProperties = {
-  display: 'block', fontSize: '0.72rem', color: S.ivory,
+  display: 'block', fontSize: '0.72rem', color: S.plomoLight,
   letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6,
-  fontFamily: 'Outfit, sans-serif', fontWeight: 700,
+  fontFamily: 'Outfit, sans-serif', fontWeight: 800,
 };
 
 export default function ColaboradorAuthPage() {
@@ -66,15 +66,15 @@ export default function ColaboradorAuthPage() {
       {/* Fondo */}
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
         <Image src="/fondo-login.png" alt="Fondo NOVA" fill priority style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.3 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.95) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(13,13,13,0.88) 0%, rgba(13,13,13,0.75) 50%, rgba(13,13,13,0.96) 100%)' }} />
       </div>
 
       {/* Nav mínimo */}
-      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(13,13,13,0.85)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/">
           <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
-        <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
+        <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', color: S.white, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 800 }}>
           ← Volver a la tienda
         </Link>
       </nav>
@@ -92,9 +92,9 @@ export default function ColaboradorAuthPage() {
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: 32 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
-              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,transparent,${S.ivory})` }} />
-              <span style={{ fontFamily: 'Outfit, sans-serif', color: S.ivory, fontSize: '0.65rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 800 }}>Área Interna</span>
-              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,${S.ivory},transparent)` }} />
+              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,transparent,${S.plomoLight})` }} />
+              <span style={{ fontFamily: 'Outfit, sans-serif', color: S.plomoLight, fontSize: '0.65rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 800 }}>Área Interna</span>
+              <span style={{ display: 'block', height: 1, width: 36, background: `linear-gradient(90deg,${S.plomoLight},transparent)` }} />
             </div>
             <h1 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.6rem', fontWeight: 800, color: S.white, letterSpacing: '0.04em', marginBottom: 6, textTransform: 'uppercase' }}>
               Acceso Colaborador
@@ -123,11 +123,11 @@ export default function ColaboradorAuthPage() {
             </div>
             <button type="submit" disabled={loading} style={{
               marginTop: 6, padding: '16px',
-              background: loading ? S.muted : S.white,
+              background: loading ? S.muted : 'linear-gradient(135deg, #FFFFFF 0%, #E5E7EB 100%)',
               color: S.black, border: 'none', borderRadius: 8,
               fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', letterSpacing: '0.14em',
               textTransform: 'uppercase', cursor: loading ? 'wait' : 'pointer', fontWeight: 800,
-              transition: 'all 0.2s',
+              transition: 'all 0.2s', boxShadow: '0 4px 14px rgba(0,0,0,0.4)'
             }}>
               {loading ? 'Verificando…' : 'Acceder al Sistema'}
             </button>
@@ -136,7 +136,7 @@ export default function ColaboradorAuthPage() {
           {/* Separador */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, margin: '32px 0 0' }}>
             <span style={{ flex: 1, height: 1, background: S.border }} />
-            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.62rem', color: S.ivory, letterSpacing: '0.18em', fontWeight: 800 }}>NOVA PERFORMANCE®</span>
+            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.62rem', color: S.plomoLight, letterSpacing: '0.18em', fontWeight: 800 }}>NOVA PERFORMANCE®</span>
             <span style={{ flex: 1, height: 1, background: S.border }} />
           </div>
         </div>

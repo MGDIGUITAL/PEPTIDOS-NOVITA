@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   const url = `https://novaperformance.cl/product/${params.id}`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
     keywords: [
       product.title,
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
       title,
       description,
       url,
-      siteName: 'NOVA Performance® | Peptidos Novita',
+      siteName: 'NOVA Performance®',
       locale: 'es_CL',
       type: 'website',
       images: product.image_url
@@ -103,7 +103,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
       itemCondition: 'https://schema.org/NewCondition',
       seller: {
         '@type': 'Organization',
-        name: 'NOVA Performance® | Peptidos Novita',
+        name: 'NOVA Performance®',
         url: 'https://novaperformance.cl',
       },
       shippingDetails: {

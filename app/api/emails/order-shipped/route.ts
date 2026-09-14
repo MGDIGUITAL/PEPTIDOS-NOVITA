@@ -62,7 +62,7 @@ const OrderShippedHtml = (orderId: string, name: string, method: string, address
           
           <!-- Footer -->
           <div class="footer">
-            © ${new Date().getFullYear()} NOVA Performance® · Péptidos Novita.<br>
+            © ${new Date().getFullYear()} NOVA Performance®.<br>
             Chile
           </div>
         </div>

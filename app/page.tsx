@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase/server';
 import StorefrontClient from './components/StorefrontClient';
 
 export const metadata: Metadata = {
-  title: 'Peptidos Novita | NOVA Performance®',
+  title: { absolute: 'NOVA Performance®' },
   description: 'Descubre nuestra línea exclusiva de péptidos de alta pureza y vanguardia biotecnológica. Envíos discretos y seguros a todo Chile.',
   keywords: 'peptidos, nova performance, biotecnología, peptidos chile, bienestar, alta pureza',
 };

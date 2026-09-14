@@ -6,30 +6,30 @@ import { supabase } from '@/lib/supabase/client';
 
 // ─── Design System NOVA Performance ───────────────────────────────────────
 const S = {
-  black:    '#000000',
-  surface:  '#0A0A0A',
-  card:     '#121212',
-  border:   '#222222',
-  borderFocus:'#E6E2D3',
-  ivory:    '#E6E2D3',
+  black:    '#0D0D0D',
+  plomo:    '#374151',
+  plomoDark:'#1F2937',
+  surface:  '#FFFFFF',
+  card:     '#FFFFFF',
+  border:   '#E5E7EB',
   white:    '#FFFFFF',
-  muted:    '#888888',
+  muted:    '#6B7280',
   error:    '#ef4444',
-  success:  '#22c55e',
+  success:  '#16a34a',
 };
 
 const inpStyle: React.CSSProperties = {
   width: '100%', padding: '14px 16px', fontSize: '0.9rem',
-  background: '#141414', border: `1px solid ${S.border}`,
-  borderRadius: 8, color: S.white, outline: 'none',
+  background: '#F9FAFB', border: `1px solid ${S.border}`,
+  borderRadius: 8, color: S.black, outline: 'none',
   fontFamily: 'Inter, sans-serif', boxSizing: 'border-box',
   transition: 'all 0.2s',
 };
 
 const lblStyle: React.CSSProperties = {
-  display: 'block', fontSize: '0.72rem', color: S.ivory,
+  display: 'block', fontSize: '0.72rem', color: S.plomoDark,
   letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6,
-  fontFamily: 'Outfit, sans-serif', fontWeight: 700,
+  fontFamily: 'Outfit, sans-serif', fontWeight: 800,
 };
 
 function formatRut(raw: string): string {
@@ -111,20 +111,14 @@ export default function ClienteAuthPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', background: S.black }}>
-
-      {/* Fondo de alta resolución NOVA */}
-      <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-        <Image src="/fondo-1.png" alt="NOVA Background" fill priority style={{ objectFit: 'cover', objectPosition: 'center', opacity: 0.35 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.95) 100%)' }} />
-      </div>
+    <div style={{ minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'column', background: '#F9FAFB' }}>
 
       {/* Nav mínimo */}
-      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <nav style={{ position: 'relative', zIndex: 10, background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(16px)', borderBottom: `1px solid ${S.border}`, padding: '0 2rem', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Link href="/">
-          <Image src="/logo-nova-white.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
+          <Image src="/logo-nova-black.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
-        <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', color: S.ivory, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 600 }}>
+        <Link href="/" style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', color: S.black, textDecoration: 'none', textTransform: 'uppercase', fontWeight: 800 }}>
           ← Volver al catálogo
         </Link>
       </nav>
@@ -136,17 +130,17 @@ export default function ClienteAuthPage() {
           background: S.surface, backdropFilter: 'blur(24px)',
           border: `1px solid ${S.border}`,
           borderRadius: 12, overflow: 'hidden',
-          boxShadow: '0 24px 80px rgba(0,0,0,0.95)',
+          boxShadow: '0 12px 40px rgba(13,13,13,0.06)',
         }}>
 
           {/* Header con divisor minimalista */}
           <div style={{ padding: '36px 40px 0', textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 14, marginBottom: 16 }}>
-              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,transparent,${S.ivory})` }} />
-              <span style={{ fontFamily: 'Outfit, sans-serif', color: S.ivory, fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 800 }}>NOVA Performance®</span>
-              <span style={{ display: 'block', height: 1, width: 40, background: `linear-gradient(90deg,${S.ivory},transparent)` }} />
+              <span style={{ display: 'block', height: 1, width: 40, background: S.border }} />
+              <span style={{ fontFamily: 'Outfit, sans-serif', color: S.plomo, fontSize: '0.68rem', letterSpacing: '0.22em', textTransform: 'uppercase', fontWeight: 800 }}>NOVA Performance®</span>
+              <span style={{ display: 'block', height: 1, width: 40, background: S.border }} />
             </div>
-            <h1 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', fontWeight: 800, color: S.white, textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.04em' }}>
+            <h1 style={{ fontFamily: 'Outfit, sans-serif', fontSize: '1.8rem', fontWeight: 900, color: S.black, textTransform: 'uppercase', marginBottom: 6, letterSpacing: '0.04em' }}>
               Mi Cuenta
             </h1>
             <p style={{ color: S.muted, fontSize: '0.85rem', lineHeight: 1.6, fontFamily: 'Inter, sans-serif' }}>
@@ -160,8 +154,8 @@ export default function ClienteAuthPage() {
               <button key={t} onClick={() => { setTab(t); setMsg(null); }} style={{
                 flex: 1, padding: '16px', background: 'none', border: 'none', cursor: 'pointer',
                 fontFamily: 'Outfit, sans-serif', fontSize: '0.78rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800,
-                color: tab === t ? S.white : S.muted,
-                borderBottom: tab === t ? `2px solid ${S.ivory}` : '2px solid transparent',
+                color: tab === t ? S.black : S.muted,
+                borderBottom: tab === t ? `2px solid ${S.black}` : '2px solid transparent',
                 transition: 'all 0.2s',
               }}>
                 {t === 'login' ? 'Ingresar' : 'Registrarse'}
@@ -193,16 +187,16 @@ export default function ClienteAuthPage() {
                   <input type="password" required value={loginPass} onChange={e => setLoginPass(e.target.value)} placeholder="••••••••" style={inpStyle} />
                 </div>
                 <button type="submit" disabled={loading} style={{
-                  marginTop: 8, padding: '16px', background: loading ? S.muted : S.white, color: S.black, border: 'none',
+                  marginTop: 8, padding: '16px', background: loading ? S.muted : 'linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%)', color: S.white, border: 'none',
                   borderRadius: 8, fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', letterSpacing: '0.14em',
                   textTransform: 'uppercase', fontWeight: 800, cursor: loading ? 'wait' : 'pointer', opacity: loading ? 0.7 : 1,
-                  transition: 'all 0.2s',
+                  transition: 'all 0.2s', boxShadow: '0 4px 14px rgba(13,13,13,0.25)'
                 }}>
                   {loading ? 'Ingresando…' : 'Ingresar a mi Cuenta'}
                 </button>
                 <p style={{ textAlign: 'center', fontSize: '0.8rem', color: S.muted, marginTop: 6, fontFamily: 'Inter, sans-serif' }}>
                   ¿Aún no tienes cuenta?{' '}
-                  <button type="button" onClick={() => setTab('registro')} style={{ background: 'none', border: 'none', color: S.ivory, cursor: 'pointer', fontSize: '0.8rem', padding: 0, fontFamily: 'Outfit, sans-serif', fontWeight: 700, textDecoration: 'underline' }}>
+                  <button type="button" onClick={() => setTab('registro')} style={{ background: 'none', border: 'none', color: S.black, cursor: 'pointer', fontSize: '0.8rem', padding: 0, fontFamily: 'Outfit, sans-serif', fontWeight: 800, textDecoration: 'underline' }}>
                     Regístrate gratis
                   </button>
                 </p>
@@ -232,10 +226,10 @@ export default function ClienteAuthPage() {
                   <input type="password" required minLength={6} value={regPass} onChange={e => setRegPass(e.target.value)} placeholder="Mínimo 6 caracteres" style={inpStyle} />
                 </div>
                 <button type="submit" disabled={loading} style={{
-                  marginTop: 8, padding: '16px', background: loading ? S.muted : S.white, color: S.black, border: 'none',
+                  marginTop: 8, padding: '16px', background: loading ? S.muted : 'linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%)', color: S.white, border: 'none',
                   borderRadius: 8, fontFamily: 'Outfit, sans-serif', fontSize: '0.8rem', letterSpacing: '0.14em',
                   textTransform: 'uppercase', fontWeight: 800, cursor: loading ? 'wait' : 'pointer', opacity: loading ? 0.7 : 1,
-                  transition: 'all 0.2s',
+                  transition: 'all 0.2s', boxShadow: '0 4px 14px rgba(13,13,13,0.25)'
                 }}>
                   {loading ? 'Creando cuenta…' : 'Crear Cuenta Gratis'}
                 </button>

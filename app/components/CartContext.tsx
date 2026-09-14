@@ -46,8 +46,35 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isMounted) {
       localStorage.setItem('peptidos_cart', JSON.stringify(cart));
+
+      // Sincronizar en segundo plano si el usuario está autenticado
+      const timer = setTimeout(async () => {
+        try {
+          const { supabase } = await import('@/lib/supabase/client');
+          const { data: { user } } = await supabase.auth.getUser();
+          if (user?.email) {
+            await fetch('/api/cart/sync', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                userId: user.id,
+                email: user.email,
+                fullName: user.user_metadata?.full_name || '',
+                items: cart,
+                subtotal: cart.reduce((t, i) => t + (i.price * i.quantity), 0),
+                status: cart.length === 0 ? 'cleared' : 'active'
+              })
+            });
+          }
+        } catch (syncErr) {
+          console.error('Error sincronizando carrito:', syncErr);
+        }
+      }, 1000);
+
+      return () => clearTimeout(timer);
     }
   }, [cart, isMounted]);
+
 
   const addToCart = (product: any, quantity = 1, size?: string) => {
     const cartItemId = size ? `${product.id}-${size}` : String(product.id);

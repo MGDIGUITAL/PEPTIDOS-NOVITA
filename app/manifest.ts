@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Peptidos Novita | Péptidos de Alta Pureza',
-    short_name: 'Peptidos Novita',
+    name: 'NOVA Performance® | Péptidos de Alta Pureza',
+    short_name: 'NOVA Performance®',
     description: 'Catálogo de péptidos de alta pureza y vanguardia biotecnológica en Chile.',
     start_url: '/',
     display: 'standalone',

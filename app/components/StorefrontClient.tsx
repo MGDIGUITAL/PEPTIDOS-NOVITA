@@ -6,17 +6,36 @@ import { supabase } from '@/lib/supabase/client';
 import { useCart } from './CartContext';
 import CartSidebar from './CartSidebar';
 
-// ─── DESIGN TOKENS ────────────────────────────────────────────────────────
+// ─── DESIGN TOKENS (WARM LUXURY CREAM & SOFT CHARCOAL) ──────────────────────
+// ─── DESIGN TOKENS (HIGH-CONTRAST PLOMO, NEGRO & BLANCO) ───────────────────
 const S = {
-  black:    '#000000',
-  surface:  '#0A0A0A',
-  card:     '#121212',
-  border:   '#222222',
-  ivory:    '#E6E2D3',
-  ivoryDark:'#C4BFA9',
-  offWhite: '#EEEEEE',
-  white:    '#FFFFFF',
-  muted:    '#888888',
+  black:          '#0D0D0D', // Deep Obsidian Black
+  blackPure:      '#000000',
+  plomoDark:      '#1F2937', // Dark Slate Plomo
+  plomo:          '#374151', // Metallic Steel Plomo
+  plomoLight:     '#4B5563', // Light Slate Plomo Accent
+  plomoBorder:    '#374151',
+  plomoTint:      '#F3F4F6',
+  snowWhite:      '#FFFFFF', // Crisp White
+  surface:        '#F9FAFB',
+  card:           '#FFFFFF',
+  border:         '#E5E7EB',
+  white:          '#FFFFFF',
+  muted:          '#4B5563', // Deep Slate Gray
+  neonNavy:       '#0D0D0D',
+  navyHover:      '#1F2937',
+  cappuccino:     '#F3F4F6',
+  cappuccinoDark: '#D1D5DB',
+  cappuccinoLight:'#F9FAFB',
+  cappuccinoHover:'#E5E7EB',
+  blueNavy:       '#0D0D0D',
+  bluePrimary:    '#0D0D0D',
+  blueElectric:   '#1F2937',
+  blueLight:      '#F3F4F6',
+  blueBorder:     '#D1D5DB',
+  ivory:          '#F3F4F6',
+  ivoryDark:      '#D1D5DB',
+  offWhite:       '#F9FAFB',
 };
 
 const CATS = ['Todos', 'Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos Mitocondriales', 'Péptidos GHRH', 'Accesorios'];
@@ -25,9 +44,9 @@ const CATS = ['Todos', 'Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos 
 function PromoBar() {
   const { cartCount } = useCart();
   return (
-    <div className="promo-bar" style={{ padding:'10px 0', textAlign:'center', color: cartCount >= 2 ? '#22c55e' : S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:600, letterSpacing:'0.18em', background:S.black, borderBottom:`1px solid ${S.border}`, transition:'all 0.3s' }}>
+    <div className="promo-bar" style={{ padding:'11px 0', textAlign:'center', color: cartCount >= 2 ? '#4ADE80' : '#FFFFFF', fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', fontWeight:900, letterSpacing:'0.18em', background:'linear-gradient(135deg, #050505 0%, #111111 50%, #1F2937 100%)', borderBottom:`1px solid #374151`, transition:'all 0.3s', boxShadow:'0 2px 12px rgba(0,0,0,0.3)' }}>
       {cartCount === 0 && '✦ COBERTURA NACIONAL · ENVÍO A TODO CHILE · SI COMPRAS 2 PRODUCTOS, TIENES DESPACHO GRATIS ✦'}
-      {cartCount === 1 && '🚚 ¡LLEVA 1 PRODUCTO MÁS Y TÚ DESPACHO SERÁ 100% GRATIS! ✦'}
+      {cartCount === 1 && '🚚 ¡LLEVA 1 PRODUCTO MÁS Y TU DESPACHO SERÁ 100% GRATIS! ✦'}
       {cartCount >= 2 && '🎉 ¡DESPACHO GRATIS APLICADO POR LA COMPRA DE 2 O MÁS PRODUCTOS! ✦'}
     </div>
   );
@@ -97,15 +116,12 @@ function Navbar() {
     window.location.href = '/';
   };
 
-  const navBg  = scrolled ? 'rgba(0,0,0,0.95)' : 'rgba(0,0,0,0.85)';
-  const linkColor = S.white;
-
   const btnBox: React.CSSProperties = {
     fontFamily:'Outfit,sans-serif', fontSize:'0.72rem', letterSpacing:'0.14em',
     textTransform:'uppercase', textDecoration:'none',
-    color:S.white, border:`1px solid ${S.border}`,
-    padding:'9px 20px', cursor:'pointer', background:'transparent',
-    transition:'all 0.25s', whiteSpace:'nowrap' as const,
+    color:S.bluePrimary, border:`1px solid ${S.border}`,
+    padding:'9px 20px', cursor:'pointer', background:S.blueLight,
+    transition:'all 0.25s', whiteSpace:'nowrap' as const, borderRadius:6
   };
 
   return (
@@ -122,16 +138,16 @@ function Navbar() {
             aria-label="Abrir menú de navegación"
             style={{ background:'none', border:'none', cursor:'pointer', padding:4, alignItems:'center', justifyContent:'center' }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.white} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.black} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
           </button>
 
-          {/* Logo NOVA PERFORMANCE */}
+          {/* Logo NOVA PERFORMANCE (Negro sobre fondo claro) */}
           <Link href="/" style={{ display:'flex', alignItems:'center', textDecoration:'none', flexShrink:0 }}>
-            <Image className="nav-logo-img" src="/logo-nova-white.png" alt="NOVA Performance" width={220} height={48} style={{ objectFit:'contain' }} priority />
+            <Image className="nav-logo-img" src="/logo-nova-black.png" alt="NOVA Performance" width={220} height={48} style={{ objectFit:'contain' }} priority />
           </Link>
 
           {/* Desktop Links */}
@@ -176,12 +192,12 @@ function Navbar() {
                     <span>{userName} ▾</span>
                   </button>
                   {showMenu && (
-                    <div style={{ position:'absolute', top:'calc(100% + 8px)', right:0, background:S.surface, border:`1px solid ${S.border}`, borderRadius:6, minWidth:170, boxShadow:'0 8px 24px rgba(0,0,0,0.8)', zIndex:200, overflow:'hidden' }}>
-                      <div style={{ padding:'10px 16px', fontFamily:'Outfit,sans-serif', fontSize:'0.65rem', letterSpacing:'0.1em', color:S.muted, borderBottom:`1px solid ${S.border}`, textTransform:'uppercase' }}>
+                    <div style={{ position:'absolute', top:'calc(100% + 8px)', right:0, background:S.cappuccino, border:`1px solid ${S.cappuccinoDark}`, borderRadius:6, minWidth:170, boxShadow:'0 8px 24px rgba(0,0,0,0.15)', zIndex:200, overflow:'hidden' }}>
+                      <div style={{ padding:'10px 16px', fontFamily:'Outfit,sans-serif', fontSize:'0.65rem', letterSpacing:'0.1em', color:S.muted, borderBottom:`1px solid ${S.cappuccinoDark}`, textTransform:'uppercase' }}>
                         Mi cuenta
                       </div>
-                      <button onClick={handleLogout} style={{ width:'100%', padding:'12px 16px', background:'none', border:'none', textAlign:'left', fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', color:S.white, cursor:'pointer', letterSpacing:'0.08em', transition:'background 0.2s' }}
-                        onMouseEnter={e=>(e.currentTarget.style.background=S.card)}
+                      <button onClick={handleLogout} style={{ width:'100%', padding:'12px 16px', background:'none', border:'none', textAlign:'left', fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', color:S.black, cursor:'pointer', letterSpacing:'0.08em', transition:'background 0.2s' }}
+                        onMouseEnter={e=>(e.currentTarget.style.background=S.cappuccinoHover)}
                         onMouseLeave={e=>(e.currentTarget.style.background='none')}
                       >
                         Cerrar sesión
@@ -205,21 +221,21 @@ function Navbar() {
         <>
           <div 
             onClick={() => setMobileDrawerOpen(false)} 
-            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.8)', backdropFilter:'blur(4px)', zIndex:999, transition:'opacity 0.3s' }} 
+            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.5)', backdropFilter:'blur(4px)', zIndex:999, transition:'opacity 0.3s' }} 
           />
           <div style={{
             position:'fixed', top:0, left:0, bottom:0, width:'85vw', maxWidth:340,
-            background:S.black, borderRight:`1px solid ${S.border}`, zIndex:1000, padding:'24px 20px', display:'flex',
-            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.8)',
+            background:S.cappuccinoLight, borderRight:`1px solid ${S.cappuccinoDark}`, zIndex:1000, padding:'24px 20px', display:'flex',
+            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.15)',
             overflowY:'auto'
           }}>
             <div>
               {/* Header Drawer */}
-              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingBottom:20, borderBottom:`1px solid ${S.border}` }}>
-                <Image src="/logo-nova-white.png" alt="NOVA Performance" width={150} height={36} style={{ objectFit:'contain' }} />
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingBottom:20, borderBottom:`1px solid ${S.cappuccinoDark}` }}>
+                <Image src="/logo-nova-black.png" alt="NOVA Performance" width={150} height={36} style={{ objectFit:'contain' }} />
                 <button 
                   onClick={() => setMobileDrawerOpen(false)}
-                  style={{ background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:S.white, padding:4 }}
+                  style={{ background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:S.black, padding:4 }}
                 >✕</button>
               </div>
 
@@ -237,8 +253,8 @@ function Navbar() {
                     style={{
                       fontFamily:'Outfit,sans-serif', fontSize:'0.9rem', letterSpacing:'0.14em',
                       textTransform:'uppercase', textDecoration:'none',
-                      color: S.white, fontWeight:700,
-                      padding:'10px 0', borderBottom:`1px solid ${S.card}`
+                      color: S.black, fontWeight:700,
+                      padding:'10px 0', borderBottom:`1px solid ${S.cappuccinoDark}`
                     }}
                   >
                     {l}
@@ -249,12 +265,12 @@ function Navbar() {
               {/* Acceso a cuenta */}
               <div style={{ marginTop:32, display:'flex', flexDirection:'column', gap:12 }}>
                 {userName ? (
-                  <div style={{ background:S.card, padding:'12px 16px', borderRadius:8, border:`1px solid ${S.border}` }}>
-                    <p style={{ fontFamily:'Outfit,sans-serif', fontSize:'0.7rem', color:S.ivory, textTransform:'uppercase', letterSpacing:'0.1em' }}>Sesión activa</p>
-                    <p style={{ fontWeight:600, fontSize:'0.9rem', color:S.white, margin:'4px 0 10px' }}>{userName}</p>
+                  <div style={{ background:S.cappuccino, padding:'12px 16px', borderRadius:8, border:`1px solid ${S.cappuccinoDark}` }}>
+                    <p style={{ fontFamily:'Outfit,sans-serif', fontSize:'0.7rem', color:S.muted, textTransform:'uppercase', letterSpacing:'0.1em' }}>Sesión activa</p>
+                    <p style={{ fontWeight:700, fontSize:'0.9rem', color:S.black, margin:'4px 0 10px' }}>{userName}</p>
                     <button 
                       onClick={handleLogout}
-                      style={{ width:'100%', padding:'8px', background:S.white, color:S.black, border:'none', borderRadius:4, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', cursor:'pointer', fontWeight:800 }}
+                      style={{ width:'100%', padding:'8px', background:S.black, color:S.cappuccino, border:'none', borderRadius:4, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', cursor:'pointer', fontWeight:800 }}
                     >
                       Cerrar Sesión
                     </button>
@@ -263,7 +279,7 @@ function Navbar() {
                   <Link 
                     href="/auth/cliente" 
                     onClick={() => setMobileDrawerOpen(false)}
-                    style={{ ...btnBox, width:'100%', textAlign:'center', padding:'12px', background:S.white, color:S.black, borderRadius:4, fontWeight:800 }}
+                    style={{ ...btnBox, width:'100%', textAlign:'center', padding:'12px', background:S.black, color:S.white, borderRadius:4, fontWeight:800 }}
                   >
                     Mi Cuenta / Ingresar
                   </Link>
@@ -278,40 +294,51 @@ function Navbar() {
 }
 
 // ─── HERO ─────────────────────────────────────────────────────────────────
-const FONDOS_DESKTOP = ['/fondo-1.png'];
-const FONDOS_MOBILE = ['/fondo-1-movil.png'];
+const VIDEO_DESKTOP = 'https://res.cloudinary.com/ddqx435i5/video/upload/v1788647706/fondo_escritorio_tvgcjl.mp4';
+const VIDEO_MOBILE  = 'https://res.cloudinary.com/ddqx435i5/video/upload/v1788647706/movil_nfhejf.mp4';
 
 function Hero() {
   return (
     <section className="hero-container">
 
-      {/* Hero Background Image (Desktop Full Screen) */}
-      <Image
+      {/* Hero Background Video (Desktop Full Screen) */}
+      <video
         className="hero-img-desktop"
-        src={FONDOS_DESKTOP[0]}
-        alt="NOVA Performance Biotech"
-        fill
-        priority
+        src={VIDEO_DESKTOP}
+        autoPlay
+        loop
+        muted
+        playsInline
         style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
           objectPosition: 'center center',
           zIndex: 0,
         }}
       />
 
-      {/* Hero Background Image (Mobile Full Screen) */}
-      <Image
+      {/* Hero Background Video (Mobile Full Screen) */}
+      <video
         className="hero-img-mobile"
-        src={FONDOS_MOBILE[0]}
-        alt="NOVA Performance Biotech"
-        fill
-        priority
+        src={VIDEO_MOBILE}
+        autoPlay
+        loop
+        muted
+        playsInline
         style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
           objectFit: 'cover',
-          objectPosition: 'center center',
+          objectPosition: 'center 40px',
           zIndex: 0,
         }}
       />
+
 
       {/* Degradado sutil para integración prolija */}
       <div
@@ -353,12 +380,11 @@ function Hero() {
     </section>
   );
 }
-
 function FeaturesBar() {
   const items = [
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.ivory} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.plomoDark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M10 2v7.5L4.5 18a2 2 0 001.7 3h11.6a2 2 0 001.7-3L14 9.5V2" />
           <path d="M8.5 2h7" />
           <path d="M7 16h10" />
@@ -368,7 +394,7 @@ function FeaturesBar() {
     },
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.ivory} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.plomoDark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
           <path d="M7 11V7a5 5 0 0110 0v4" />
         </svg>
@@ -377,7 +403,7 @@ function FeaturesBar() {
     },
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.ivory} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.plomoDark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
           <polyline points="14 2 14 8 20 8" />
           <path d="M9 15l2 2 4-4" />
@@ -387,7 +413,7 @@ function FeaturesBar() {
     },
     {
       icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.ivory} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.plomoDark} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M6 18h12M12 6v12M9 9l3-3 3 3" />
           <circle cx="12" cy="12" r="9" />
         </svg>
@@ -396,16 +422,16 @@ function FeaturesBar() {
     },
   ];
   return (
-    <div style={{ background: S.surface, borderBottom:`1px solid ${S.border}`, padding:'28px 2rem' }}>
+    <div style={{ background: '#F9FAFB', borderBottom:`1px solid ${S.border}`, padding:'28px 2rem' }}>
 
       <div className="features-grid" style={{ maxWidth:1200, margin:'0 auto' }}>
         {items.map(f => (
           <div key={f.t} style={{ display:'flex', alignItems:'center', gap:14 }}>
-            <div style={{ padding: 10, background: '#121212', border: `1px solid ${S.border}`, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ padding: 10, background: '#F3F4F6', border: `1px solid #D1D5DB`, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               {f.icon}
             </div>
             <div>
-              <div style={{ fontFamily:'Outfit,sans-serif', color:S.white, fontSize:'0.78rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:700 }}>{f.t}</div>
+              <div style={{ fontFamily:'Outfit,sans-serif', color:S.black, fontSize:'0.78rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:900 }}>{f.t}</div>
               <div style={{ color:S.muted, fontSize:'0.76rem', marginTop:2 }}>{f.d}</div>
             </div>
           </div>
@@ -426,11 +452,11 @@ function ProductCard({ p }: { p: any }) {
   return (
     <article 
       className="product-card" 
-      style={{ background: '#121212', border: `1px solid ${S.border}`, display: 'flex', flexDirection: 'column', borderRadius: 6, overflow: 'hidden' }}
+      style={{ background: '#FFFFFF', border: `1px solid ${S.border}`, display: 'flex', flexDirection: 'column', borderRadius: 10, overflow: 'hidden' }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={`/product/${p.id}`} className="product-card-img-link" style={{ display: 'block', height:260, position:'relative', overflow:'hidden', background:'#050505', padding: '12px' }}>
+      <Link href={`/product/${p.id}`} className="product-card-img-link" style={{ display: 'block', height:260, position:'relative', overflow:'hidden', background:'linear-gradient(180deg, #FFFFFF 0%, #F3F4F6 100%)', padding: '12px' }}>
         <div style={{ width: '100%', height: '100%', display:'flex', alignItems:'center', justifyContent:'center' }}>
         {currentImage ? (
            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -442,41 +468,41 @@ function ProductCard({ p }: { p: any }) {
                style={{ 
                  objectFit:'contain', 
                  transition:'transform 0.5s ease',
-                 transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                 transform: isHovered ? 'scale(1.06)' : 'scale(1)'
                }} 
              />
            </div>
         ) : (
-          <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:12, opacity:0.4 }}>
-            <span style={{ color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', letterSpacing:'0.14em', textTransform:'uppercase', fontWeight:700 }}>Péptido NOVA</span>
+          <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:12, opacity:0.6 }}>
+            <span style={{ color:S.black, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', letterSpacing:'0.14em', textTransform:'uppercase', fontWeight:800 }}>Péptido NOVA</span>
           </div>
         )}
-        {/* Category badge */}
-        <span style={{ position:'absolute', bottom:14, right:14, background:'rgba(0,0,0,0.85)', border:`1px solid ${S.border}`, color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.65rem', padding:'4px 10px', letterSpacing:'0.1em', borderRadius:4, fontWeight:700 }}>
+        {/* Category badge con estilo plomo steel */}
+        <span style={{ position:'absolute', bottom:14, right:14, background:'linear-gradient(135deg, #374151 0%, #1F2937 100%)', border:`1px solid #4B5563`, color:'#FFFFFF', fontFamily:'Outfit,sans-serif', fontSize:'0.65rem', padding:'5px 12px', letterSpacing:'0.12em', borderRadius:20, fontWeight:800, boxShadow:'0 2px 8px rgba(0,0,0,0.15)' }}>
           {p.category}
         </span>
         </div>
       </Link>
-      <div className="product-card-info" style={{ padding:'20px', background:'#121212', flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className="product-card-info" style={{ padding:'20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Link href={`/product/${p.id}`} style={{ textDecoration: 'none' }}>
-          <h3 className="font-display product-card-title" style={{ fontSize:'1.1rem', fontWeight:700, color:S.white, lineHeight:1.3, marginBottom:16, cursor: 'pointer' }}>
+          <h3 className="font-display product-card-title" style={{ fontSize:'1.1rem', fontWeight:900, color:S.black, lineHeight:1.3, marginBottom:16, cursor: 'pointer' }}>
             {p.title}
           </h3>
         </Link>
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginTop: 'auto', gap: 6, flexWrap: 'wrap' }}>
-          <span className="font-display product-card-price" style={{ fontSize:'1.25rem', color:S.ivory, fontWeight:800 }} suppressHydrationWarning>
+          <span className="font-display product-card-price" style={{ fontSize:'1.35rem', color:S.black, fontWeight:900 }} suppressHydrationWarning>
             ${p.sale_price ? Math.round(p.sale_price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') : '0'}
           </span>
           <button 
             onClick={() => addToCart(p)} 
             style={{
-              fontFamily:'Outfit,sans-serif', fontSize:'0.7rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:800,
-              background:S.white, border:`1px solid ${S.white}`, color:S.black,
-              padding:'10px 18px', cursor:'pointer', transition:'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)', borderRadius:4,
-              display:'inline-flex', alignItems:'center', gap:6
+              fontFamily:'Outfit,sans-serif', fontSize:'0.7rem', letterSpacing:'0.14em', textTransform:'uppercase', fontWeight:900,
+              background:'linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%)', border:`1px solid #374151`, color:'#FFFFFF',
+              padding:'11px 20px', cursor:'pointer', transition:'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)', borderRadius:6,
+              display:'inline-flex', alignItems:'center', gap:6, boxShadow:'0 4px 14px rgba(0,0,0,0.25)'
             }}
-            onMouseEnter={e=>{ e.currentTarget.style.background=S.ivory; e.currentTarget.style.borderColor=S.ivory; e.currentTarget.style.boxShadow='0 0 14px rgba(230,226,211,0.5)'; }}
-            onMouseLeave={e=>{ e.currentTarget.style.background=S.white; e.currentTarget.style.borderColor=S.white; e.currentTarget.style.boxShadow='none'; }}
+            onMouseEnter={e=>{ e.currentTarget.style.background='linear-gradient(135deg, #1F2937 0%, #374151 100%)'; e.currentTarget.style.borderColor='#6B7280'; e.currentTarget.style.boxShadow='0 6px 18px rgba(0,0,0,0.35)'; }}
+            onMouseLeave={e=>{ e.currentTarget.style.background='linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%)'; e.currentTarget.style.borderColor='#374151'; e.currentTarget.style.boxShadow='0 4px 14px rgba(0,0,0,0.25)'; }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             <span>Agregar</span>
@@ -500,22 +526,23 @@ function Products({ products }: { products: any[] }) {
   }, [filter]);
 
   return (
-    <section id="catalogo" style={{ padding:'80px 1rem', background:S.black }} className="section-mobile-pad">
+    <section id="catalogo" style={{ padding:'80px 1rem', background:'#FFFFFF' }} className="section-mobile-pad">
       <div style={{ maxWidth:1400, margin:'0 auto' }}>
         <div className="catalog-header" style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-end', marginBottom:40, flexWrap:'wrap', gap:16 }}>
           <div>
-            <span style={{ color:S.ivory, fontFamily:'Outfit,sans-serif', fontSize:'0.8rem', letterSpacing:'0.2em', textTransform:'uppercase', fontWeight:800 }}>Alta Pureza</span>
-            <h2 className="font-display" style={{ fontSize:'clamp(2.2rem,5vw,3.5rem)', fontWeight:800, color:S.white, textTransform:'uppercase' }}>Catálogo de Compuestos</h2>
+            <span style={{ color:'#4B5563', fontFamily:'Outfit,sans-serif', fontSize:'0.82rem', letterSpacing:'0.22em', textTransform:'uppercase', fontWeight:900 }}>✦ PUREZA CERTIFICADA HPLC ✦</span>
+            <h2 className="font-display text-luxury-heading" style={{ fontSize:'clamp(2.2rem,5vw,3.5rem)', fontWeight:900, textTransform:'uppercase', marginTop:4 }}>Catálogo de Compuestos</h2>
           </div>
           <div className="catalog-filter-bar" style={{ display:'flex', gap:8, flexWrap:'wrap' }}>
             {CATS.map(c => (
               <button key={c} onClick={() => setFilter(c)} style={{
-                fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:700,
-                padding:'10px 20px', borderRadius:4,
-                background: filter===c ? S.white : S.surface,
-                color: filter===c ? S.black : S.muted,
-                border: filter===c ? `1px solid ${S.white}` : `1px solid ${S.border}`,
-                cursor:'pointer', transition:'all 0.25s',
+                fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', letterSpacing:'0.12em', textTransform:'uppercase', fontWeight:900,
+                padding:'10px 22px', borderRadius:20,
+                background: filter===c ? 'linear-gradient(135deg, #1F2937 0%, #0D0D0D 100%)' : '#F3F4F6',
+                color: filter===c ? '#FFFFFF' : '#374151',
+                border: filter===c ? '1px solid #4B5563' : '1px solid #D1D5DB',
+                boxShadow: filter===c ? '0 4px 16px rgba(0,0,0,0.3)' : '0 2px 6px rgba(0,0,0,0.03)',
+                cursor:'pointer', transition:'all 0.3s ease',
               }}>{c}</button>
             ))}
           </div>
@@ -539,21 +566,22 @@ function Products({ products }: { products: any[] }) {
                 <button 
                   onClick={() => setVisibleCount(v => v + 15)}
                   style={{
-                    background: 'transparent',
-                    border: `1px solid ${S.white}`,
-                    color: S.white,
+                    background: 'linear-gradient(135deg, #0D0D0D 0%, #1F2937 100%)',
+                    border: `1px solid #374151`,
+                    color: '#FFFFFF',
                     fontFamily: 'Outfit,sans-serif',
                     fontSize: '0.8rem',
-                    fontWeight: 800,
+                    fontWeight: 900,
                     letterSpacing: '0.14em',
                     textTransform: 'uppercase',
-                    padding: '14px 36px',
+                    padding: '16px 40px',
                     cursor: 'pointer',
-                    borderRadius: 4,
-                    transition: 'all 0.3s'
+                    borderRadius: 6,
+                    transition: 'all 0.3s',
+                    boxShadow: '0 4px 16px rgba(0,0,0,0.3)'
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.background = S.white; e.currentTarget.style.color = S.black; }}
-                  onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = S.white; }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#6B7280'; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = '#374151'; }}
                 >
                   Cargar Más
                 </button>
@@ -568,7 +596,6 @@ function Products({ products }: { products: any[] }) {
 
 // ─── FEATURED PRODUCTS ──────────────────────────────────────────────────────
 function FeaturedProducts({ products }: { products: any[] }) {
-  // Excluir Agua/Accesorios y mostrar exclusivamente los péptidos de 10mg destacados
   const nonWater = products.filter(p => {
     const title = (p.title || '').toLowerCase();
     return !title.includes('agua') && p.category !== 'Accesorios';
@@ -581,11 +608,11 @@ function FeaturedProducts({ products }: { products: any[] }) {
   if (featured.length === 0) return null;
 
   return (
-    <section style={{ padding: '80px 2rem', background: S.black }}>
+    <section style={{ padding: '80px 2rem', background: '#F9FAFB', borderBottom: `1px solid ${S.border}` }}>
       <div style={{ maxWidth: 1320, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <span style={{ color: S.ivory, fontFamily: 'Outfit,sans-serif', fontSize: '0.8rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 800 }}>Destacados</span>
-          <h2 className="font-display" style={{ fontSize: 'clamp(2.2rem,4vw,3.2rem)', fontWeight: 800, color: S.white, textTransform: 'uppercase' }}>
+          <span style={{ color: '#4B5563', fontFamily: 'Outfit,sans-serif', fontSize: '0.8rem', letterSpacing: '0.22em', textTransform:'uppercase', fontWeight: 900 }}>✦ DESTACADOS DE INVESTIGACIÓN ✦</span>
+          <h2 className="font-display text-luxury-heading" style={{ fontSize: 'clamp(2.2rem,4vw,3.2rem)', fontWeight: 900, textTransform: 'uppercase', marginTop: 4 }}>
             Compuestos Principales
           </h2>
         </div>
@@ -603,12 +630,12 @@ function FeaturedProducts({ products }: { products: any[] }) {
 // ─── SECOND BANNER ────────────────────────────────────────────────────────
 function SecondBanner() {
   return (
-    <section id="novedades" className="second-banner-section" style={{ position:'relative', height:480, overflow:'hidden', display:'flex', alignItems:'center', justifyContent: 'center', background: S.black }}>
+    <section id="novedades" className="second-banner-section" style={{ position:'relative', height:440, overflow:'hidden', display:'flex', alignItems:'center', justifyContent: 'center', background: 'linear-gradient(135deg, #050505 0%, #111111 40%, #1F2937 100%)' }}>
       <style>{`
         @keyframes pulseGlow {
-          0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
-          70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
-          100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+          0% { box-shadow: 0 0 0 0 rgba(75, 85, 99, 0.5); }
+          70% { box-shadow: 0 0 0 20px rgba(75, 85, 99, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(75, 85, 99, 0); }
         }
         @keyframes slowPan {
           0% { transform: scale(1); }
@@ -623,20 +650,24 @@ function SecondBanner() {
         }
         .animated-btn:hover {
           animation: none;
-          transform: scale(1.05) translateY(-3px);
-          box-shadow: 0 15px 30px rgba(255,255,255,0.3) !important;
+          transform: scale(1.04) translateY(-3px);
+          box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25) !important;
         }
       `}</style>
       <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
-        <Image src="/items.png" alt="NOVA Performance Biotech" fill className="animated-banner-bg" style={{ objectFit:'cover', objectPosition:'center center', opacity: 0.6 }} />
+        <Image src="/items.png" alt="NOVA Performance Biotech" fill className="animated-banner-bg" style={{ objectFit:'cover', objectPosition:'center center', opacity: 0.4 }} />
       </div>
-      <div style={{ position:'relative', zIndex:1 }}>
-        <a href="#catalogo" className="animated-btn" style={{ display:'inline-flex', alignItems:'center', gap:10, background:S.white, color:S.black, fontFamily:'Outfit,sans-serif', fontSize:'0.9rem', fontWeight:800, letterSpacing:'0.16em', textTransform:'uppercase', padding:'20px 48px', textDecoration:'none', transition:'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', borderRadius:6 }}
-          onMouseEnter={e=>{ e.currentTarget.style.background=S.ivory; }}
-          onMouseLeave={e=>{ e.currentTarget.style.background=S.white; }}
+      <div style={{ position:'relative', zIndex:1, textAlign:'center', padding: '0 20px' }}>
+        <span style={{ color: '#9CA3AF', fontFamily: 'Outfit,sans-serif', fontSize: '0.8rem', letterSpacing: '0.25em', textTransform:'uppercase', fontWeight: 900, display: 'block', marginBottom: 8 }}>✦ TECNOLOGÍA AVANZADA ✦</span>
+        <h3 className="font-display" style={{ color:S.white, fontSize:'clamp(1.8rem, 4vw, 2.8rem)', fontWeight:900, textTransform:'uppercase', marginBottom:24 }}>
+          EXPLORA NUESTRAS NOVEDADES BIOTECNOLÓGICAS
+        </h3>
+        <a href="#catalogo" className="animated-btn" style={{ display:'inline-flex', alignItems:'center', gap:10, background:'#FFFFFF', color:S.black, border:`1px solid #D1D5DB`, fontFamily:'Outfit,sans-serif', fontSize:'0.88rem', fontWeight:900, letterSpacing:'0.16em', textTransform:'uppercase', padding:'18px 44px', textDecoration:'none', transition:'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)', borderRadius:6, boxShadow:'0 10px 30px rgba(0,0,0,0.4)' }}
+          onMouseEnter={e=>{ e.currentTarget.style.background='#F3F4F6'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.background='#FFFFFF'; }}
         >
           <span>Ver Compuestos</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: 'translateX(0)' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s' }}><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
     </section>
@@ -716,25 +747,25 @@ function TestimonialsSection() {
     : REVIEWS_DATA.filter(r => r.tag === activeFilter);
 
   return (
-    <section id="reseñas" style={{ padding: '88px 1.5rem', background: S.black, borderTop: `1px solid ${S.border}` }}>
+    <section id="reseñas" style={{ padding: '88px 1.5rem', background: '#F9FAFB', borderTop: `1px solid ${S.border}` }}>
       <div style={{ maxWidth: 1320, margin: '0 auto' }}>
         
         {/* Header / Summary */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '6px 18px', background: S.surface, border: `1px solid ${S.border}`, borderRadius: 30, marginBottom: 18 }}>
-            <span style={{ color: '#F5A623', fontSize: '0.85rem', display: 'flex', gap: 2 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '8px 22px', background: S.white, border: `1px solid #D1D5DB`, borderRadius: 30, marginBottom: 18, boxShadow: '0 4px 14px rgba(0,0,0,0.04)' }}>
+            <span style={{ color: '#1F2937', fontSize: '0.85rem', display: 'flex', gap: 2 }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </span>
-            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.12em', color: S.white, fontWeight: 700 }}>
+            <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.12em', color: S.black, fontWeight: 900 }}>
               4.9 / 5.0 REVIEWS DE INVESTIGACIÓN VERIFICADOS
             </span>
           </div>
 
-          <h2 className="font-display" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)', fontWeight: 800, color: S.white, marginBottom: 16, textTransform: 'uppercase' }}>
+          <h2 className="font-display text-luxury-heading" style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)', fontWeight: 900, marginBottom: 16, textTransform: 'uppercase' }}>
             Experiencias & Reseñas de Clientes
           </h2>
           <p style={{ color: S.muted, fontSize: '0.98rem', maxWidth: 640, margin: '0 auto', lineHeight: 1.7, fontFamily: 'Inter, sans-serif' }}>
@@ -742,17 +773,17 @@ function TestimonialsSection() {
           </p>
 
           {/* Badges de Confianza */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginTop: 24, fontSize: '0.78rem', color: S.ivory, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', fontWeight: 600 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: 24, flexWrap: 'wrap', marginTop: 24, fontSize: '0.78rem', color: S.black, fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', fontWeight: 900 }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               Lotes Verificados HPLC
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
               Empaque 100% Discreto
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
               Envíos a todo Chile
             </span>
           </div>
@@ -769,14 +800,15 @@ function TestimonialsSection() {
                 fontSize: '0.72rem',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                fontWeight: 700,
-                padding: '10px 20px',
-                borderRadius: '4px',
-                border: activeFilter === f ? `1px solid ${S.white}` : `1px solid ${S.border}`,
-                background: activeFilter === f ? S.white : S.surface,
-                color: activeFilter === f ? S.black : S.muted,
+                fontWeight: 900,
+                padding: '10px 22px',
+                borderRadius: '20px',
+                border: activeFilter === f ? '1px solid #4B5563' : '1px solid #D1D5DB',
+                background: activeFilter === f ? 'linear-gradient(135deg, #1F2937 0%, #0D0D0D 100%)' : '#FFFFFF',
+                color: activeFilter === f ? '#FFFFFF' : '#374151',
+                boxShadow: activeFilter === f ? '0 4px 14px rgba(0,0,0,0.3)' : '0 2px 6px rgba(0,0,0,0.03)',
                 cursor: 'pointer',
-                transition: 'all 0.25s ease',
+                transition: 'all 0.3s ease',
               }}
             >
               {f}
@@ -790,7 +822,7 @@ function TestimonialsSection() {
             <div
               key={r.id}
               style={{
-                background: S.surface,
+                background: S.card,
                 border: `1px solid ${S.border}`,
                 borderRadius: '8px',
                 padding: '28px',
@@ -799,13 +831,13 @@ function TestimonialsSection() {
                 justifyContent: 'space-between',
                 transition: 'transform 0.3s ease, border-color 0.3s ease',
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = S.ivory; }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = S.neonNavy; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = S.border; }}
             >
               <div>
                 {/* Rating & Tag Header */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-                  <div style={{ display: 'flex', gap: 2, color: '#F5A623' }}>
+                  <div style={{ display: 'flex', gap: 2, color: '#131936' }}>
                     {Array.from({ length: r.rating }).map((_, i) => (
                       <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                     ))}
@@ -815,10 +847,10 @@ function TestimonialsSection() {
                     fontFamily: 'Outfit, sans-serif',
                     letterSpacing: '0.08em',
                     textTransform: 'uppercase',
-                    fontWeight: 700,
-                    background: '#181818',
-                    color: S.ivory,
-                    border: `1px solid ${S.border}`,
+                    fontWeight: 800,
+                    background: S.cappuccino,
+                    color: S.neonNavy,
+                    border: `1px solid ${S.cappuccinoDark}`,
                     padding: '4px 10px',
                     borderRadius: '4px'
                   }}>
@@ -826,14 +858,14 @@ function TestimonialsSection() {
                   </span>
                 </div>
 
-                <p style={{ color: S.white, fontSize: '0.9rem', lineHeight: 1.7, marginBottom: 20, fontFamily: 'Inter, sans-serif' }}>
+                <p style={{ color: S.black, fontSize: '0.9rem', lineHeight: 1.7, marginBottom: 20, fontFamily: 'Inter, sans-serif' }}>
                   "{r.comment}"
                 </p>
               </div>
 
               <div style={{ borderTop: `1px solid ${S.border}`, paddingTop: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '0.88rem', color: S.white, fontFamily: 'Outfit, sans-serif' }}>
+                  <div style={{ fontWeight: 800, fontSize: '0.88rem', color: S.black, fontFamily: 'Outfit, sans-serif' }}>
                     {r.name}
                   </div>
                   <div style={{ fontSize: '0.75rem', color: S.muted, marginTop: 2 }}>
@@ -842,7 +874,7 @@ function TestimonialsSection() {
                 </div>
 
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '0.72rem', fontFamily: 'Outfit, sans-serif', color: S.ivory, letterSpacing: '0.05em', fontWeight: 600 }}>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'Outfit, sans-serif', color: S.neonNavy, letterSpacing: '0.05em', fontWeight: 700 }}>
                     {r.product}
                   </div>
                   <div style={{ fontSize: '0.7rem', color: S.muted, marginTop: 2 }}>
@@ -855,8 +887,8 @@ function TestimonialsSection() {
         </div>
 
         {/* Footer CTA */}
-        <div style={{ marginTop: 64, textAlign: 'center', background: S.surface, border: `1px solid ${S.border}`, borderRadius: '8px', padding: '44px 24px' }}>
-          <h3 className="font-display" style={{ fontSize: '1.6rem', color: S.white, fontWeight: 800, marginBottom: 12, textTransform: 'uppercase' }}>
+        <div style={{ marginTop: 64, textAlign: 'center', background: S.white, border: `1px solid ${S.cappuccinoDark}`, borderRadius: '12px', padding: '44px 24px' }}>
+          <h3 className="font-display" style={{ fontSize: '1.6rem', color: S.black, fontWeight: 900, marginBottom: 12, textTransform: 'uppercase' }}>
             ¿Necesitas Certificado de Análisis (COA) o Atención Directa?
           </h3>
           <p style={{ color: S.muted, fontSize: '0.92rem', marginBottom: 28, maxWidth: 540, margin: '0 auto 28px' }}>
@@ -867,7 +899,8 @@ function TestimonialsSection() {
               href="#catalogo"
               style={{
                 fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800,
-                background: S.white, color: S.black, padding: '16px 36px', textDecoration: 'none', borderRadius: '4px'
+                background: S.neonNavy, color: S.white, padding: '16px 36px', textDecoration: 'none', borderRadius: '6px',
+                boxShadow: '0 4px 14px rgba(19,25,54,0.3)'
               }}
             >
               Explorar Compuestos
@@ -878,7 +911,7 @@ function TestimonialsSection() {
               rel="noopener noreferrer"
               style={{
                 fontFamily: 'Outfit, sans-serif', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800,
-                background: '#25D366', color: '#FFFFFF', padding: '16px 36px', textDecoration: 'none', borderRadius: '4px', display: 'inline-flex', alignItems: 'center', gap: 8
+                background: '#25D366', color: '#FFFFFF', padding: '16px 36px', textDecoration: 'none', borderRadius: '6px', display: 'inline-flex', alignItems: 'center', gap: 8
               }}
             >
               <span>💬</span> Consultar por WhatsApp
@@ -898,14 +931,14 @@ const MODAL_CONTENT: Record<string, { title: string; icon: string; body: React.R
     icon: '🛍️',
     body: (
       <div>
-        <p style={{ marginBottom: 16, lineHeight: 1.8 }}>En <strong>NOVA Performance®</strong> cuentas con procesos ágiles y seguros para la adquisición de compuestos de investigación:</p>
-        <div style={{ marginBottom: 20, padding: '16px 20px', background: '#121212', borderLeft: '3px solid #E6E2D3', borderRadius: 4 }}>
-          <strong style={{ display: 'block', marginBottom: 8, fontFamily: 'Outfit,sans-serif', fontSize: '0.75rem', letterSpacing: '0.1em', color: '#E6E2D3' }}>💬 ASESORÍA Y PEDIDOS WHATSAPP</strong>
-          <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.75, color: '#CCCCCC' }}>Escríbenos directamente a nuestro canal oficial para resolver dudas técnicas sobre lotes o COA. Aceptamos <strong>transferencia bancaria instantánea y tarjetas de crédito/débito</strong>.</p>
+        <p style={{ marginBottom: 16, lineHeight: 1.8, color: '#334155' }}>En <strong>NOVA Performance®</strong> cuentas con procesos ágiles y seguros para la adquisición de compuestos de investigación:</p>
+        <div style={{ marginBottom: 20, padding: '16px 20px', background: S.blueLight, borderLeft: `3px solid ${S.bluePrimary}`, borderRadius: 6 }}>
+          <strong style={{ display: 'block', marginBottom: 8, fontFamily: 'Outfit,sans-serif', fontSize: '0.75rem', letterSpacing: '0.1em', color: S.bluePrimary }}>💬 ASESORÍA Y PEDIDOS WHATSAPP</strong>
+          <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.75, color: '#334155' }}>Escríbenos directamente a nuestro canal oficial para resolver dudas técnicas sobre lotes o COA. Aceptamos <strong>transferencia bancaria instantánea y tarjetas de crédito/débito</strong>.</p>
         </div>
-        <div style={{ marginBottom: 20, padding: '16px 20px', background: '#121212', borderLeft: '3px solid #E6E2D3', borderRadius: 4 }}>
-          <strong style={{ display: 'block', marginBottom: 8, fontFamily: 'Outfit,sans-serif', fontSize: '0.75rem', letterSpacing: '0.1em', color: '#E6E2D3' }}>🌐 PEDIDO EN LÍNEA</strong>
-          <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.75, color: '#CCCCCC' }}>Selecciona tus compuestos, agrégalos al carrito y completa la solicitud. Tu orden será procesada inmediatamente con despacho discreto en caja sellada.</p>
+        <div style={{ marginBottom: 20, padding: '16px 20px', background: S.blueLight, borderLeft: `3px solid ${S.bluePrimary}`, borderRadius: 6 }}>
+          <strong style={{ display: 'block', marginBottom: 8, fontFamily: 'Outfit,sans-serif', fontSize: '0.75rem', letterSpacing: '0.1em', color: S.bluePrimary }}>🌐 PEDIDO EN LÍNEA</strong>
+          <p style={{ margin: 0, fontSize: '0.88rem', lineHeight: 1.75, color: '#334155' }}>Selecciona tus compuestos, agrégalos al carrito y completa la solicitud. Tu orden será procesada inmediatamente con despacho discreto en caja sellada.</p>
         </div>
       </div>
     ),
@@ -915,18 +948,18 @@ const MODAL_CONTENT: Record<string, { title: string; icon: string; body: React.R
     icon: '📦',
     body: (
       <div>
-        <p style={{ marginBottom: 16, lineHeight: 1.8, color: '#CCCCCC' }}>En <strong>NOVA Performance®</strong> priorizamos la velocidad y total discreción en cada envío a lo largo de Chile.</p>
+        <p style={{ marginBottom: 16, lineHeight: 1.8, color: '#334155' }}>En <strong>NOVA Performance®</strong> priorizamos la velocidad y total discreción en cada envío a lo largo de Chile.</p>
         <div style={{ display: 'grid', gap: 12, marginBottom: 20 }}>
           {[
             { icon: '🚚', t: 'Cobertura Nacional', d: 'Envíos a todo Chile con embalaje térmico/protegido a través de operadores logísticos certificados.' },
             { icon: '🔒', t: 'Empaque Discreto', d: 'Empaque neutro sin rotulación exterior de compuestos, garantizando máxima privacidad.' },
             { icon: '📍', t: 'Trazabilidad en Tiempo Real', d: 'Número de seguimiento enviado inmediatamente tras despacho.' },
           ].map(i => (
-            <div key={i.t} style={{ padding: '12px 16px', background: '#121212', borderRadius: 6, display: 'flex', gap: 12, alignItems: 'flex-start', border: '1px solid #222222' }}>
+            <div key={i.t} style={{ padding: '12px 16px', background: S.blueLight, borderRadius: 6, display: 'flex', gap: 12, alignItems: 'flex-start', border: `1px solid ${S.border}` }}>
               <span style={{ fontSize: '1.2rem', flexShrink: 0 }}>{i.icon}</span>
               <div>
-                <strong style={{ display: 'block', fontSize: '0.82rem', marginBottom: 4, color: '#E6E2D3' }}>{i.t}</strong>
-                <span style={{ fontSize: '0.82rem', color: '#AAAAAA', lineHeight: 1.65 }}>{i.d}</span>
+                <strong style={{ display: 'block', fontSize: '0.82rem', marginBottom: 4, color: S.bluePrimary }}>{i.t}</strong>
+                <span style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.65 }}>{i.d}</span>
               </div>
             </div>
           ))}
@@ -939,20 +972,20 @@ const MODAL_CONTENT: Record<string, { title: string; icon: string; body: React.R
     icon: '⚖️',
     body: (
       <div>
-        <p style={{ marginBottom: 16, lineHeight: 1.8, color: '#CCCCCC' }}>
+        <p style={{ marginBottom: 16, lineHeight: 1.8, color: '#334155' }}>
           Los compuestos comercializados por <strong>NOVA PERFORMANCE®</strong> son productos químicos destinados exclusivamente a investigación científica (<em>“research use only”</em>).
         </p>
-        <p style={{ fontSize: '0.85rem', color: '#AAAAAA', marginBottom: 16 }}>
+        <p style={{ fontSize: '0.85rem', color: '#64748B', marginBottom: 16 }}>
           NO son medicamentos, suplementos alimenticios ni cosméticos. Se requiere ser mayor de 18 años para su adquisición.
         </p>
         <Link 
           href="/marco-regulatorio" 
           style={{ 
             display: 'inline-block', 
-            background: '#FFFFFF', 
-            color: '#000000', 
+            background: S.bluePrimary, 
+            color: S.white, 
             padding: '12px 24px', 
-            borderRadius: 4, 
+            borderRadius: 6, 
             fontFamily: 'Outfit, sans-serif', 
             fontWeight: 800, 
             fontSize: '0.78rem', 
@@ -979,83 +1012,83 @@ function Footer() {
       {modal && (
         <div
           onClick={() => setActiveModal(null)}
-          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)', zIndex: 9000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(15, 23, 42, 0.65)', backdropFilter: 'blur(8px)', zIndex: 9000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}
         >
           <div
             onClick={e => e.stopPropagation()}
-            style={{ background: '#0A0A0A', border: '1px solid #222222', borderRadius: 8, maxWidth: 560, width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 64px rgba(0,0,0,0.9)' }}
+            style={{ background: '#FFFFFF', border: `1px solid ${S.border}`, borderRadius: 12, maxWidth: 560, width: '100%', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 24px 64px rgba(15,23,42,0.25)' }}
           >
             {/* Modal Header */}
-            <div style={{ padding: '24px 28px 20px', borderBottom: '1px solid #222222', display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#0A0A0A', zIndex: 1 }}>
+            <div style={{ padding: '24px 28px 20px', borderBottom: `1px solid ${S.border}`, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, background: '#FFFFFF', zIndex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span style={{ fontSize: '1.5rem' }}>{modal.icon}</span>
-                <h2 style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.9rem', letterSpacing: '0.1em', color: '#E6E2D3', margin: 0, textTransform: 'uppercase', fontWeight: 800 }}>{modal.title}</h2>
+                <h2 style={{ fontFamily: 'Outfit,sans-serif', fontSize: '0.9rem', letterSpacing: '0.1em', color: S.black, margin: 0, textTransform: 'uppercase', fontWeight: 800 }}>{modal.title}</h2>
               </div>
               <button
                 onClick={() => setActiveModal(null)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', color: '#888888', lineHeight: 1, padding: 4 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#FFFFFF')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#888888')}
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', color: S.muted, lineHeight: 1, padding: 4 }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.black)}
+                onMouseLeave={e => (e.currentTarget.style.color = S.muted)}
                 aria-label="Cerrar"
               >✕</button>
             </div>
             {/* Modal Body */}
-            <div style={{ padding: '24px 28px 32px', color: '#FFFFFF', fontSize: '0.88rem' }}>
+            <div style={{ padding: '24px 28px 32px', color: S.black, fontSize: '0.88rem' }}>
               {modal.body}
             </div>
           </div>
         </div>
       )}
 
-      <footer style={{ background: '#FFFFFF', borderTop: `1px solid #E5E5E5`, paddingTop: 64 }}>
+      <footer style={{ background: '#FFFFFF', borderTop: `1px solid ${S.border}`, paddingTop: 64 }}>
         <div style={{ maxWidth: 1320, margin: '0 auto', padding: '0 2rem' }}>
 
           {/* ── MAIN FOOTER GRID ── */}
-          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '260px 1fr 1fr 1fr', gap: 48, paddingBottom: 56, borderBottom: `1px solid #E5E5E5` }}>
+          <div className="footer-grid" style={{ display: 'grid', gridTemplateColumns: '260px 1fr 1fr 1fr', gap: 48, paddingBottom: 56, borderBottom: `1px solid ${S.border}` }}>
 
             {/* Col 1 — Brand */}
             <div>
               <Image src="/logo-nova-black.png" alt="NOVA Performance®" width={190} height={42} style={{ objectFit: 'contain', marginBottom: 20, display: 'block' }} priority />
-              <p style={{ color: '#333333', fontSize: '0.84rem', lineHeight: 1.8, fontFamily: 'Inter, sans-serif' }}>
+              <p style={{ color: '#475569', fontSize: '0.84rem', lineHeight: 1.8, fontFamily: 'Inter, sans-serif' }}>
                 NOVA PERFORMANCE® — Compuestos de vanguardia biotecnológica y alta pureza para investigación científica.
               </p>
             </div>
 
             {/* Col 2 — Categorías */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Categorías</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: S.black, fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: `1px solid ${S.border}`, paddingBottom: 12 }}>Categorías</div>
               {['Péptidos GLP-1', 'Péptidos Regenerativos', 'Péptidos GHRH', 'Accesorios'].map(cat => (
-                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#444444', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
+                <a key={cat} href="#catalogo" style={{ display: 'block', color: '#475569', fontSize: '0.84rem', textDecoration: 'none', marginBottom: 11, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif', fontWeight: 500 }}
+                  onMouseEnter={e => (e.currentTarget.style.color = S.bluePrimary)}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
                 >{cat}</a>
               ))}
             </div>
 
             {/* Col 3 — Info & Ayuda */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Información & Ayuda</div>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: S.black, fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: `1px solid ${S.border}`, paddingBottom: 12 }}>Información & Ayuda</div>
               <button
                 onClick={() => setActiveModal('Cómo comprar')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#444444', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#475569', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.bluePrimary)}
+                onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
               >
                 Cómo Comprar →
               </button>
               <button
                 onClick={() => setActiveModal('Envíos')}
-                style={{ display: 'block', background: 'none', border: 'none', color: '#444444', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#444444')}
+                style={{ display: 'block', background: 'none', border: 'none', color: '#475569', fontSize: '0.84rem', cursor: 'pointer', marginBottom: 11, textAlign: 'left', fontFamily: 'Inter, sans-serif', fontWeight: 500, transition: 'color 0.2s', padding: 0 }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.bluePrimary)}
+                onMouseLeave={e => (e.currentTarget.style.color = '#475569')}
               >
                 Política de Envíos →
               </button>
               <Link
                 href="/marco-regulatorio"
-                style={{ display: 'block', color: '#000000', fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 700, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#555555')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#000000')}
+                style={{ display: 'block', color: S.bluePrimary, fontSize: '0.84rem', textDecoration: 'underline', marginBottom: 11, fontWeight: 700, transition: 'color 0.2s', fontFamily: 'Inter, sans-serif' }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.blueElectric)}
+                onMouseLeave={e => (e.currentTarget.style.color = S.bluePrimary)}
               >
                 Marco Regulatorio y Legal →
               </Link>
@@ -1063,14 +1096,14 @@ function Footer() {
 
             {/* Col 4 — Medios de Pago */}
             <div>
-              <div style={{ fontFamily: 'Outfit,sans-serif', color: '#000000', fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: '1px solid #E5E5E5', paddingBottom: 12 }}>Medios de Pago</div>
-              <p style={{ color: '#444444', fontSize: '0.8rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
+              <div style={{ fontFamily: 'Outfit,sans-serif', color: S.black, fontSize: '0.74rem', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 20, fontWeight: 900, borderBottom: `1px solid ${S.border}`, paddingBottom: 12 }}>Medios de Pago</div>
+              <p style={{ color: '#475569', fontSize: '0.8rem', lineHeight: 1.65, marginBottom: 18, fontFamily: 'Inter, sans-serif' }}>
                 Paga de forma segura con tarjeta de débito, crédito o transferencia.
               </p>
               {/* Payment logos strip */}
               <div className="payment-logos-wrap" style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
                 {/* Webpay Plus */}
-                <div style={{ background: '#000000', border: '1px solid #000000', borderRadius: 6, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ background: '#0F172A', border: '1px solid #0F172A', borderRadius: 6, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="72" height="22" viewBox="0 0 90 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="10" cy="14" r="9" fill="#D42C2C"/>
                     <path d="M6 14 Q10 6 14 14 Q10 22 6 14Z" fill="#1A4A9A"/>
@@ -1086,7 +1119,7 @@ function Footer() {
                   </svg>
                 </div>
                 {/* Mastercard */}
-                <div style={{ background: '#FFFFFF', border: '1px solid #E0E0E0', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5 }}>
+                <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 6, padding: '6px 10px', display: 'flex', alignItems: 'center', gap: 5 }}>
                   <svg width="36" height="22" viewBox="0 0 44 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="14" cy="14" r="12" fill="#EB001B"/>
                     <circle cx="30" cy="14" r="12" fill="#F79E1B"/>
@@ -1106,13 +1139,13 @@ function Footer() {
 
           {/* ── BOTTOM BAR ── */}
           <div className="footer-bottom-bar" style={{ padding: '22px 0', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
-            <span style={{ color: '#555555', fontSize: '0.74rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.1em', fontWeight: 600 }}>
+            <span style={{ color: S.muted, fontSize: '0.74rem', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.1em', fontWeight: 600 }}>
               © {new Date().getFullYear()} NOVA PERFORMANCE®. TODOS LOS DERECHOS RESERVADOS.
             </span>
             <div style={{ display: 'flex', gap: 20 }}>
-              <Link href="/marco-regulatorio" style={{ color: '#555555', fontSize: '0.74rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em', fontWeight: 600, transition: 'color 0.2s' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#000000')}
-                onMouseLeave={e => (e.currentTarget.style.color = '#555555')}
+              <Link href="/marco-regulatorio" style={{ color: S.muted, fontSize: '0.74rem', textDecoration: 'none', fontFamily: 'Outfit,sans-serif', letterSpacing: '0.08em', fontWeight: 600, transition: 'color 0.2s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = S.black)}
+                onMouseLeave={e => (e.currentTarget.style.color = S.muted)}
               >
                 Aviso Legal / Marco Regulatorio
               </Link>
@@ -1144,7 +1177,7 @@ export default function StorefrontClient({ products }: { products: any[] }) {
         top: 0,
         zIndex: 1000,
         width: '100%',
-        background: 'rgba(0, 0, 0, 0.95)',
+        background: 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         borderBottom: `1px solid ${S.border}`,
@@ -1167,34 +1200,34 @@ export default function StorefrontClient({ products }: { products: any[] }) {
       <Footer />
       <CartSidebar />
 
-      {/* Floating Scientific Disclaimer Banner (Estilo NOVA Performance®) */}
+      {/* Floating Scientific Disclaimer Banner (Estilo NOVA Performance® - Light Theme) */}
       {showLegalNotice && (
         <div className="legal-banner" style={{
           position: 'fixed', bottom: 24, left: 24, zIndex: 99,
           maxWidth: 420, padding: '16px 20px',
-          background: 'rgba(10, 10, 10, 0.95)',
-          border: '1px solid rgba(230, 226, 211, 0.25)',
+          background: 'rgba(255, 255, 255, 0.96)',
+          border: `1px solid ${S.border}`,
           borderRadius: 10, backdropFilter: 'blur(16px)',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
+          boxShadow: '0 12px 36px rgba(15,23,42,0.15)',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <span style={{ fontSize: '0.85rem' }}>⚠️</span>
-              <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.68rem', color: '#E6E2D3', letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'Outfit, sans-serif', fontSize: '0.68rem', color: S.bluePrimary, letterSpacing: '0.14em', textTransform: 'uppercase', fontWeight: 800 }}>
                 AVISO LEGAL · INVESTIGACIÓN CIENTÍFICA
               </span>
             </div>
             <button 
               onClick={() => setShowLegalNotice(false)} 
-              style={{ background: 'none', border: 'none', color: '#888888', cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px', lineHeight: 1 }}
+              style={{ background: 'none', border: 'none', color: S.muted, cursor: 'pointer', fontSize: '1.2rem', padding: '0 4px', lineHeight: 1 }}
               title="Cerrar aviso"
             >
               ×
             </button>
           </div>
-          <p style={{ margin: 0, fontSize: '0.74rem', color: '#AAAAAA', lineHeight: 1.5, fontFamily: 'Inter, sans-serif' }}>
+          <p style={{ margin: 0, fontSize: '0.74rem', color: '#475569', lineHeight: 1.5, fontFamily: 'Inter, sans-serif' }}>
             Productos para investigación científica únicamente. No destinados a consumo humano. Acceso restringido a investigadores y profesionales mayores de 18 años. No son medicamentos ni cosméticos sujetos a registro sanitario ISP.{' '}
-            <Link href="/marco-regulatorio" target="_blank" style={{ color: '#FFFFFF', textDecoration: 'underline', fontWeight: 700 }}>
+            <Link href="/marco-regulatorio" target="_blank" style={{ color: S.bluePrimary, textDecoration: 'underline', fontWeight: 700 }}>
               Aviso Legal
             </Link>
           </p>

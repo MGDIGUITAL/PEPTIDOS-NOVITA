@@ -102,7 +102,7 @@ export default async function AdminDashboard() {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
         <div>
           <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: T.text, margin: 0 }}>Panel Ejecutivo (ERP)</h2>
-          <p style={{ color: T.textMuted, fontSize: '0.9rem', marginTop: '4px' }}>Resumen operativo y financiero de Peptidos Novita en tiempo real.</p>
+          <p style={{ color: T.textMuted, fontSize: '0.9rem', marginTop: '4px' }}>Resumen operativo y financiero de NOVA Performance® en tiempo real.</p>
         </div>
       </div>
 

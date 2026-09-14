@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
     const flowResponse = await createFlowPayment({
       commerceOrder:   orderId.toString(),
-      subject:         `Orden #${orderId} — NOVA Performance® | Peptidos Novita`,
+      subject:         `Orden #${orderId} — NOVA Performance®`,
       amount:          Math.round(amount),
       email,
       urlConfirmation: `${baseUrl}/api/checkout/flow-webhook`,
