@@ -131,6 +131,31 @@ export default function ProductDetailClient({ product }: { product: any }) {
             font-size: 0.9rem !important;
           }
 
+          /* ── Navbar — mobile ── */
+          .pdetail-nav {
+            padding: 16px 5%;
+            background: ${S.white};
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid ${S.border};
+            position: sticky;
+            top: 0;
+            z-index: 50;
+          }
+          @media (max-width: 640px) {
+            .pdetail-nav {
+              padding: 10px 16px !important;
+            }
+            .pdetail-logo-img {
+              width: 130px !important;
+              height: 32px !important;
+            }
+            .pdetail-back-text {
+              font-size: 0.72rem !important;
+            }
+          }
+
           /* ── Ficha Técnica modal — mobile ── */
           #nova-ficha-overlay > div {
             max-width: 96vw !important;
@@ -175,23 +200,23 @@ export default function ProductDetailClient({ product }: { product: any }) {
       `}</style>
 
       {/* NAVBAR */}
-      <nav style={{ padding: '16px 5%', background: S.white, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: `1px solid ${S.border}`, position: 'sticky', top: 0, zIndex: 50 }}>
+      <nav className="pdetail-nav">
         <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
-          <Image src="/logo-nova-black.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
+          <Image className="pdetail-logo-img" src="/logo-nova-black.png" alt="NOVA Performance" width={180} height={40} style={{ objectFit: 'contain' }} priority />
         </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <button onClick={openCart} style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center', color: S.black }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <button onClick={openCart} title="Abrir Carrito" style={{ background: 'none', border: 'none', cursor: 'pointer', position: 'relative', display: 'flex', alignItems: 'center', color: S.black, padding: 4 }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0"/></svg>
             {cartCount > 0 && (
-              <span style={{ position: 'absolute', top: -6, right: -6, background: S.neonNavy, color: S.white, borderRadius: '50%', width: 18, height: 18, fontSize: '0.65rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ position: 'absolute', top: -4, right: -4, background: S.neonNavy, color: S.white, borderRadius: '50%', width: 18, height: 18, fontSize: '0.65rem', fontWeight: 800, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {cartCount}
               </span>
             )}
           </button>
           
-          <Link href="/" style={{ color: S.neonNavy, textDecoration: 'none', fontSize: '0.82rem', fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', borderBottom: `1px solid ${S.border}`, paddingBottom: 2, fontWeight: 800 }}>
-            ← Volver al Catálogo
+          <Link href="/" className="pdetail-back-text" style={{ color: S.neonNavy, textDecoration: 'none', fontSize: '0.82rem', fontFamily: 'Outfit, sans-serif', letterSpacing: '0.08em', borderBottom: `1px solid ${S.border}`, paddingBottom: 2, fontWeight: 800, whiteSpace: 'nowrap' }}>
+            ← Catálogo
           </Link>
         </div>
       </nav>

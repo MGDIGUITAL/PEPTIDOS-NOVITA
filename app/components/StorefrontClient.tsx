@@ -62,6 +62,18 @@ function Navbar() {
   const { cartCount, openCart } = useCart();
   const menuRef = useRef<HTMLDivElement>(null);
 
+  // Controlar overflow del body cuando el drawer móvil está abierto
+  useEffect(() => {
+    if (mobileDrawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileDrawerOpen]);
+
   // Detectar scroll
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -116,6 +128,26 @@ function Navbar() {
     window.location.href = '/';
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      setMobileDrawerOpen(false);
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 110;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      setMobileDrawerOpen(false);
+    }
+  };
+
   const btnBox: React.CSSProperties = {
     fontFamily:'Outfit,sans-serif', fontSize:'0.72rem', letterSpacing:'0.14em',
     textTransform:'uppercase', textDecoration:'none',
@@ -123,6 +155,14 @@ function Navbar() {
     padding:'9px 20px', cursor:'pointer', background:S.blueLight,
     transition:'all 0.25s', whiteSpace:'nowrap' as const, borderRadius:6
   };
+
+  const NAV_ITEMS = [
+    { label: 'Catálogo', href: '#catalogo', isHash: true },
+    { label: 'Novedades', href: '#novedades', isHash: true },
+    { label: 'Garantía', href: '#garantia', isHash: true },
+    { label: 'Marco Regulatorio', href: '/marco-regulatorio', isHash: false },
+    { label: 'Ficha Técnica', href: '/ficha-tecnica', isHash: false },
+  ];
 
   return (
     <>
@@ -138,7 +178,7 @@ function Navbar() {
             aria-label="Abrir menú de navegación"
             style={{ background:'none', border:'none', cursor:'pointer', padding:4, alignItems:'center', justifyContent:'center' }}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.black} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={S.black} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="3" y1="12" x2="21" y2="12"></line>
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -152,16 +192,16 @@ function Navbar() {
 
           {/* Desktop Links */}
           <div className="nav-desktop-links">
-            {[
-              { l:'Catálogo',  h:'#catalogo' },
-              { l:'Novedades', h:'#novedades' },
-              { l:'Garantía', h:'#garantia' },
-              { l:'Marco Regulatorio', h:'/marco-regulatorio' },
-              { l:'Ficha Técnica', h:'/ficha-tecnica' },
-            ].map(({ l, h }) => (
-              <a key={l} href={h} className="nav-link">
-                {l}
-              </a>
+            {NAV_ITEMS.map(({ label, href, isHash }) => (
+              isHash ? (
+                <a key={label} href={href} onClick={(e) => handleNavClick(e, href)} className="nav-link">
+                  {label}
+                </a>
+              ) : (
+                <Link key={label} href={href} className="nav-link">
+                  {label}
+                </Link>
+              )
             ))}
           </div>
 
@@ -222,12 +262,12 @@ function Navbar() {
         <>
           <div 
             onClick={() => setMobileDrawerOpen(false)} 
-            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.5)', backdropFilter:'blur(4px)', zIndex:999, transition:'opacity 0.3s' }} 
+            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.6)', backdropFilter:'blur(6px)', zIndex:9999, transition:'opacity 0.3s' }} 
           />
           <div style={{
             position:'fixed', top:0, left:0, bottom:0, width:'85vw', maxWidth:340,
-            background:S.cappuccinoLight, borderRight:`1px solid ${S.cappuccinoDark}`, zIndex:1000, padding:'24px 20px', display:'flex',
-            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.15)',
+            background:S.snowWhite, borderRight:`1px solid ${S.cappuccinoDark}`, zIndex:10000, padding:'24px 20px', display:'flex',
+            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.25)',
             overflowY:'auto'
           }}>
             <div>
@@ -236,42 +276,61 @@ function Navbar() {
                 <Image src="/logo-nova-black.png" alt="NOVA Performance" width={150} height={36} style={{ objectFit:'contain' }} />
                 <button 
                   onClick={() => setMobileDrawerOpen(false)}
-                  style={{ background:'none', border:'none', fontSize:'1.5rem', cursor:'pointer', color:S.black, padding:4 }}
+                  aria-label="Cerrar menú de navegación"
+                  style={{ background:'none', border:'none', fontSize:'1.4rem', cursor:'pointer', color:S.black, padding:6, display:'flex', alignItems:'center', justifyContent:'center' }}
                 >✕</button>
               </div>
 
               {/* Links de Navegación */}
-              <div style={{ display:'flex', flexDirection:'column', gap:16, marginTop:24 }}>
-                {[
-                  { l:'Catálogo',  h:'#catalogo' },
-                  { l:'Novedades', h:'#novedades' },
-                  { l:'Garantía', h:'#garantia' },
-                ].map(({ l, h }) => (
-                  <a 
-                    key={l} 
-                    href={h} 
-                    onClick={() => setMobileDrawerOpen(false)}
-                    style={{
-                      fontFamily:'Outfit,sans-serif', fontSize:'0.9rem', letterSpacing:'0.14em',
-                      textTransform:'uppercase', textDecoration:'none',
-                      color: S.black, fontWeight:700,
-                      padding:'10px 0', borderBottom:`1px solid ${S.cappuccinoDark}`
-                    }}
-                  >
-                    {l}
-                  </a>
+              <div style={{ display:'flex', flexDirection:'column', gap:8, marginTop:20 }}>
+                {NAV_ITEMS.map(({ label, href, isHash }) => (
+                  isHash ? (
+                    <a 
+                      key={label} 
+                      href={href} 
+                      onClick={(e) => handleNavClick(e, href)}
+                      style={{
+                        fontFamily:'Outfit,sans-serif', fontSize:'0.85rem', letterSpacing:'0.12em',
+                        textTransform:'uppercase', textDecoration:'none',
+                        color: S.black, fontWeight:800,
+                        padding:'12px 14px', borderBottom:`1px solid ${S.border}`,
+                        display:'flex', alignItems:'center', justifyContent:'space-between',
+                        borderRadius:6, transition:'background 0.2s'
+                      }}
+                    >
+                      <span>{label}</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={S.plomoLight} strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </a>
+                  ) : (
+                    <Link 
+                      key={label} 
+                      href={href} 
+                      onClick={() => setMobileDrawerOpen(false)}
+                      style={{
+                        fontFamily:'Outfit,sans-serif', fontSize:'0.85rem', letterSpacing:'0.12em',
+                        textTransform:'uppercase', textDecoration:'none',
+                        color: S.black, fontWeight:800,
+                        padding:'12px 14px', borderBottom:`1px solid ${S.border}`,
+                        display:'flex', alignItems:'center', justifyContent:'space-between',
+                        borderRadius:6, transition:'background 0.2s'
+                      }}
+                    >
+                      <span>{label}</span>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={S.plomoLight} strokeWidth="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </Link>
+                  )
                 ))}
               </div>
 
               {/* Acceso a cuenta */}
-              <div style={{ marginTop:32, display:'flex', flexDirection:'column', gap:12 }}>
+              <div style={{ marginTop:28, display:'flex', flexDirection:'column', gap:12 }}>
                 {userName ? (
-                  <div style={{ background:S.cappuccino, padding:'12px 16px', borderRadius:8, border:`1px solid ${S.cappuccinoDark}` }}>
-                    <p style={{ fontFamily:'Outfit,sans-serif', fontSize:'0.7rem', color:S.muted, textTransform:'uppercase', letterSpacing:'0.1em' }}>Sesión activa</p>
-                    <p style={{ fontWeight:700, fontSize:'0.9rem', color:S.black, margin:'4px 0 10px' }}>{userName}</p>
+                  <div style={{ background:S.cappuccino, padding:'14px 16px', borderRadius:8, border:`1px solid ${S.cappuccinoDark}` }}>
+                    <p style={{ fontFamily:'Outfit,sans-serif', fontSize:'0.68rem', color:S.muted, textTransform:'uppercase', letterSpacing:'0.1em', fontWeight:700 }}>Sesión activa</p>
+                    <p style={{ fontWeight:800, fontSize:'0.9rem', color:S.black, margin:'4px 0 12px' }}>{userName}</p>
                     <button 
                       onClick={handleLogout}
-                      style={{ width:'100%', padding:'8px', background:S.black, color:S.cappuccino, border:'none', borderRadius:4, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', cursor:'pointer', fontWeight:800 }}
+                      style={{ width:'100%', padding:'10px', background:S.black, color:S.white, border:'none', borderRadius:6, fontFamily:'Outfit,sans-serif', fontSize:'0.75rem', cursor:'pointer', fontWeight:800, textTransform:'uppercase', letterSpacing:'0.1em' }}
                     >
                       Cerrar Sesión
                     </button>
@@ -280,7 +339,7 @@ function Navbar() {
                   <Link 
                     href="/auth/cliente" 
                     onClick={() => setMobileDrawerOpen(false)}
-                    style={{ ...btnBox, width:'100%', textAlign:'center', padding:'12px', background:S.black, color:S.white, borderRadius:4, fontWeight:800 }}
+                    style={{ ...btnBox, width:'100%', textAlign:'center', padding:'14px', background:S.black, color:S.white, borderRadius:6, fontWeight:800, display:'block' }}
                   >
                     Mi Cuenta / Ingresar
                   </Link>
@@ -748,8 +807,8 @@ function TestimonialsSection() {
     : REVIEWS_DATA.filter(r => r.tag === activeFilter);
 
   return (
-    <section id="reseñas" style={{ padding: '88px 1.5rem', background: '#F9FAFB', borderTop: `1px solid ${S.border}` }}>
-      <div style={{ maxWidth: 1320, margin: '0 auto' }}>
+    <section id="garantia" style={{ padding: '88px 1.5rem', background: '#F9FAFB', borderTop: `1px solid ${S.border}` }}>
+      <div id="reseñas" style={{ maxWidth: 1320, margin: '0 auto' }}>
         
         {/* Header / Summary */}
         <div style={{ textAlign: 'center', marginBottom: 48 }}>
