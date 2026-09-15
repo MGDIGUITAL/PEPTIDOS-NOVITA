@@ -130,6 +130,47 @@ export default function ProductDetailClient({ product }: { product: any }) {
             padding: 16px 0 !important;
             font-size: 0.9rem !important;
           }
+
+          /* ── Ficha Técnica modal — mobile ── */
+          #nova-ficha-overlay > div {
+            max-width: 96vw !important;
+            border-radius: 10px !important;
+          }
+          #nova-ficha-overlay > div > div:nth-child(2) {
+            max-height: 65vh !important;
+          }
+        }
+
+        /* ── Ficha Técnica button ── */
+        .nova-ficha-btn {
+          padding: 15px 24px;
+          background-color: #F3F4F6;
+          color: #0D0D0D;
+          border: 1px solid #E5E7EB;
+          border-radius: 6px;
+          font-family: 'Outfit', sans-serif;
+          letter-spacing: 0.12em;
+          font-size: 0.82rem;
+          font-weight: 800;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+        .nova-ficha-btn:hover {
+          background-color: #E5E7EB;
+          border-color: #374151;
+        }
+        @media (max-width: 480px) {
+          .nova-ficha-btn {
+            font-size: 0.75rem !important;
+            padding: 13px 16px !important;
+            letter-spacing: 0.08em !important;
+          }
         }
       `}</style>
 
@@ -315,6 +356,167 @@ export default function ProductDetailClient({ product }: { product: any }) {
             >
               <span>💬</span> CONSULTAR TÉCNICAMENTE POR WHATSAPP
             </a>
+
+            {/* ── VER FICHA TÉCNICA ─────────────────────────── */}
+            {(() => {
+              const fichaMap: Record<string, string> = {
+                RT10:  '/fichas/RT10.jpeg',
+                RT20:  '/fichas/RT20.jpeg',
+                CU100: '/fichas/CU100.jpeg',
+                BC10:  '/fichas/BC10.jpeg',
+                MS10:  '/fichas/MS10.jpeg',
+                TSM10: '/fichas/TSM10.jpeg',
+                TSM20: '/fichas/TSM20.jpeg',
+                CJCIP: '/fichas/CJCIP.jpeg',
+                BAC10: '/fichas/BAC10.jpeg',
+              };
+              const fichaUrl = product.sku ? fichaMap[product.sku] : null;
+              if (!fichaUrl) return null;
+              return (
+                <>
+                  <button
+                    onClick={() => {
+                      const overlay = document.getElementById('nova-ficha-overlay');
+                      if (overlay) { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+                    }}
+                    style={{
+                      padding: '15px 24px',
+                      backgroundColor: '#F3F4F6',
+                      color: '#0D0D0D',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '6px',
+                      fontFamily: 'Outfit, sans-serif',
+                      letterSpacing: '0.12em',
+                      fontSize: '0.82rem',
+                      fontWeight: 800,
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#E5E7EB'; e.currentTarget.style.borderColor = '#374151'; }}
+                    onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#F3F4F6'; e.currentTarget.style.borderColor = '#E5E7EB'; }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                      <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                    </svg>
+                    Ver Ficha Técnica
+                  </button>
+
+                  {/* Modal Ficha Técnica */}
+                  <div
+                    id="nova-ficha-overlay"
+                    onClick={(e) => {
+                      if (e.target === e.currentTarget) { e.currentTarget.style.display = 'none'; document.body.style.overflow = ''; }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape') { const el = document.getElementById('nova-ficha-overlay'); if (el) { el.style.display = 'none'; document.body.style.overflow = ''; } }
+                    }}
+                    style={{
+                      display: 'none',
+                      position: 'fixed', inset: 0, zIndex: 9999,
+                      background: 'rgba(0,0,0,0.90)',
+                      alignItems: 'center', justifyContent: 'center',
+                      padding: '16px',
+                      backdropFilter: 'blur(8px)',
+                    }}
+                  >
+                    <div
+                      onClick={e => e.stopPropagation()}
+                      style={{
+                        maxWidth: 500, width: '100%',
+                        borderRadius: 12, overflow: 'hidden',
+                        boxShadow: '0 40px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.07)',
+                      }}
+                    >
+                      {/* Header modal */}
+                      <div style={{
+                        background: '#0D0D0D', padding: '13px 18px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        borderBottom: '1px solid #1F2937',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9CA3AF" strokeWidth="2">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                          </svg>
+                          <div>
+                            <p style={{ fontFamily: 'Outfit, sans-serif', fontWeight: 800, fontSize: '0.88rem', color: '#FFFFFF', margin: 0 }}>
+                              Ficha Técnica — {product.title}
+                            </p>
+                            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.67rem', color: '#6B7280', margin: 0 }}>
+                              SKU: {product.sku} · Uso exclusivo investigación (RUO)
+                            </p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => {
+                            const el = document.getElementById('nova-ficha-overlay');
+                            if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
+                          }}
+                          style={{
+                            background: '#1F2937', border: '1px solid #374151',
+                            color: '#9CA3AF', borderRadius: 6, width: 32, height: 32,
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            cursor: 'pointer', flexShrink: 0,
+                          }}
+                        >
+                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                          </svg>
+                        </button>
+                      </div>
+
+                      {/* Imagen ficha */}
+                      <div style={{ background: '#111', maxHeight: '72vh', overflowY: 'auto' }}>
+                        <img
+                          src={fichaUrl}
+                          alt={`Ficha Técnica ${product.title}`}
+                          style={{ width: '100%', height: 'auto', display: 'block' }}
+                        />
+                      </div>
+
+                      {/* Footer modal */}
+                      <div style={{
+                        background: '#0D0D0D', padding: '11px 18px',
+                        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                        borderTop: '1px solid #1F2937',
+                      }}>
+                        <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.66rem', color: '#4B5563', margin: 0, display: 'flex', alignItems: 'center', gap: 5 }}>
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                          </svg>
+                          Research Use Only (RUO)
+                        </p>
+                        <a
+                          href={fichaUrl}
+                          download={`Ficha_${product.sku}_NOVA.jpeg`}
+                          style={{
+                            display: 'inline-flex', alignItems: 'center', gap: 6,
+                            background: '#FFFFFF', color: '#0D0D0D',
+                            fontFamily: 'Outfit, sans-serif', fontWeight: 700,
+                            fontSize: '0.66rem', letterSpacing: '0.08em',
+                            textTransform: 'uppercase', textDecoration: 'none',
+                            padding: '7px 14px', borderRadius: 5,
+                          }}
+                        >
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                            <polyline points="7,10 12,15 17,10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                          </svg>
+                          Descargar
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
           </div>
           
           <div style={{ marginTop: '28px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.8rem', color: S.muted, background: S.cappuccino, padding: '16px 20px', borderRadius: '8px', border: `1px solid ${S.cappuccinoDark}` }}>

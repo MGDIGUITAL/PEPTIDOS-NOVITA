@@ -157,6 +157,7 @@ function Navbar() {
               { l:'Novedades', h:'#novedades' },
               { l:'Garantía', h:'#garantia' },
               { l:'Marco Regulatorio', h:'/marco-regulatorio' },
+              { l:'Ficha Técnica', h:'/ficha-tecnica' },
             ].map(({ l, h }) => (
               <a key={l} href={h} className="nav-link">
                 {l}
