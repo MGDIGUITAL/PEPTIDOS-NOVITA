@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { supabase } from '@/lib/supabase/client';
 import { useCart } from './CartContext';
 import CartSidebar from './CartSidebar';
@@ -59,8 +60,13 @@ function Navbar() {
   const [userName, setUserName]         = useState<string | null>(null);
   const [showMenu, setShowMenu]         = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [mounted, setMounted]           = useState(false);
   const { cartCount, openCart } = useCart();
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Controlar overflow del body cuando el drawer móvil está abierto
   useEffect(() => {
@@ -257,17 +263,17 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* MOBILE DRAWER NAVIGATION OVERLAY */}
-      {mobileDrawerOpen && (
+      {/* MOBILE DRAWER NAVIGATION OVERLAY (Portal a document.body) */}
+      {mobileDrawerOpen && mounted && createPortal(
         <>
           <div 
             onClick={() => setMobileDrawerOpen(false)} 
-            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.6)', backdropFilter:'blur(6px)', zIndex:9999, transition:'opacity 0.3s' }} 
+            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.65)', backdropFilter:'blur(6px)', WebkitBackdropFilter:'blur(6px)', zIndex:99999, transition:'opacity 0.3s' }} 
           />
           <div style={{
-            position:'fixed', top:0, left:0, bottom:0, width:'85vw', maxWidth:340,
-            background:S.snowWhite, borderRight:`1px solid ${S.cappuccinoDark}`, zIndex:10000, padding:'24px 20px', display:'flex',
-            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.25)',
+            position:'fixed', top:0, left:0, bottom:0, width:'85vw', maxWidth:340, height:'100vh',
+            background:S.snowWhite, borderRight:`1px solid ${S.cappuccinoDark}`, zIndex:100000, padding:'24px 20px', display:'flex',
+            flexDirection:'column', justifyContent:'space-between', boxShadow:'8px 0 32px rgba(0,0,0,0.3)',
             overflowY:'auto'
           }}>
             <div>
@@ -347,7 +353,8 @@ function Navbar() {
               </div>
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </>
   );
